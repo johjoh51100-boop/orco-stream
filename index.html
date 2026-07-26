@@ -997,23 +997,36 @@
 
         .pagination-container {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             gap: 10px;
             margin-top: 30px;
+        }
+
+        .page-info-text {
+            font-weight: 800;
+            font-size: 15px;
+            color: var(--text-main);
+        }
+
+        .page-arrows {
+            display: flex;
+            gap: 15px;
         }
 
         .page-btn {
             background: rgba(255,255,255,0.05);
             border: 1px solid var(--glass-border);
             color: white;
-            padding: 8px 15px;
+            padding: 8px 20px;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 700;
+            font-weight: 900;
+            font-size: 18px;
+            transition: var(--transition);
         }
 
         .page-btn:hover { background: var(--accent); color: black; }
-        .page-btn.active { background: var(--accent); color: black; }
 
         @keyframes slideInRight {
             from { transform: translateX(100%); opacity: 0; }
@@ -1033,7 +1046,10 @@
             .sidebar-nav { flex-direction: row; justify-content: space-around; width: 100%; gap: 0; }
             .main-wrapper { margin-left: 0; width: 100%; padding-bottom: 70px; }
             main { padding: 20px; }
-            header.top-bar { padding: 15px 20px; }
+            header.top-bar { padding: 15px 20px; flex-wrap: wrap; }
+            .brand-name { order: 1; }
+            .btn-secondary { order: 2; }
+            .search-container { order: 3; max-width: 100%; width: 100%; margin-top: 15px; }
             .hero-banner { height: 350px; padding: 20px; }
             .hero-title { font-size: 28px; }
             .anime-detail-header { flex-direction: column; padding: 20px; }
@@ -1072,13 +1088,13 @@
     <div class="main-wrapper">
         <header class="top-bar">
             <div class="brand-name" onclick="resetSearch(); router.home()" style="cursor:pointer;">ORCO STREAM</div>
+            <button class="btn-secondary" onclick="resetSearch(); router.catalog();" style="white-space: nowrap;">Voir le catalogue</button>
             <div class="search-container">
                 <span class="search-icon">🔍</span>
                 <input type="text" id="search-input" class="search-input" placeholder="Rechercher une œuvre..." oninput="handleSearchDropdown(this.value)" onfocus="showSearchHistory()">
                 <button class="mic-btn" onclick="startVoiceSearch()">🎤</button>
                 <div id="search-dropdown" class="search-results-dropdown"></div>
             </div>
-            <button class="btn-secondary" onclick="resetSearch(); router.catalog();" style="white-space: nowrap;">Voir le catalogue</button>
         </header>
 
         <main id="app">
@@ -1384,18 +1400,20 @@
                 dropdown.classList.remove('active');
                 return;
             }
-            dropdown.innerHTML = `
-                <div class="search-history-header">
-                    <span>Recherches récentes</span>
-                    <span class="search-history-clear" onclick="clearSearchHistory(event)">Effacer</span>
-                </div>
-                ${history.map(q => `
-                    <div class="search-result-item" onclick="document.getElementById('search-input').value='${q}'; handleSearchDropdown('${q}')">
-                        <span style="font-size:16px; margin-right:10px;">🕒</span>
-                        <div class="search-result-title">${q}</div>
-                    </div>
-                `).join('')}
-            `;
+            let historyHtml = '<div class="search-history-header">';
+            historyHtml += '<span>Recherches récentes</span>';
+            historyHtml += '<span class="search-history-clear" onclick="clearSearchHistory(event)">Effacer</span>';
+            historyHtml += '</div>';
+            
+            historyHtml += history.map(q => {
+                let itemHtml = '<div class="search-result-item" onclick="document.getElementById(\'search-input\').value=\'' + q + '\'; handleSearchDropdown(\'' + q + '\')">';
+                itemHtml += '<span style="font-size:16px; margin-right:10px;">🕒</span>';
+                itemHtml += '<div class="search-result-title">' + q + '</div>';
+                itemHtml += '</div>';
+                return itemHtml;
+            }).join('');
+            
+            dropdown.innerHTML = historyHtml;
             dropdown.classList.add('active');
         }
 
@@ -1451,7 +1469,7 @@
 
         function markEpisodeWatched(animeId, context) {
             let watched = getArrayFromCookie('orco_watched');
-            const key = `${animeId}-${context.type}-${context.index}-${context.itemIndex}`;
+            const key = animeId + '-' + context.type + '-' + context.index + '-' + context.itemIndex;
             if (!watched.includes(key)) {
                 watched.push(key);
                 if(watched.length > 200) watched.shift();
@@ -1461,7 +1479,7 @@
 
         function isEpisodeWatched(animeId, context) {
             const watched = getArrayFromCookie('orco_watched');
-            const key = `${animeId}-${context.type}-${context.index}-${context.itemIndex}`;
+            const key = animeId + '-' + context.type + '-' + context.index + '-' + context.itemIndex;
             return watched.includes(key);
         }
 
@@ -1481,13 +1499,14 @@
             if(filtered.length === 0) {
                 dropdown.innerHTML = '<div style="padding: 15px; text-align: center; color: var(--text-sub);">Aucun résultat</div>';
             } else {
-                dropdown.innerHTML = filtered.map(anime => `
-                    <div class="search-result-item" onclick="selectSearchResult('${anime.id}', '${q}')">
-                        <img src="${anime.image || ''}" alt="">
-                        <div class="search-result-title">${anime.title}</div>
-                        <div class="search-result-genre">${(anime.genres && anime.genres[0]) ? anime.genres[0] : 'Anime'}</div>
-                    </div>
-                `).join('');
+                dropdown.innerHTML = filtered.map(anime => {
+                    let cardHtml = '<div class="search-result-item" onclick="selectSearchResult(\'' + anime.id + '\', \'' + q + '\')">';
+                    cardHtml += '<img src="' + (anime.image || '') + '" alt="" loading="lazy">';
+                    cardHtml += '<div class="search-result-title">' + anime.title + '</div>';
+                    cardHtml += '<div class="search-result-genre">' + ((anime.genres && anime.genres[0]) ? anime.genres[0] : 'Anime') + '</div>';
+                    cardHtml += '</div>';
+                    return cardHtml;
+                }).join('');
             }
             dropdown.classList.add('active');
         }
@@ -1503,27 +1522,24 @@
             if (!database || database.length === 0) { container.innerHTML = ''; return; }
             const anime = database[0];
             const detectedGenres = anime.genres || [];
-            const genreTagsHtml = detectedGenres.map(g => `<span class="meta-badge">${g}</span>`).join('');
-            container.innerHTML = `
-                <div class="hero-banner">
-                    <img src="${anime.image || ''}" class="hero-bg" alt="${anime.title}">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-tag">À LA UNE</div>
-                        <h1 class="hero-title">${anime.title}</h1>
-                        <div class="hero-meta">
-                            <span class="meta-rating">★ 8.5</span>
-                            <span class="meta-badge">TV</span>
-                            ${genreTagsHtml}
-                        </div>
-                        <p class="hero-desc">${anime.resume || 'Aucune description disponible.'}</p>
-                        <div class="hero-actions">
-                            <button class="btn-primary" onclick="router.anime('${anime.id}')">▶ Regarder</button>
-                            <button class="btn-secondary" onclick="toggleWatchLaterEvent(event, '${anime.id}')">+ Plus tard</button>
-                        </div>
-                    </div>
-                </div>
-            `;
+            const genreTagsHtml = detectedGenres.map(g => '<span class="meta-badge">' + g + '</span>').join('');
+            let heroHtml = '<div class="hero-banner">';
+            heroHtml += '<img src="' + (anime.image || '') + '" class="hero-bg" alt="' + anime.title + '" loading="lazy">';
+            heroHtml += '<div class="hero-overlay"></div>';
+            heroHtml += '<div class="hero-content">';
+            heroHtml += '<div class="hero-tag">À LA UNE</div>';
+            heroHtml += '<h1 class="hero-title">' + anime.title + '</h1>';
+            heroHtml += '<div class="hero-meta">';
+            heroHtml += '<span class="meta-rating">★ 8.5</span>';
+            heroHtml += '<span class="meta-badge">TV</span>';
+            heroHtml += genreTagsHtml;
+            heroHtml += '</div>';
+            heroHtml += '<p class="hero-desc">' + (anime.resume || 'Aucune description disponible.') + '</p>';
+            heroHtml += '<div class="hero-actions">';
+            heroHtml += '<button class="btn-primary" onclick="router.anime(\'' + anime.id + '\')">▶ Regarder</button>';
+            heroHtml += '<button class="btn-secondary" onclick="toggleWatchLaterEvent(event, \'' + anime.id + '\')">+ Plus tard</button>';
+            heroHtml += '</div></div></div>';
+            container.innerHTML = heroHtml;
         }
 
         function renderGenresGrid() {
@@ -1534,12 +1550,13 @@
                 { name: 'Comédie', img: 'https://image.tmdb.org/t/p/w500/rt1gmKCONtlcJoBfNvNhcLQziLH.jpg' },
                 { name: 'Fantastique', img: 'https://www.themoviedb.org/t/p/w600_and_h900_face/nGuTtEc5q3pO6Kl2Pmszc9IwEe.jpg' }
             ];
-            container.innerHTML = genreList.map(g => `
-                <div class="genre-card" onclick="filterByGenre('${g.name}')">
-                    <img src="${g.img}" alt="${g.name}">
-                    <span>${g.name}</span>
-                </div>
-            `).join('');
+            container.innerHTML = genreList.map(g => {
+                let html = '<div class="genre-card" onclick="filterByGenre(\'' + g.name + '\')">';
+                html += '<img src="' + g.img + '" alt="' + g.name + '" loading="lazy">';
+                html += '<span>' + g.name + '</span>';
+                html += '</div>';
+                return html;
+            }).join('');
         }
 
         function filterByGenre(genreName) {
@@ -1561,18 +1578,17 @@
                 const item = getItem(anime, data.context);
                 if (!anime || !item) { container.innerHTML = ""; return; }
                 let labelStr = data.context.type === 'film' 
-                    ? `Film ${item.number || (data.context.itemIndex + 1)}`
-                    : `Saison ${anime.seasons[data.context.index]?.season_number || 1} • Épisode ${item.number || (data.context.itemIndex + 1)}`;
-                container.innerHTML = `
-                    <div class="resume-banner" onclick="openPlayerFromResume('${anime.id}')">
-                        <div class="resume-info">
-                            <span class="resume-badge">Continuer la lecture</span>
-                            <span class="resume-title">${anime.title}</span>
-                            <span class="resume-ep">${labelStr} - ${item.title || ''}</span>
-                        </div>
-                        <div class="resume-play">▶</div>
-                    </div>
-                `;
+                    ? 'Film ' + (item.number || (data.context.itemIndex + 1))
+                    : 'Saison ' + (anime.seasons[data.context.index]?.season_number || 1) + ' • Épisode ' + (item.number || (data.context.itemIndex + 1));
+                let html = '<div class="resume-banner" onclick="openPlayerFromResume(\'' + anime.id + '\')">';
+                html += '<div class="resume-info">';
+                html += '<span class="resume-badge">Continuer la lecture</span>';
+                html += '<span class="resume-title">' + anime.title + '</span>';
+                html += '<span class="resume-ep">' + labelStr + ' - ' + (item.title || '') + '</span>';
+                html += '</div>';
+                html += '<div class="resume-play">▶</div>';
+                html += '</div>';
+                container.innerHTML = html;
             } catch (e) {
                 container.innerHTML = "";
             }
@@ -1601,21 +1617,21 @@
             grid.innerHTML = items.map(anime => generateAnimeCard(anime)).join('');
         }
 
-function generateAnimeCard(anime) {
-            return `
-                <div class="card" onclick="router.anime('${anime.id}')">
-                    <div class="card-img-wrapper">
-                        <img src="${anime.image || ''}" alt="${anime.title}" loading="lazy">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-title">${anime.title}</div>
-                        <button class="fav-btn ${isFavorite(anime.id) ? 'active' : ''}" onclick="toggleFavoriteEvent(event, '${anime.id}')">
-                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                        </button>
-                    </div>
-                    <div class="card-tooltip">${anime.resume || 'Aucun résumé.'}</div>
-                </div>
-            `;
+        function generateAnimeCard(anime) {
+            let activeClass = isFavorite(anime.id) ? 'active' : '';
+            let html = '<div class="card" onclick="router.anime(\'' + anime.id + '\')">';
+            html += '<div class="card-img-wrapper">';
+            html += '<img src="' + (anime.image || '') + '" alt="' + anime.title + '" loading="lazy">';
+            html += '</div>';
+            html += '<div class="card-content">';
+            html += '<div class="card-title">' + anime.title + '</div>';
+            html += '<button class="fav-btn ' + activeClass + '" onclick="toggleFavoriteEvent(event, \'' + anime.id + '\')">';
+            html += '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+            html += '</button>';
+            html += '</div>';
+            html += '<div class="card-tooltip">' + (anime.resume || 'Aucun résumé.') + '</div>';
+            html += '</div>';
+            return html;
         }
 
         function toggleGridView() {
@@ -1631,7 +1647,7 @@ function generateAnimeCard(anime) {
 
         function toggleFilter(type) {
             catalogFilters[type] = !catalogFilters[type];
-            document.getElementById(`filter-${type}`).classList.toggle('active', catalogFilters[type]);
+            document.getElementById('filter-' + type).classList.toggle('active', catalogFilters[type]);
             resetPaginationAndApply();
         }
 
@@ -1676,10 +1692,18 @@ function generateAnimeCard(anime) {
 
         function renderPaginationControls(totalPages, currentPage) {
             const container = document.getElementById('pagination-controls');
-            let html = '';
-            for (let i = 1; i <= totalPages; i++) {
-                html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToCatalogPage(${i})">${i}</button>`;
+            let html = '<div class="page-info-text">' + currentPage + ' / ' + totalPages + '</div>';
+            html += '<div class="page-arrows">';
+            
+            if (currentPage > 1) {
+                html += '<button class="page-btn" onclick="goToCatalogPage(' + (currentPage - 1) + ')">←</button>';
             }
+            
+            if (currentPage < totalPages) {
+                html += '<button class="page-btn" onclick="goToCatalogPage(' + (currentPage + 1) + ')">→</button>';
+            }
+            
+            html += '</div>';
             container.innerHTML = html;
         }
 
@@ -1733,29 +1757,32 @@ function generateAnimeCard(anime) {
             let tabsHtml = '';
             if (anime.seasons) {
                 anime.seasons.forEach((s, idx) => {
-                    const id = `s-${idx}`;
-                    tabsHtml += `<button class="tab-btn ${activeTabId === id ? 'active' : ''}" onclick="switchTab('${id}')">Saison ${s.season_number}</button>`;
+                    const id = 's-' + idx;
+                    let activeClass = activeTabId === id ? 'active' : '';
+                    tabsHtml += '<button class="tab-btn ' + activeClass + '" onclick="switchTab(\'' + id + '\')">Saison ' + s.season_number + '</button>';
                 });
             }
             if (anime.films && anime.films.length > 0) {
-                tabsHtml += `<button class="tab-btn ${activeTabId === 'films' ? 'active' : ''}" onclick="switchTab('films')">Films</button>`;
+                let activeClass = activeTabId === 'films' ? 'active' : '';
+                tabsHtml += '<button class="tab-btn ' + activeClass + '" onclick="switchTab(\'films\')">Films</button>';
             }
-            container.innerHTML = `
-                <div class="anime-detail-header">
-                    <img src="${anime.image || ''}" class="anime-detail-bg" alt="">
-                    <img src="${anime.image || ''}" class="detail-poster" alt="${anime.title}">
-                    <div class="anime-info">
-                        <h2>${anime.title}</h2>
-                        <div class="anime-actions-row">
-                            <button class="btn-secondary" onclick="toggleFavoriteEvent(event, '${anime.id}')">${isFavorite(anime.id) ? '♥ Retirer Favori' : '♡ Favori'}</button>
-                            <button class="btn-secondary" onclick="toggleWatchLaterEvent(event, '${anime.id}')">${isWatchLater(anime.id) ? '✓ Dans la liste' : '+ À regarder'}</button>
-                        </div>
-                        <div class="anime-resume">${anime.resume || 'Aucune description disponible.'}</div>
-                    </div>
-                </div>
-                <div class="tabs-container">${tabsHtml}</div>
-                <div class="episodes-grid" id="episodes-container"></div>
-            `;
+            
+            let html = '<div class="anime-detail-header">';
+            html += '<img src="' + (anime.image || '') + '" class="anime-detail-bg" alt="" loading="lazy">';
+            html += '<img src="' + (anime.image || '') + '" class="detail-poster" alt="' + anime.title + '" loading="lazy">';
+            html += '<div class="anime-info">';
+            html += '<h2>' + anime.title + '</h2>';
+            html += '<div class="anime-actions-row">';
+            html += '<button class="btn-secondary" onclick="toggleFavoriteEvent(event, \'' + anime.id + '\')">' + (isFavorite(anime.id) ? '♥ Retirer Favori' : '♡ Favori') + '</button>';
+            html += '<button class="btn-secondary" onclick="toggleWatchLaterEvent(event, \'' + anime.id + '\')">' + (isWatchLater(anime.id) ? '✓ Dans la liste' : '+ À regarder') + '</button>';
+            html += '</div>';
+            html += '<div class="anime-resume">' + (anime.resume || 'Aucune description disponible.') + '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="tabs-container">' + tabsHtml + '</div>';
+            html += '<div class="episodes-grid" id="episodes-container"></div>';
+            
+            container.innerHTML = html;
             renderEpisodesList();
         }
 
@@ -1790,20 +1817,23 @@ function generateAnimeCard(anime) {
                 let badges = '';
                 if(hasLang(item, 'vf')) badges += '<span class="badge vf">VF</span>';
                 if(hasLang(item, 'vostfr')) badges += '<span class="badge vostfr">VOSTFR</span>';
-                return `
-                    <div class="episode-card ${isWatched ? 'watched' : ''}" onclick="launchPlayer('${contextType}', ${sIndex}, ${index})">
-                        <div class="ep-info">
-                            <span class="ep-num">${contextType === 'film' ? 'Film' : 'Épisode'} ${item.number || (index+1)}</span>
-                            <span class="ep-title">${item.title || ''}</span>
-                        </div>
-                        <div class="badges-container">${badges}</div>
-                    </div>
-                `;
+                
+                let watchedClass = isWatched ? 'watched' : '';
+                let epLabel = contextType === 'film' ? 'Film' : 'Épisode';
+                
+                let cardHtml = '<div class="episode-card ' + watchedClass + '" onclick="launchPlayer(\'' + contextType + '\', ' + sIndex + ', ' + index + ')">';
+                cardHtml += '<div class="ep-info">';
+                cardHtml += '<span class="ep-num">' + epLabel + ' ' + (item.number || (index+1)) + '</span>';
+                cardHtml += '<span class="ep-title">' + (item.title || '') + '</span>';
+                cardHtml += '</div>';
+                cardHtml += '<div class="badges-container">' + badges + '</div>';
+                cardHtml += '</div>';
+                return cardHtml;
             }).join('');
         }
 
         function launchPlayer(type, sIndex, itemIndex) {
-            playerContext = { type, index: sIndex, itemIndex };
+            playerContext = { type: type, index: sIndex, itemIndex: itemIndex };
             const anime = getAnime(currentAnimeId);
             const item = getItem(anime, playerContext);
             if(hasLang(item, 'vf')) playerLang = 'vf';
@@ -1854,11 +1884,13 @@ function generateAnimeCard(anime) {
             markEpisodeWatched(currentAnimeId, playerContext);
             addToHistory(currentAnimeId);
             saveProgress();
-            const labelStr = playerContext.type === 'film' 
-                ? `Film ${item.number || (playerContext.itemIndex + 1)}`
-                : `Saison ${anime.seasons[playerContext.index].season_number} • Épisode ${item.number || (playerContext.itemIndex + 1)}`;
+            
+            let labelStr = playerContext.type === 'film' 
+                ? 'Film ' + (item.number || (playerContext.itemIndex + 1))
+                : 'Saison ' + anime.seasons[playerContext.index].season_number + ' • Épisode ' + (item.number || (playerContext.itemIndex + 1));
+                
             document.getElementById('player-anime-name').innerText = anime.title;
-            document.getElementById('player-ep-info').innerText = `${labelStr} - ${item.title || ''}`;
+            document.getElementById('player-ep-info').innerText = labelStr + ' - ' + (item.title || '');
             const iframe = document.getElementById('video-iframe');
             
             iframe.onerror = function() {
@@ -1874,10 +1906,10 @@ function generateAnimeCard(anime) {
             }
             if (playerServer === 'sibnet') {
                 let id = src.includes('sibnet') ? src.replace(/\D/g,'') : src;
-                src = `https://video.sibnet.ru/shell.php?videoid=${id}`;
+                src = 'https://video.sibnet.ru/shell.php?videoid=' + id;
             } else if (playerServer === 'vidmoly') {
                 let id = src.includes('vidmoly') ? src.split('-').pop().replace('.html','') : src;
-                src = `https://vidmoly.biz/embed-${id}.html`;
+                src = 'https://vidmoly.biz/embed-' + id + '.html';
             }
             iframe.src = src || '';
             updatePlayerControls(anime, item);
@@ -1910,18 +1942,21 @@ function generateAnimeCard(anime) {
             let catHtml = '';
             if(anime.seasons) {
                 anime.seasons.forEach((s, i) => {
-                    catHtml += `<button class="pill ${playerContext.type === 'season' && playerContext.index === i ? 'active' : ''}" onclick="changePlayerCategory('season', ${i})">Saison ${s.season_number}</button>`;
+                    let activeClass = playerContext.type === 'season' && playerContext.index === i ? 'active' : '';
+                    catHtml += '<button class="pill ' + activeClass + '" onclick="changePlayerCategory(\'season\', ' + i + ')">Saison ' + s.season_number + '</button>';
                 });
             }
             if(anime.films && anime.films.length > 0) {
-                catHtml += `<button class="pill ${playerContext.type === 'film' ? 'active' : ''}" onclick="changePlayerCategory('film', 0)">Films</button>`;
+                let activeClass = playerContext.type === 'film' ? 'active' : '';
+                catHtml += '<button class="pill ' + activeClass + '" onclick="changePlayerCategory(\'film\', 0)">Films</button>';
             }
             document.getElementById('player-cat-pills').innerHTML = catHtml;
             document.getElementById('label-cat').innerText = playerContext.type === 'season' ? 'Saison' : 'Catégorie';
             let itemsHtml = '';
             let items = playerContext.type === 'film' ? anime.films : anime.seasons[playerContext.index].episodes;
             items.forEach((item, i) => {
-                itemsHtml += `<button class="pill ${playerContext.itemIndex === i ? 'active' : ''}" onclick="changePlayerItem(${i})">${item.number || (i+1)}</button>`;
+                let activeClass = playerContext.itemIndex === i ? 'active' : '';
+                itemsHtml += '<button class="pill ' + activeClass + '" onclick="changePlayerItem(' + i + ')">' + (item.number || (i+1)) + '</button>';
             });
             document.getElementById('player-item-pills').innerHTML = itemsHtml;
         }
@@ -2036,8 +2071,8 @@ function generateAnimeCard(anime) {
             e.preventDefault();
             const menu = document.getElementById('custom-context-menu');
             menu.style.display = 'flex';
-            menu.style.left = `${e.pageX}px`;
-            menu.style.top = `${e.pageY}px`;
+            menu.style.left = e.pageX + 'px';
+            menu.style.top = e.pageY + 'px';
         });
 
         document.addEventListener('click', () => {
@@ -2054,12 +2089,21 @@ function generateAnimeCard(anime) {
             }
         }
 
-        function applyThemeColor(color) {
+        function applyThemeColor(color, showTst = true) {
             document.documentElement.style.setProperty('--accent', color);
             document.documentElement.style.setProperty('--highlight', color);
-            document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
-            event.target.classList.add('active');
-            showToast("Couleur modifiée avec succès");
+            
+            document.querySelectorAll('.color-dot').forEach(d => {
+                d.classList.remove('active');
+                if (d.style.background === color || d.style.backgroundColor === color || d.style.background.includes(color)) {
+                    d.classList.add('active');
+                }
+            });
+            
+            setCookie('orco_theme', color);
+            if (showTst) {
+                showToast("Couleur modifiée avec succès");
+            }
         }
 
         function startVoiceSearch() {
@@ -2083,6 +2127,10 @@ function generateAnimeCard(anime) {
         }
 
         window.onload = () => {
+            const savedTheme = getCookie('orco_theme');
+            if (savedTheme) {
+                applyThemeColor(savedTheme, false);
+            }
             router.home();
         };
     </script>
