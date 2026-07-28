@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Orco Stream est une plateforme moderne pour découvrir des en avec une interface rapide, fluide et intuitive.">
+    <meta name="description" content="Orco Stream est une plateforme moderne pour découvrir des animes avec une interface rapide, fluide et intuitive.">
     <title>Orco Stream - Regardez vos films et séries animes en streaming</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:wght@400;600;800;900&display=swap');
 
         :root {
             --bg-body: #050508;
@@ -21,12 +21,13 @@
             --glass-blur: blur(20px) saturate(180%);
             --shadow-glass: 0 20px 50px rgba(0, 0, 0, 0.7);
             --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            --custom-radius: 12px;
         }
 
         * {
             margin: 0; padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             outline: none;
             -webkit-tap-highlight-color: transparent;
         }
@@ -35,6 +36,7 @@
            left: -9999px;
         }
         body {
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
             min-height: 100vh;
@@ -42,6 +44,27 @@
             overflow-x: hidden;
             transition: background-color 0.5s ease;
         }
+
+        /* Directives dynamiques de personnalisation */
+        body.hide-resume-banner #resume-container { display: none !important; }
+        body.hide-badges .badges-container { display: none !important; }
+        body.hide-tooltips .card-tooltip { display: none !important; }
+
+        body.reduced-motion *, body.reduced-motion *::before, body.reduced-motion *::after {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        body[data-hero-size="hidden"] #hero-container { display: none !important; }
+        body[data-hero-size="small"] .hero-banner { height: 260px; }
+        body[data-hero-size="large"] .hero-banner { height: 520px; }
+
+        body[data-card-zoom="none"] .card:hover { transform: none !important; }
+        body[data-card-zoom="high"] .card:hover { transform: translateY(-12px) scale(1.04) !important; }
+
+        body[data-glow="none"] { --shadow-glass: none; }
+        body[data-glow="none"] .card:hover { box-shadow: none !important; }
+        body[data-glow="high"] .card:hover { box-shadow: 0 20px 50px rgba(0, 242, 254, 0.4), 0 0 35px var(--accent) !important; }
 
         body.cinema-mode {
             background-color: #000;
@@ -129,10 +152,29 @@
             position: relative;
         }
         
-        .nav-icon-btn:hover::after {
+        @media (hover: hover) {
+            .nav-icon-btn:hover::after {
+                content: attr(data-title);
+                position: absolute;
+                left: 60px;
+                background: rgba(0,0,0,0.9);
+                color: white;
+                padding: 6px 12px;
+                border-radius: 6px;
+                font-size: 12px;
+                font-weight: 700;
+                white-space: nowrap;
+                border: 1px solid var(--accent);
+                z-index: 1000;
+            }
+        }
+
+        .nav-icon-btn.show-tooltip::after {
             content: attr(data-title);
             position: absolute;
-            left: 60px;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(0,0,0,0.9);
             color: white;
             padding: 6px 12px;
@@ -142,6 +184,7 @@
             white-space: nowrap;
             border: 1px solid var(--accent);
             z-index: 1000;
+            margin-bottom: 10px;
         }
 
         .nav-icon-btn svg {
@@ -547,6 +590,7 @@
         .catalog-filters {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .filter-select, .filter-btn {
@@ -667,14 +711,28 @@
             gap: 15px;
         }
 
+        body[data-density="compact"] .grid {
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 8px;
+        }
+
+        body[data-density="ultra"] .grid {
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 6px;
+        }
+
         .grid.list-view {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
+        body[data-density="compact"] .grid.list-view {
+            gap: 8px;
+        }
+
         .card {
-            border-radius: 12px;
+            border-radius: var(--custom-radius);
             overflow: hidden;
             cursor: pointer;
             transition: var(--transition);
@@ -687,6 +745,10 @@
             display: flex;
             flex-direction: row;
             height: 120px;
+        }
+
+        body[data-density="compact"] .grid.list-view .card {
+            height: 90px;
         }
 
         .card:hover {
@@ -713,6 +775,10 @@
             flex-shrink: 0;
         }
 
+        body[data-density="compact"] .grid.list-view .card-img-wrapper {
+            width: 65px;
+        }
+
         .card img {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -732,6 +798,10 @@
             align-items: flex-end;
         }
 
+        body[data-density="compact"] .card-content {
+            padding: 8px;
+        }
+
         .grid.list-view .card-content {
             position: relative;
             background: transparent;
@@ -747,6 +817,14 @@
             overflow: hidden;
             text-overflow: ellipsis;
             width: 80%;
+        }
+
+        body[data-density="compact"] .card-title {
+            font-size: 11px;
+        }
+
+        body[data-density="ultra"] .card-title {
+            font-size: 10px;
         }
 
         .grid.list-view .card-title {
@@ -771,6 +849,11 @@
 
         .grid.list-view .card-tooltip {
             display: none;
+        }
+
+        body.hide-resumes .card-tooltip,
+        body.hide-resumes .anime-resume {
+            display: none !important;
         }
 
         .progress-bar {
@@ -866,29 +949,6 @@
         body.cinema-mode .player-wrapper { border-radius: 0; border: none; height: 85vh; padding-bottom: 0; }
         .player-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        .action-popup-btn {
-            position: absolute;
-            background: rgba(0,0,0,0.9);
-            border: 1px solid var(--accent);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 12px;
-            font-weight: 800;
-            cursor: pointer;
-            z-index: 300;
-            transition: var(--transition);
-            opacity: 0;
-            pointer-events: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-
-        .action-popup-btn.show { opacity: 1; pointer-events: auto; }
-        .action-popup-btn:hover { background: var(--accent); color: #000; }
-
-        #skip-intro-btn { bottom: 70px; right: 30px; }
-        #skip-outro-btn { bottom: 130px; right: 30px; }
-        #next-ep-popup { bottom: 70px; right: 30px; background: linear-gradient(135deg, var(--accent), var(--highlight)); color: #000; }
-
         .command-center { padding: 30px; border-radius: 24px; display: flex; flex-direction: column; gap: 24px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--glass-border); }
         body.cinema-mode .command-center { display: none; }
         .nav-buttons { display: flex; justify-content: space-between; gap: 16px; }
@@ -906,13 +966,16 @@
 
         #toast-container {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
             display: flex;
             flex-direction: column;
             gap: 10px;
             z-index: 9999;
         }
+
+        #toast-container.pos-bottom-right { bottom: 20px; right: 20px; top: auto; left: auto; }
+        #toast-container.pos-bottom-left { bottom: 20px; left: 20px; top: auto; right: auto; }
+        #toast-container.pos-top-right { top: 20px; right: 20px; bottom: auto; left: auto; }
+        #toast-container.pos-top-left { top: 20px; left: 20px; bottom: auto; right: auto; }
 
         .toast {
             background: rgba(8, 10, 16, 0.95);
@@ -959,7 +1022,7 @@
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
             z-index: 5000;
             display: none;
             align-items: center;
@@ -970,21 +1033,53 @@
             background: #080a10;
             border: 1px solid var(--accent);
             padding: 30px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 400px;
+            border-radius: 24px;
+            width: 92%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,242,254,0.15);
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) transparent;
+        }
+
+        .settings-grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 650px) {
+            .settings-grid-container { grid-template-columns: 1fr; }
+        }
+
+        .settings-group {
+            margin-bottom: 18px;
+            background: rgba(255,255,255,0.02);
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .settings-group h4 {
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            font-weight: 900;
         }
 
         .color-picker-container {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            justify-content: center;
+            gap: 12px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
         }
 
         .color-dot {
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid transparent;
@@ -993,6 +1088,31 @@
 
         .color-dot:hover {
             transform: scale(1.2);
+        }
+
+        .settings-select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .settings-select option {
+            background: #080a10;
+        }
+
+        .settings-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
         }
 
         .pagination-container {
@@ -1054,8 +1174,6 @@
             .hero-title { font-size: 28px; }
             .anime-detail-header { flex-direction: column; padding: 20px; }
             .detail-poster { width: 100%; max-width: 220px; margin: 0 auto; }
-            .catalog-filters { flex-wrap: wrap; }
-            #skip-intro-btn, #skip-outro-btn, #next-ep-popup { right: 50%; transform: translateX(50%); bottom: 90px; }
             .grid.list-view .card { height: auto; flex-direction: column; }
             .grid.list-view .card-img-wrapper { width: 100%; padding-top: 140%; }
         }
@@ -1080,6 +1198,9 @@
             </button>
             <button class="nav-icon-btn" data-title="Rechercher" onclick="document.getElementById('search-input').focus()">
                 <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            </button>
+            <button class="nav-icon-btn" data-title="Paramètres" onclick="openSettingsModal()">
+                <svg viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
             </button>
         </nav>
         <div class="sidebar-user">L</div>
@@ -1111,6 +1232,7 @@
 
                 <div class="section-header">
                     <div class="section-title">Découvrir</div>
+                    <button class="filter-btn" onclick="playRandomAnime()">🎲 Anime au hasard</button>
                 </div>
                 <div class="grid" id="home-grid"></div>
             </div>
@@ -1119,11 +1241,17 @@
                 <div class="section-header">
                     <div class="section-title">Catalogue Complet</div>
                     <div class="catalog-filters">
+                        <button class="filter-btn" onclick="playRandomAnime()">🎲 Anime au hasard</button>
                         <button id="toggle-view-btn" class="filter-btn" onclick="toggleGridView()">Vue Liste</button>
                         <select id="sort-select" class="filter-select" onchange="resetPaginationAndApply()">
                             <option value="default">Trier par : Défaut</option>
                             <option value="az">De A à Z</option>
                             <option value="za">De Z à A</option>
+                        </select>
+                        <select id="status-select" class="filter-select" onchange="resetPaginationAndApply()">
+                            <option value="all">Tous statuts</option>
+                            <option value="terminé">Terminés</option>
+                            <option value="en cours">En cours</option>
                         </select>
                         <button id="filter-vf" class="filter-btn" onclick="toggleFilter('vf')">VF</button>
                         <button id="filter-vostfr" class="filter-btn" onclick="toggleFilter('vostfr')">VOSTFR</button>
@@ -1158,12 +1286,12 @@
             </div>
 
             <div id="view-anime" class="page-view">
-                <button class="btn-back" onclick="router.home()">← Retour</button>
+                <button class="btn-back" onclick="router.back()">← Retour</button>
                 <div id="anime-detail-content"></div>
             </div>
 
             <div id="view-player" class="page-view">
-                <button class="btn-back" id="player-to-anime-btn">← Fiche de l'œuvre</button>
+                <button class="btn-back" id="player-to-anime-btn" onclick="router.back()">← Fiche de l'œuvre</button>
                 
                 <div class="player-layout">
                     <div class="player-top-info">
@@ -1188,9 +1316,6 @@
                     </div>
 
                     <div class="player-wrapper" id="player-wrapper">
-                        <button id="skip-intro-btn" class="action-popup-btn" onclick="hideDynamicButton('skip-intro-btn')">Passer l'introduction</button>
-                        <button id="skip-outro-btn" class="action-popup-btn" onclick="hideDynamicButton('skip-outro-btn')">Passer le générique</button>
-                        <button id="next-ep-popup" class="action-popup-btn" onclick="navigateEpisode(1)">▶ Épisode suivant</button>
                         <iframe id="video-iframe" allowfullscreen></iframe>
                     </div>
 
@@ -1215,58 +1340,433 @@
         </main>
     </div>
 
-    <div id="toast-container"></div>
+    <div id="toast-container" class="pos-bottom-right"></div>
 
     <div id="custom-context-menu" class="context-menu">
-        <div class="context-menu-item" onclick="openSettingsModal()">Personnaliser les couleurs</div>
+        <div class="context-menu-item" onclick="openSettingsModal()">Personnaliser l'interface</div>
         <div class="context-menu-item" onclick="router.home()">Retour à l'accueil</div>
         <div class="context-menu-item" onclick="toggleCinemaMode()">Mode Cinéma</div>
     </div>
 
     <div id="settings-modal" class="modal-overlay" onclick="closeSettingsModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <h3 style="color:white;text-align:center;margin-bottom:10px;">Couleur de l'interface</h3>
-            <div class="color-picker-container">
-                <div class="color-dot active" style="background:#00f2fe;" onclick="applyThemeColor('#00f2fe')"></div>
-                <div class="color-dot" style="background:#ff4757;" onclick="applyThemeColor('#ff4757')"></div>
-                <div class="color-dot" style="background:#10b981;" onclick="applyThemeColor('#10b981')"></div>
-                <div class="color-dot" style="background:#8b5cf6;" onclick="applyThemeColor('#8b5cf6')"></div>
-                <div class="color-dot" style="background:#facc15;" onclick="applyThemeColor('#facc15')"></div>
+            <h3 style="color:white;text-align:center;margin-bottom:20px;font-weight:900;font-size:20px;letter-spacing:-0.5px;">Centre de Personnalisation</h3>
+            
+            <div class="settings-grid-container">
+                <!-- Option 1 -->
+                <div class="settings-group">
+                    <h4>1. Couleur d'accentuation</h4>
+                    <div class="color-picker-container">
+                        <div class="color-dot" style="background:#00f2fe;" onclick="applyThemeColor('#00f2fe')"></div>
+                        <div class="color-dot" style="background:#ff4757;" onclick="applyThemeColor('#ff4757')"></div>
+                        <div class="color-dot" style="background:#10b981;" onclick="applyThemeColor('#10b981')"></div>
+                        <div class="color-dot" style="background:#8b5cf6;" onclick="applyThemeColor('#8b5cf6')"></div>
+                        <div class="color-dot" style="background:#facc15;" onclick="applyThemeColor('#facc15')"></div>
+                        <div class="color-dot" style="background:#ff7675;" onclick="applyThemeColor('#ff7675')"></div>
+                    </div>
+                </div>
+
+                <!-- Option 2 -->
+                <div class="settings-group">
+                    <h4>2. Fond de page</h4>
+                    <select class="settings-select" id="setting-bg-color" onchange="applyBgColor(this.value)">
+                        <option value="#050508">Deep Space (Défaut)</option>
+                        <option value="#000000">Noir Absolu</option>
+                        <option value="#080c16">Midnight Blue</option>
+                        <option value="#0f051d">Cyber Purple</option>
+                    </select>
+                </div>
+
+                <!-- Option 3 -->
+                <div class="settings-group">
+                    <h4>3. Typographie</h4>
+                    <select class="settings-select" id="setting-typo" onchange="applyTypography(this.value)">
+                        <option value="Inter">Inter (Défaut)</option>
+                        <option value="Roboto">Roboto</option>
+                        <option value="Poppins">Poppins</option>
+                        <option value="Montserrat">Montserrat</option>
+                    </select>
+                </div>
+
+                <!-- Option 4 -->
+                <div class="settings-group">
+                    <h4>4. Taille du texte</h4>
+                    <select class="settings-select" id="setting-font-size" onchange="applyFontSize(this.value)">
+                        <option value="90%">Réduite (90%)</option>
+                        <option value="100%">Normale (100%)</option>
+                        <option value="110%">Grande (110%)</option>
+                    </select>
+                </div>
+
+                <!-- Option 5 -->
+                <div class="settings-group">
+                    <h4>5. Arrondi des coins</h4>
+                    <select class="settings-select" id="setting-radius" onchange="applyBorderRadius(this.value)">
+                        <option value="0px">Carré (0px)</option>
+                        <option value="8px">Léger (8px)</option>
+                        <option value="12px">Standard (12px)</option>
+                        <option value="20px">Arrondi (20px)</option>
+                    </select>
+                </div>
+
+                <!-- Option 6 -->
+                <div class="settings-group">
+                    <h4>6. Effet Flou Glassmorphism</h4>
+                    <select class="settings-select" id="setting-blur" onchange="applyBlur(this.value)">
+                        <option value="0px">Désactivé (0px)</option>
+                        <option value="10px">Modéré (10px)</option>
+                        <option value="20px">Intense (20px)</option>
+                    </select>
+                </div>
+
+                <!-- Option 7 -->
+                <div class="settings-group">
+                    <h4>7. Lumières & Effet Glow</h4>
+                    <select class="settings-select" id="setting-glow" onchange="applyGlow(this.value)">
+                        <option value="none">Aucun Glow</option>
+                        <option value="medium">Modéré</option>
+                        <option value="high">Intense Neon</option>
+                    </select>
+                </div>
+
+                <!-- Option 8 -->
+                <div class="settings-group">
+                    <h4>8. Densité de la Grille</h4>
+                    <select class="settings-select" id="setting-density" onchange="applyDensity(this.value)">
+                        <option value="normal">Normale (Défaut)</option>
+                        <option value="compact">Compacte</option>
+                        <option value="ultra">Ultra Condensée</option>
+                    </select>
+                </div>
+
+                <!-- Option 9 -->
+                <div class="settings-group">
+                    <h4>9. Effet au survol des cartes</h4>
+                    <select class="settings-select" id="setting-card-zoom" onchange="applyCardZoom(this.value)">
+                        <option value="none">Fixe (Pas de zoom)</option>
+                        <option value="soft">Subtil (Défaut)</option>
+                        <option value="high">Zoom Amplifié</option>
+                    </select>
+                </div>
+
+                <!-- Option 10 -->
+                <div class="settings-group">
+                    <h4>10. Hauteur du Banner Hero</h4>
+                    <select class="settings-select" id="setting-hero-size" onchange="applyHeroSize(this.value)">
+                        <option value="small">Compact (260px)</option>
+                        <option value="medium">Standard (420px)</option>
+                        <option value="large">Grand (520px)</option>
+                        <option value="hidden">Masquer Hero</option>
+                    </select>
+                </div>
+
+                <!-- Option 11 -->
+                <div class="settings-group">
+                    <h4>11. Position des Toasts</h4>
+                    <select class="settings-select" id="setting-toast-pos" onchange="applyToastPos(this.value)">
+                        <option value="pos-bottom-right">Bas Droite</option>
+                        <option value="pos-bottom-left">Bas Gauche</option>
+                        <option value="pos-top-right">Haut Droite</option>
+                        <option value="pos-top-left">Haut Gauche</option>
+                    </select>
+                </div>
+
+                <!-- Option 12 -->
+                <div class="settings-group">
+                    <h4>12. Éléments par page</h4>
+                    <select class="settings-select" id="setting-per-page" onchange="applyPerPage(this.value)">
+                        <option value="20">20 Animes</option>
+                        <option value="50">50 Animes (Défaut)</option>
+                        <option value="100">100 Animes</option>
+                    </select>
+                </div>
+
+                <!-- Option 13 -->
+                <div class="settings-group">
+                    <h4>13. Audio Préféré par défaut</h4>
+                    <select class="settings-select" id="setting-default-lang" onchange="applyDefaultLang(this.value)">
+                        <option value="vf">VF (Voix Françaises)</option>
+                        <option value="vostfr">VOSTFR (Sous-titré)</option>
+                    </select>
+                </div>
+
+                <!-- Option 14 -->
+                <div class="settings-group">
+                    <h4>14. Lecteur vidéo par défaut</h4>
+                    <select class="settings-select" id="setting-default-server" onchange="applyDefaultServer(this.value)">
+                        <option value="sibnet">Sibnet</option>
+                        <option value="vidmoly">Vidmoly</option>
+                    </select>
+                </div>
+
+                <!-- Option 15 -->
+                <div class="settings-group">
+                    <label class="settings-checkbox">
+                        <input type="checkbox" id="setting-hide-resumes" onchange="applyHideResumes(this.checked)">
+                        15. Masquer les résumés
+                    </label>
+                </div>
+
+                <!-- Option 16 -->
+                <div class="settings-group">
+                    <label class="settings-checkbox">
+                        <input type="checkbox" id="setting-hide-banner" onchange="applyHideBanner(this.checked)">
+                        16. Masquer bandeau "Continuer"
+                    </label>
+                </div>
+
+                <!-- Option 17 -->
+                <div class="settings-group">
+                    <label class="settings-checkbox">
+                        <input type="checkbox" id="setting-reduced-motion" onchange="applyReducedMotion(this.checked)">
+                        17. Réduire les animations
+                    </label>
+                </div>
+
+                <!-- Option 18 -->
+                <div class="settings-group">
+                    <label class="settings-checkbox">
+                        <input type="checkbox" id="setting-hide-badges" onchange="applyHideBadges(this.checked)">
+                        18. Masquer badges VF/VOSTFR
+                    </label>
+                </div>
+
+                <!-- Option 19 -->
+                <div class="settings-group">
+                    <label class="settings-checkbox">
+                        <input type="checkbox" id="setting-hide-tooltips" onchange="applyHideTooltips(this.checked)">
+                        19. Masquer tooltips au survol
+                    </label>
+                </div>
+
+                <!-- Option 20 -->
+                <div class="settings-group">
+                    <label class="settings-checkbox">
+                        <input type="checkbox" id="setting-autoplay" onchange="applyAutoplay(this.checked)">
+                        20. Lecture automatique
+                    </label>
+                </div>
             </div>
+            
+            <button class="btn-primary" style="width:100%; justify-content:center; margin-top:15px;" onclick="closeSettingsModal(event)">Enregistrer les préférences</button>
         </div>
     </div>
 
     <script src="database.json"></script>
     <script>
-        function setCookie(name, value, days = 365) {
-            let expires = "";
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + encodeURIComponent(value || "") + expires + "; path=/";
+        function setStorage(name, value) {
+            localStorage.setItem(name, value);
         }
 
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
-            }
-            return null;
+        function getStorage(name) {
+            return localStorage.getItem(name);
         }
 
-        function getArrayFromCookie(name) {
-            const val = getCookie(name);
+        function getArrayFromStorage(name) {
+            const val = getStorage(name);
             if (!val) return [];
             try { return JSON.parse(val); } catch(e) { return []; }
         }
 
-        function saveArrayToCookie(name, arr) {
-            setCookie(name, JSON.stringify(arr));
+        function saveArrayToStorage(name, arr) {
+            setStorage(name, JSON.stringify(arr));
+        }
+
+        function loadSettings() {
+            applyThemeColor(getStorage('orco_theme') || '#00f2fe');
+
+            const bg = getStorage('orco_bg_color') || '#050508';
+            if (document.getElementById('setting-bg-color')) document.getElementById('setting-bg-color').value = bg;
+            applyBgColor(bg);
+
+            const typo = getStorage('orco_typo') || 'Inter';
+            if (document.getElementById('setting-typo')) document.getElementById('setting-typo').value = typo;
+            applyTypography(typo);
+
+            const fSize = getStorage('orco_font_size') || '100%';
+            if (document.getElementById('setting-font-size')) document.getElementById('setting-font-size').value = fSize;
+            applyFontSize(fSize);
+
+            const radius = getStorage('orco_radius') || '12px';
+            if (document.getElementById('setting-radius')) document.getElementById('setting-radius').value = radius;
+            applyBorderRadius(radius);
+
+            const blurVal = getStorage('orco_blur') || '20px';
+            if (document.getElementById('setting-blur')) document.getElementById('setting-blur').value = blurVal;
+            applyBlur(blurVal);
+
+            const glow = getStorage('orco_glow') || 'medium';
+            if (document.getElementById('setting-glow')) document.getElementById('setting-glow').value = glow;
+            applyGlow(glow);
+
+            const density = getStorage('orco_density') || 'normal';
+            if (document.getElementById('setting-density')) document.getElementById('setting-density').value = density;
+            applyDensity(density);
+
+            const cardZoom = getStorage('orco_card_zoom') || 'soft';
+            if (document.getElementById('setting-card-zoom')) document.getElementById('setting-card-zoom').value = cardZoom;
+            applyCardZoom(cardZoom);
+
+            const heroSize = getStorage('orco_hero_size') || 'medium';
+            if (document.getElementById('setting-hero-size')) document.getElementById('setting-hero-size').value = heroSize;
+            applyHeroSize(heroSize);
+
+            const toastPos = getStorage('orco_toast_pos') || 'pos-bottom-right';
+            if (document.getElementById('setting-toast-pos')) document.getElementById('setting-toast-pos').value = toastPos;
+            applyToastPos(toastPos);
+
+            const perPage = getStorage('orco_per_page') || '50';
+            if (document.getElementById('setting-per-page')) document.getElementById('setting-per-page').value = perPage;
+            applyPerPage(perPage);
+
+            const defLang = getStorage('orco_default_lang') || 'vf';
+            if (document.getElementById('setting-default-lang')) document.getElementById('setting-default-lang').value = defLang;
+            playerLang = defLang;
+
+            const defServer = getStorage('orco_default_server') || 'sibnet';
+            if (document.getElementById('setting-default-server')) document.getElementById('setting-default-server').value = defServer;
+            playerServer = defServer;
+
+            const hideResume = getStorage('orco_hide_resume') === 'true';
+            if (document.getElementById('setting-hide-resumes')) document.getElementById('setting-hide-resumes').checked = hideResume;
+            applyHideResumes(hideResume);
+
+            const hideBanner = getStorage('orco_hide_banner') === 'true';
+            if (document.getElementById('setting-hide-banner')) document.getElementById('setting-hide-banner').checked = hideBanner;
+            applyHideBanner(hideBanner);
+
+            const reducedMotion = getStorage('orco_reduced_motion') === 'true';
+            if (document.getElementById('setting-reduced-motion')) document.getElementById('setting-reduced-motion').checked = reducedMotion;
+            applyReducedMotion(reducedMotion);
+
+            const hideBadges = getStorage('orco_hide_badges') === 'true';
+            if (document.getElementById('setting-hide-badges')) document.getElementById('setting-hide-badges').checked = hideBadges;
+            applyHideBadges(hideBadges);
+
+            const hideTooltips = getStorage('orco_hide_tooltips') === 'true';
+            if (document.getElementById('setting-hide-tooltips')) document.getElementById('setting-hide-tooltips').checked = hideTooltips;
+            applyHideTooltips(hideTooltips);
+
+            const autoplay = getStorage('orco_autoplay') === 'true';
+            if (document.getElementById('setting-autoplay')) document.getElementById('setting-autoplay').checked = autoplay;
+            setStorage('orco_autoplay', autoplay.toString());
+        }
+
+        function applyThemeColor(color) {
+            document.documentElement.style.setProperty('--accent', color);
+            setStorage('orco_theme', color);
+        }
+
+        function applyBgColor(color) {
+            document.documentElement.style.setProperty('--bg-body', color);
+            setStorage('orco_bg_color', color);
+        }
+
+        function applyTypography(font) {
+            document.body.style.fontFamily = font + ', sans-serif';
+            setStorage('orco_typo', font);
+        }
+
+        function applyFontSize(size) {
+            document.documentElement.style.fontSize = size;
+            setStorage('orco_font_size', size);
+        }
+
+        function applyBorderRadius(radius) {
+            document.documentElement.style.setProperty('--custom-radius', radius);
+            setStorage('orco_radius', radius);
+        }
+
+        function applyBlur(val) {
+            document.documentElement.style.setProperty('--glass-blur', 'blur(' + val + ') saturate(180%)');
+            setStorage('orco_blur', val);
+        }
+
+        function applyGlow(val) {
+            document.body.setAttribute('data-glow', val);
+            setStorage('orco_glow', val);
+        }
+
+        function applyDensity(density) {
+            document.body.setAttribute('data-density', density);
+            setStorage('orco_density', density);
+        }
+
+        function applyCardZoom(val) {
+            document.body.setAttribute('data-card-zoom', val);
+            setStorage('orco_card_zoom', val);
+        }
+
+        function applyHeroSize(val) {
+            document.body.setAttribute('data-hero-size', val);
+            setStorage('orco_hero_size', val);
+        }
+
+        function applyToastPos(pos) {
+            const container = document.getElementById('toast-container');
+            if (container) container.className = pos;
+            setStorage('orco_toast_pos', pos);
+        }
+
+        function applyPerPage(val) {
+            catalogItemsPerPage = parseInt(val) || 50;
+            setStorage('orco_per_page', val);
+            if (document.getElementById('view-catalog').classList.contains('active-view')) {
+                applyCatalogFilters();
+            }
+        }
+
+        function applyHideResumes(checked) {
+            document.body.classList.toggle('hide-resumes', checked);
+            setStorage('orco_hide_resume', checked.toString());
+        }
+
+        function applyHideBanner(checked) {
+            document.body.classList.toggle('hide-resume-banner', checked);
+            setStorage('orco_hide_banner', checked.toString());
+        }
+
+        function applyReducedMotion(checked) {
+            document.body.classList.toggle('reduced-motion', checked);
+            setStorage('orco_reduced_motion', checked.toString());
+        }
+
+        function applyHideBadges(checked) {
+            document.body.classList.toggle('hide-badges', checked);
+            setStorage('orco_hide_badges', checked.toString());
+        }
+
+        function applyHideTooltips(checked) {
+            document.body.classList.toggle('hide-tooltips', checked);
+            setStorage('orco_hide_tooltips', checked.toString());
+        }
+
+        function applyDefaultLang(val) {
+            playerLang = val;
+            setStorage('orco_default_lang', val);
+        }
+
+        function applyDefaultServer(val) {
+            playerServer = val;
+            setStorage('orco_default_server', val);
+        }
+
+        function applyAutoplay(checked) {
+            setStorage('orco_autoplay', checked.toString());
+        }
+
+        function openSettingsModal() {
+            document.getElementById('settings-modal').style.display = 'flex';
+        }
+
+        function closeSettingsModal(e) {
+            if (e) {
+                if (e.target.id === 'settings-modal' || e.target.classList.contains('btn-primary')) {
+                    document.getElementById('settings-modal').style.display = 'none';
+                }
+            } else {
+                document.getElementById('settings-modal').style.display = 'none';
+            }
         }
 
         function getAnime(id) { return database.find(a => a.id === id) || null; }
@@ -1312,11 +1812,10 @@
         let playerContext = { type: 'season', index: 0, itemIndex: 0 };
         let playerLang = 'vf';
         let playerServer = 'sibnet';
-        let catalogFilters = { sort: 'default', vf: false, vostfr: false };
+        let catalogFilters = { sort: 'default', status: 'all', vf: false, vostfr: false };
         let catalogPage = 1;
         let catalogItemsPerPage = 50;
         let isListView = false;
-        let activeTimers = [];
 
         function showToast(message) {
             const container = document.getElementById('toast-container');
@@ -1331,7 +1830,7 @@
 
         function toggleFavoriteEvent(e, id) {
             e.stopPropagation();
-            let favs = getArrayFromCookie('orco_favorites');
+            let favs = getArrayFromStorage('orco_favorites');
             const index = favs.indexOf(id);
             if (index > -1) {
                 favs.splice(index, 1);
@@ -1340,13 +1839,13 @@
                 favs.push(id);
                 showToast("Ajouté aux favoris");
             }
-            saveArrayToCookie('orco_favorites', favs);
+            saveArrayToStorage('orco_favorites', favs);
             refreshActiveGrid();
         }
 
         function toggleWatchLaterEvent(e, id) {
             e.stopPropagation();
-            let list = getArrayFromCookie('orco_watchlater');
+            let list = getArrayFromStorage('orco_watchlater');
             const index = list.indexOf(id);
             if (index > -1) {
                 list.splice(index, 1);
@@ -1355,16 +1854,16 @@
                 list.push(id);
                 showToast("Ajouté pour plus tard");
             }
-            saveArrayToCookie('orco_watchlater', list);
+            saveArrayToStorage('orco_watchlater', list);
             refreshActiveGrid();
         }
 
         function isFavorite(id) {
-            return getArrayFromCookie('orco_favorites').includes(id);
+            return getArrayFromStorage('orco_favorites').includes(id);
         }
 
         function isWatchLater(id) {
-            return getArrayFromCookie('orco_watchlater').includes(id);
+            return getArrayFromStorage('orco_watchlater').includes(id);
         }
 
         function refreshActiveGrid() {
@@ -1378,23 +1877,23 @@
 
         function saveSearchHistory(query) {
             if (!query) return;
-            let history = getArrayFromCookie('orco_search_history');
+            let history = getArrayFromStorage('orco_search_history');
             history = history.filter(q => q !== query);
             history.unshift(query);
             if (history.length > 5) history.pop();
-            saveArrayToCookie('orco_search_history', history);
+            saveArrayToStorage('orco_search_history', history);
         }
 
         function clearSearchHistory(e) {
             if(e) e.stopPropagation();
-            setCookie('orco_search_history', '');
+            setStorage('orco_search_history', '');
             document.getElementById('search-dropdown').classList.remove('active');
         }
 
         function showSearchHistory() {
             const input = document.getElementById('search-input').value.trim();
             if (input !== "") return;
-            let history = getArrayFromCookie('orco_search_history');
+            let history = getArrayFromStorage('orco_search_history');
             const dropdown = document.getElementById('search-dropdown');
             if (history.length === 0) {
                 dropdown.classList.remove('active');
@@ -1450,35 +1949,37 @@
         function saveProgress() {
             if(!currentAnimeId) return;
             const data = { animeId: currentAnimeId, context: playerContext };
-            setCookie('orco_progress', JSON.stringify(data));
+            setStorage('orco_progress', JSON.stringify(data));
         }
 
         function addToHistory(animeId) {
-            let history = getArrayFromCookie('orco_history');
+            let history = getArrayFromStorage('orco_history');
             history = history.filter(id => id !== animeId);
             history.unshift(animeId);
             if (history.length > 20) history.pop();
-            saveArrayToCookie('orco_history', history);
+            saveArrayToStorage('orco_history', history);
         }
 
         function clearWatchHistory() {
-            setCookie('orco_history', '');
-            renderHistoryGrid();
-            showToast("Historique effacé");
+            if (confirm("Voulez-vous vraiment effacer tout votre historique de visionnage ?")) {
+                setStorage('orco_history', '');
+                renderHistoryGrid();
+                showToast("Historique effacé");
+            }
         }
 
         function markEpisodeWatched(animeId, context) {
-            let watched = getArrayFromCookie('orco_watched');
+            let watched = getArrayFromStorage('orco_watched');
             const key = animeId + '-' + context.type + '-' + context.index + '-' + context.itemIndex;
             if (!watched.includes(key)) {
                 watched.push(key);
                 if(watched.length > 200) watched.shift();
-                saveArrayToCookie('orco_watched', watched);
+                saveArrayToStorage('orco_watched', watched);
             }
         }
 
         function isEpisodeWatched(animeId, context) {
-            const watched = getArrayFromCookie('orco_watched');
+            const watched = getArrayFromStorage('orco_watched');
             const key = animeId + '-' + context.type + '-' + context.index + '-' + context.itemIndex;
             return watched.includes(key);
         }
@@ -1515,6 +2016,12 @@
             saveSearchHistory(query);
             resetSearch();
             router.anime(id);
+        }
+
+        function playRandomAnime() {
+            if (!database || database.length === 0) return;
+            const randomAnime = database[Math.floor(Math.random() * database.length)];
+            router.anime(randomAnime.id);
         }
 
         function renderHeroBanner() {
@@ -1570,7 +2077,7 @@
 
         function renderResumeBanner() {
             const container = document.getElementById('resume-container');
-            const savedData = getCookie('orco_progress');
+            const savedData = getStorage('orco_progress');
             if (!savedData) { container.innerHTML = ""; return; }
             try {
                 const data = JSON.parse(savedData);
@@ -1595,7 +2102,7 @@
         }
 
         function openPlayerFromResume(animeId) {
-            const savedData = getCookie('orco_progress');
+            const savedData = getStorage('orco_progress');
             if (!savedData) return;
             const data = JSON.parse(savedData);
             currentAnimeId = animeId;
@@ -1662,6 +2169,9 @@
                 let filtered = [...db];
                 if (filters.vf) filtered = filtered.filter(a => JSON.stringify(a).includes('"vf"'));
                 if (filters.vostfr) filtered = filtered.filter(a => JSON.stringify(a).includes('"vostfr"'));
+                if (filters.status && filters.status !== 'all') {
+                    filtered = filtered.filter(a => a.status && a.status.toLowerCase() === filters.status);
+                }
                 if (filters.sort === 'az') filtered.sort((a, b) => a.title.localeCompare(b.title));
                 else if (filters.sort === 'za') filtered.sort((a, b) => b.title.localeCompare(a.title));
                 const totalPages = Math.ceil(filtered.length / itemsPerPage);
@@ -1687,6 +2197,7 @@
 
         function applyCatalogFilters() {
             catalogFilters.sort = document.getElementById('sort-select').value;
+            catalogFilters.status = document.getElementById('status-select').value;
             catalogWorker.postMessage({ db: database, filters: catalogFilters, page: catalogPage, itemsPerPage: catalogItemsPerPage });
         }
 
@@ -1714,7 +2225,7 @@
         }
 
         function renderFavoritesGrid() {
-            const favIds = getArrayFromCookie('orco_favorites');
+            const favIds = getArrayFromStorage('orco_favorites');
             const grid = document.getElementById('favorites-grid');
             if (favIds.length === 0) {
                 grid.innerHTML = "<p style='color: var(--text-sub)'>Vous n'avez aucun favori pour le moment.</p>";
@@ -1725,7 +2236,7 @@
         }
 
         function renderWatchLaterGrid() {
-            const listIds = getArrayFromCookie('orco_watchlater');
+            const listIds = getArrayFromStorage('orco_watchlater');
             const grid = document.getElementById('watchlater-grid');
             if (listIds.length === 0) {
                 grid.innerHTML = "<p style='color: var(--text-sub)'>Votre liste est vide.</p>";
@@ -1736,7 +2247,7 @@
         }
 
         function renderHistoryGrid() {
-            const listIds = getArrayFromCookie('orco_history');
+            const listIds = getArrayFromStorage('orco_history');
             const grid = document.getElementById('history-grid');
             if (listIds.length === 0) {
                 grid.innerHTML = "<p style='color: var(--text-sub)'>Votre historique est vide.</p>";
@@ -1843,41 +2354,7 @@
             router.player();
         }
 
-        function clearAllTimers() {
-            activeTimers.forEach(t => clearTimeout(t));
-            activeTimers = [];
-        }
-
-        function setupDynamicPlayerEvents() {
-            clearAllTimers();
-            const btnIntro = document.getElementById('skip-intro-btn');
-            const btnOutro = document.getElementById('skip-outro-btn');
-            const btnNext = document.getElementById('next-ep-popup');
-            
-            btnIntro.classList.remove('show');
-            btnOutro.classList.remove('show');
-            btnNext.classList.remove('show');
-            
-            activeTimers.push(setTimeout(() => btnIntro.classList.add('show'), 5000));
-            activeTimers.push(setTimeout(() => btnIntro.classList.remove('show'), 85000));
-            
-            activeTimers.push(setTimeout(() => {
-                btnOutro.classList.add('show');
-                btnNext.classList.add('show');
-            }, 1200000));
-            
-            activeTimers.push(setTimeout(() => {
-                btnNext.classList.remove('show');
-                navigateEpisode(1);
-            }, 1320000));
-        }
-
-        function hideDynamicButton(id) {
-            document.getElementById(id).classList.remove('show');
-        }
-
         function loadPlayerContent() {
-            clearAllTimers();
             const anime = getAnime(currentAnimeId);
             const item = getItem(anime, playerContext);
             if (!anime || !item) { router.home(); return; }
@@ -1914,7 +2391,6 @@
             iframe.src = src || '';
             updatePlayerControls(anime, item);
             buildPlayerNav(anime);
-            setupDynamicPlayerEvents();
         }
 
         function updatePlayerControls(anime, item) {
@@ -1985,8 +2461,6 @@
             const newIndex = playerContext.itemIndex + dir;
             if (newIndex >= 0 && newIndex < items.length) {
                 changePlayerItem(newIndex);
-            } else {
-                hideDynamicButton('next-ep-popup');
             }
         }
 
@@ -2004,133 +2478,103 @@
             loadPlayerContent();
         }
 
+        let touchTimer;
+        document.querySelectorAll('.nav-icon-btn').forEach(btn => {
+            btn.addEventListener('touchstart', e => {
+                touchTimer = setTimeout(() => {
+                    btn.classList.add('show-tooltip');
+                }, 500);
+            });
+            btn.addEventListener('touchend', () => {
+                clearTimeout(touchTimer);
+                setTimeout(() => btn.classList.remove('show-tooltip'), 1000);
+            });
+            btn.addEventListener('touchmove', () => {
+                clearTimeout(touchTimer);
+                btn.classList.remove('show-tooltip');
+            });
+        });
+
+        /* Gestionnaire de navigation intelligente (Historique & Défilement) */
+        let navigationStack = [];
+        let currentViewState = null;
+
         const router = {
             hideAll: () => {
                 document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active-view'));
                 document.querySelectorAll('.nav-icon-btn').forEach(btn => btn.classList.remove('active'));
             },
-            home: () => {
+            navigate: (viewName, id = null, isBack = false) => {
+                if (!isBack && currentViewState) {
+                    currentViewState.scrollY = window.scrollY;
+                    navigationStack.push({ ...currentViewState });
+                }
+
+                currentViewState = { viewName, id, scrollY: 0 };
                 router.hideAll();
-                document.getElementById('view-home').classList.add('active-view');
-                document.getElementById('nav-home').classList.add('active');
-                renderHeroBanner();
-                renderResumeBanner();
-                renderHomeGrid();
-                renderGenresGrid();
+
+                if (viewName === 'home') {
+                    document.getElementById('view-home').classList.add('active-view');
+                    document.getElementById('nav-home').classList.add('active');
+                    renderHeroBanner();
+                    renderResumeBanner();
+                    renderHomeGrid();
+                    renderGenresGrid();
+                } else if (viewName === 'catalog') {
+                    document.getElementById('view-catalog').classList.add('active-view');
+                    if (isListView) document.getElementById('catalog-grid').classList.add('list-view');
+                    applyCatalogFilters();
+                } else if (viewName === 'favorites') {
+                    document.getElementById('view-favorites').classList.add('active-view');
+                    document.getElementById('nav-favs').classList.add('active');
+                    if (isListView) document.getElementById('favorites-grid').classList.add('list-view');
+                    renderFavoritesGrid();
+                } else if (viewName === 'watchLater') {
+                    document.getElementById('view-watchlater').classList.add('active-view');
+                    document.getElementById('nav-watchlater').classList.add('active');
+                    if (isListView) document.getElementById('watchlater-grid').classList.add('list-view');
+                    renderWatchLaterGrid();
+                } else if (viewName === 'history') {
+                    document.getElementById('view-history').classList.add('active-view');
+                    document.getElementById('nav-history').classList.add('active');
+                    if (isListView) document.getElementById('history-grid').classList.add('list-view');
+                    renderHistoryGrid();
+                } else if (viewName === 'anime') {
+                    currentAnimeId = id || currentAnimeId;
+                    activeTabId = 's-0';
+                    document.getElementById('view-anime').classList.add('active-view');
+                    renderAnimeDetail();
+                } else if (viewName === 'player') {
+                    document.getElementById('view-player').classList.add('active-view');
+                    loadPlayerContent();
+                }
+
+                if (isBack) {
+                    const targetScroll = id ? id.scrollY : 0;
+                    setTimeout(() => window.scrollTo(0, targetScroll), 10);
+                } else {
+                    window.scrollTo(0, 0);
+                }
             },
-            catalog: () => {
-                router.hideAll();
-                document.getElementById('view-catalog').classList.add('active-view');
-                if (isListView) document.getElementById('catalog-grid').classList.add('list-view');
-                resetPaginationAndApply();
+            back: () => {
+                if (navigationStack.length > 0) {
+                    const prevState = navigationStack.pop();
+                    router.navigate(prevState.viewName, prevState, true);
+                } else {
+                    router.navigate('home', null, true);
+                }
             },
-            favorites: () => {
-                router.hideAll();
-                document.getElementById('view-favorites').classList.add('active-view');
-                document.getElementById('nav-favs').classList.add('active');
-                if (isListView) document.getElementById('favorites-grid').classList.add('list-view');
-                renderFavoritesGrid();
-            },
-            watchLater: () => {
-                router.hideAll();
-                document.getElementById('view-watchlater').classList.add('active-view');
-                document.getElementById('nav-watchlater').classList.add('active');
-                if (isListView) document.getElementById('watchlater-grid').classList.add('list-view');
-                renderWatchLaterGrid();
-            },
-            history: () => {
-                router.hideAll();
-                document.getElementById('view-history').classList.add('active-view');
-                document.getElementById('nav-history').classList.add('active');
-                if (isListView) document.getElementById('history-grid').classList.add('list-view');
-                renderHistoryGrid();
-            },
-            anime: (id) => {
-                currentAnimeId = id;
-                activeTabId = 's-0';
-                router.hideAll();
-                document.getElementById('view-anime').classList.add('active-view');
-                renderAnimeDetail();
-                window.scrollTo(0,0);
-            },
-            player: () => {
-                router.hideAll();
-                document.getElementById('view-player').classList.add('active-view');
-                loadPlayerContent();
-                window.scrollTo(0,0);
-            }
+            home: () => router.navigate('home'),
+            catalog: () => router.navigate('catalog'),
+            favorites: () => router.navigate('favorites'),
+            watchLater: () => router.navigate('watchLater'),
+            history: () => router.navigate('history'),
+            anime: (id) => router.navigate('anime', id),
+            player: () => router.navigate('player')
         };
 
-        document.getElementById('player-to-anime-btn').addEventListener('click', () => {
-            document.getElementById('video-iframe').src = '';
-            clearAllTimers();
-            router.anime(currentAnimeId);
-        });
-
-        document.addEventListener('contextmenu', e => {
-            e.preventDefault();
-            const menu = document.getElementById('custom-context-menu');
-            menu.style.display = 'flex';
-            menu.style.left = e.pageX + 'px';
-            menu.style.top = e.pageY + 'px';
-        });
-
-        document.addEventListener('click', () => {
-            document.getElementById('custom-context-menu').style.display = 'none';
-        });
-
-        function openSettingsModal() {
-            document.getElementById('settings-modal').style.display = 'flex';
-        }
-
-        function closeSettingsModal(e) {
-            if (e.target.id === 'settings-modal') {
-                document.getElementById('settings-modal').style.display = 'none';
-            }
-        }
-
-        function applyThemeColor(color, showTst = true) {
-            document.documentElement.style.setProperty('--accent', color);
-            document.documentElement.style.setProperty('--highlight', color);
-            
-            document.querySelectorAll('.color-dot').forEach(d => {
-                d.classList.remove('active');
-                if (d.style.background === color || d.style.backgroundColor === color || d.style.background.includes(color)) {
-                    d.classList.add('active');
-                }
-            });
-            
-            setCookie('orco_theme', color);
-            if (showTst) {
-                showToast("Couleur modifiée avec succès");
-            }
-        }
-
-        function startVoiceSearch() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (SpeechRecognition) {
-                const recognition = new SpeechRecognition();
-                recognition.lang = 'fr-FR';
-                recognition.start();
-                showToast("Écoute en cours...");
-                recognition.onresult = function(event) {
-                    const query = event.results[0][0].transcript;
-                    document.getElementById('search-input').value = query;
-                    handleSearchDropdown(query);
-                };
-                recognition.onerror = function() {
-                    showToast("Erreur de reconnaissance vocale.");
-                };
-            } else {
-                showToast("Recherche vocale non supportée sur ce navigateur.");
-            }
-        }
-
         window.onload = () => {
-            const savedTheme = getCookie('orco_theme');
-            if (savedTheme) {
-                applyThemeColor(savedTheme, false);
-            }
+            loadSettings();
             router.home();
         };
     </script>
