@@ -45,7 +45,6 @@
             transition: background-color 0.5s ease;
         }
 
-        /* Directives dynamiques de personnalisation */
         body.hide-resume-banner #resume-container { display: none !important; }
         body.hide-badges .badges-container { display: none !important; }
         body.hide-tooltips .card-tooltip { display: none !important; }
@@ -580,13 +579,6 @@
             gap: 10px;
         }
 
-        .section-title span.kanji {
-            font-size: 13px;
-            color: var(--accent);
-            font-weight: 900;
-            opacity: 0.8;
-        }
-
         .catalog-filters {
             display: flex;
             gap: 10px;
@@ -627,55 +619,6 @@
             background: var(--accent);
             color: #000;
             border-color: var(--accent);
-        }
-
-        .genres-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 18px;
-            margin-bottom: 45px;
-        }
-
-        .genre-card {
-            height: 95px;
-            border-radius: 18px;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            border: 1px solid var(--glass-border);
-            transition: var(--transition);
-            display: flex;
-            align-items: flex-end;
-            padding: 15px;
-        }
-
-        .genre-card img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.5);
-            transition: transform 0.5s ease;
-        }
-
-        .genre-card:hover img {
-            transform: scale(1.15);
-            filter: brightness(0.7);
-        }
-
-        .genre-card span {
-            position: relative;
-            z-index: 2;
-            font-weight: 800;
-            font-size: 15px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-        }
-
-        .genre-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.7);
         }
 
         .resume-banner {
@@ -788,6 +731,28 @@
 
         .card:hover img { transform: scale(1.08); }
 
+        .card-genre-tags {
+            position: absolute;
+            top: 8px; left: 8px;
+            display: flex; gap: 4px; flex-wrap: wrap; z-index: 2;
+        }
+        
+        #view-home .card-genre-tags {
+            display: none !important;
+        }
+
+        .card-tag {
+            background: rgba(0,0,0,0.7);
+            color: var(--accent);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border: 1px solid var(--accent);
+            backdrop-filter: blur(4px);
+        }
+
         .card-content {
             padding: 12px 10px;
             background: linear-gradient(to top, rgba(5,5,8,0.98) 0%, rgba(5,5,8,0.7) 60%, transparent 100%);
@@ -854,15 +819,6 @@
         body.hide-resumes .card-tooltip,
         body.hide-resumes .anime-resume {
             display: none !important;
-        }
-
-        .progress-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 4px;
-            background: var(--accent);
-            z-index: 10;
         }
 
         .fav-btn {
@@ -964,199 +920,50 @@
         .pill:hover { background: rgba(255,255,255,0.1); color: white; }
         .pill.active { background: #fff; color: #000; border-color: transparent; box-shadow: 0 4px 15px rgba(255,255,255,0.3); }
 
-        #toast-container {
-            position: fixed;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 9999;
-        }
-
+        #toast-container { position: fixed; display: flex; flex-direction: column; gap: 10px; z-index: 9999; }
         #toast-container.pos-bottom-right { bottom: 20px; right: 20px; top: auto; left: auto; }
         #toast-container.pos-bottom-left { bottom: 20px; left: 20px; top: auto; right: auto; }
         #toast-container.pos-top-right { top: 20px; right: 20px; bottom: auto; left: auto; }
         #toast-container.pos-top-left { top: 20px; left: 20px; bottom: auto; right: auto; }
 
         .toast {
-            background: rgba(8, 10, 16, 0.95);
-            border: 1px solid var(--accent);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 700;
+            background: rgba(8, 10, 16, 0.95); border: 1px solid var(--accent); color: white;
+            padding: 15px 25px; border-radius: 12px; font-size: 13px; font-weight: 700;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(0, 242, 254, 0.2);
             animation: slideInRight 0.3s forwards, fadeOut 0.3s 2.7s forwards;
         }
 
         .context-menu {
-            position: absolute;
-            background: rgba(8,10,16,0.98);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 10px 0;
-            z-index: 10000;
-            display: none;
-            flex-direction: column;
-            min-width: 220px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
-            backdrop-filter: var(--glass-blur);
+            position: absolute; background: rgba(8,10,16,0.98); border: 1px solid var(--glass-border);
+            border-radius: 12px; padding: 10px 0; z-index: 10000; display: none; flex-direction: column;
+            min-width: 220px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); backdrop-filter: var(--glass-blur);
         }
         
-        .context-menu-item {
-            padding: 12px 20px;
-            color: var(--text-main);
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        
-        .context-menu-item:hover {
-            background: rgba(0, 242, 254, 0.15);
-            color: var(--accent);
-            padding-left: 25px;
-        }
+        .context-menu-item { padding: 12px 20px; color: var(--text-main); cursor: pointer; font-size: 14px; font-weight: 600; transition: var(--transition); }
+        .context-menu-item:hover { background: rgba(0, 242, 254, 0.15); color: var(--accent); padding-left: 25px; }
 
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(8px);
-            z-index: 5000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 5000; display: none; align-items: center; justify-content: center; }
+        .modal-content { background: #080a10; border: 1px solid var(--accent); padding: 30px; border-radius: 24px; width: 92%; max-width: 700px; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,242,254,0.15); scrollbar-width: thin; scrollbar-color: var(--accent) transparent; }
 
-        .modal-content {
-            background: #080a10;
-            border: 1px solid var(--accent);
-            padding: 30px;
-            border-radius: 24px;
-            width: 92%;
-            max-width: 700px;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0,242,254,0.15);
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent) transparent;
-        }
+        .settings-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 650px) { .settings-grid-container { grid-template-columns: 1fr; } }
+        .settings-group { margin-bottom: 18px; background: rgba(255,255,255,0.02); padding: 14px; border-radius: 12px; border: 1px solid var(--glass-border); }
+        .settings-group h4 { font-size: 12px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; font-weight: 900; }
+        .color-picker-container { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; }
+        .color-dot { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: var(--transition); }
+        .color-dot:hover { transform: scale(1.2); }
+        .settings-select { width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: white; padding: 10px; border-radius: 10px; font-size: 13px; cursor: pointer; }
+        .settings-select option { background: #080a10; }
+        .settings-checkbox { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-main); }
 
-        .settings-grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 650px) {
-            .settings-grid-container { grid-template-columns: 1fr; }
-        }
-
-        .settings-group {
-            margin-bottom: 18px;
-            background: rgba(255,255,255,0.02);
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-        }
-
-        .settings-group h4 {
-            font-size: 12px;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            font-weight: 900;
-        }
-
-        .color-picker-container {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-        }
-
-        .color-dot {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: var(--transition);
-        }
-
-        .color-dot:hover {
-            transform: scale(1.2);
-        }
-
-        .settings-select {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .settings-select option {
-            background: #080a10;
-        }
-
-        .settings-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .pagination-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-top: 30px;
-        }
-
-        .page-info-text {
-            font-weight: 800;
-            font-size: 15px;
-            color: var(--text-main);
-        }
-
-        .page-arrows {
-            display: flex;
-            gap: 15px;
-        }
-
-        .page-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 900;
-            font-size: 18px;
-            transition: var(--transition);
-        }
-
+        .pagination-container { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 30px; }
+        .page-info-text { font-weight: 800; font-size: 15px; color: var(--text-main); }
+        .page-arrows { display: flex; gap: 15px; }
+        .page-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: 900; font-size: 18px; transition: var(--transition); }
         .page-btn:hover { background: var(--accent); color: black; }
 
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
+        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 
         @media (max-width: 900px) {
             :root { var(--sidebar-width): 0px; }
@@ -1224,25 +1031,47 @@
                 <div id="resume-container"></div>
 
                 <div class="section-header">
-                    <div class="section-title">
-                        <span class="kanji">ジャンル</span> Genres
-                    </div>
+                    <div class="section-title">🔥 Tendances Actuelles</div>
                 </div>
-                <div class="genres-grid" id="genres-grid"></div>
+                <div class="grid" id="home-trending-grid"></div>
 
-                <div class="section-header">
-                    <div class="section-title">Découvrir</div>
-                    <button class="filter-btn" onclick="playRandomAnime()">🎲 Anime au hasard</button>
+                <div class="section-header" style="margin-top: 50px;">
+                    <div class="section-title">✨ Nouveautés Récentes</div>
                 </div>
-                <div class="grid" id="home-grid"></div>
+                <div class="grid" id="home-new-grid"></div>
+
+                <div class="section-header" style="margin-top: 50px;">
+                    <div class="section-title">🎲 Découvrez au Hasard</div>
+                    <button class="filter-btn" onclick="playRandomAnime()">Lancer la roulette</button>
+                </div>
+                <div class="grid" id="home-discover-grid"></div>
             </div>
 
             <div id="view-catalog" class="page-view">
                 <div class="section-header">
                     <div class="section-title">Catalogue Complet</div>
                     <div class="catalog-filters">
-                        <button class="filter-btn" onclick="playRandomAnime()">🎲 Anime au hasard</button>
-                        <button id="toggle-view-btn" class="filter-btn" onclick="toggleGridView()">Vue Liste</button>
+                        <select id="genre-select" class="filter-select" onchange="resetPaginationAndApply()">
+                            <option value="all">Tous les genres</option>
+                            <option value="Action">Action</option>
+                            <option value="Aventure">Aventure</option>
+                            <option value="Comédie">Comédie</option>
+                            <option value="Drame">Drame</option>
+                            <option value="Ecchi">Ecchi</option>
+                            <option value="Fantastique">Fantastique</option>
+                            <option value="Horreur">Horreur</option>
+                            <option value="Magical Girl">Magical Girl</option>
+                            <option value="Mecha">Mecha</option>
+                            <option value="Musique">Musique</option>
+                            <option value="Mystère">Mystère</option>
+                            <option value="Psychologique">Psychologique</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Science-Fiction">Science-Fiction</option>
+                            <option value="Tranche de vie">Tranche de vie</option>
+                            <option value="Sport">Sport</option>
+                            <option value="Surnaturel">Surnaturel</option>
+                            <option value="Thriller">Thriller</option>
+                        </select>
                         <select id="sort-select" class="filter-select" onchange="resetPaginationAndApply()">
                             <option value="default">Trier par : Défaut</option>
                             <option value="az">De A à Z</option>
@@ -1253,6 +1082,7 @@
                             <option value="terminé">Terminés</option>
                             <option value="en cours">En cours</option>
                         </select>
+                        <button id="toggle-view-btn" class="filter-btn" onclick="toggleGridView()">Vue Liste</button>
                         <button id="filter-vf" class="filter-btn" onclick="toggleFilter('vf')">VF</button>
                         <button id="filter-vostfr" class="filter-btn" onclick="toggleFilter('vostfr')">VOSTFR</button>
                     </div>
@@ -1353,7 +1183,6 @@
             <h3 style="color:white;text-align:center;margin-bottom:20px;font-weight:900;font-size:20px;letter-spacing:-0.5px;">Centre de Personnalisation</h3>
             
             <div class="settings-grid-container">
-                <!-- Option 1 -->
                 <div class="settings-group">
                     <h4>1. Couleur d'accentuation</h4>
                     <div class="color-picker-container">
@@ -1366,7 +1195,6 @@
                     </div>
                 </div>
 
-                <!-- Option 2 -->
                 <div class="settings-group">
                     <h4>2. Fond de page</h4>
                     <select class="settings-select" id="setting-bg-color" onchange="applyBgColor(this.value)">
@@ -1377,7 +1205,6 @@
                     </select>
                 </div>
 
-                <!-- Option 3 -->
                 <div class="settings-group">
                     <h4>3. Typographie</h4>
                     <select class="settings-select" id="setting-typo" onchange="applyTypography(this.value)">
@@ -1388,7 +1215,6 @@
                     </select>
                 </div>
 
-                <!-- Option 4 -->
                 <div class="settings-group">
                     <h4>4. Taille du texte</h4>
                     <select class="settings-select" id="setting-font-size" onchange="applyFontSize(this.value)">
@@ -1398,7 +1224,6 @@
                     </select>
                 </div>
 
-                <!-- Option 5 -->
                 <div class="settings-group">
                     <h4>5. Arrondi des coins</h4>
                     <select class="settings-select" id="setting-radius" onchange="applyBorderRadius(this.value)">
@@ -1409,7 +1234,6 @@
                     </select>
                 </div>
 
-                <!-- Option 6 -->
                 <div class="settings-group">
                     <h4>6. Effet Flou Glassmorphism</h4>
                     <select class="settings-select" id="setting-blur" onchange="applyBlur(this.value)">
@@ -1419,7 +1243,6 @@
                     </select>
                 </div>
 
-                <!-- Option 7 -->
                 <div class="settings-group">
                     <h4>7. Lumières & Effet Glow</h4>
                     <select class="settings-select" id="setting-glow" onchange="applyGlow(this.value)">
@@ -1429,7 +1252,6 @@
                     </select>
                 </div>
 
-                <!-- Option 8 -->
                 <div class="settings-group">
                     <h4>8. Densité de la Grille</h4>
                     <select class="settings-select" id="setting-density" onchange="applyDensity(this.value)">
@@ -1439,7 +1261,6 @@
                     </select>
                 </div>
 
-                <!-- Option 9 -->
                 <div class="settings-group">
                     <h4>9. Effet au survol des cartes</h4>
                     <select class="settings-select" id="setting-card-zoom" onchange="applyCardZoom(this.value)">
@@ -1449,7 +1270,6 @@
                     </select>
                 </div>
 
-                <!-- Option 10 -->
                 <div class="settings-group">
                     <h4>10. Hauteur du Banner Hero</h4>
                     <select class="settings-select" id="setting-hero-size" onchange="applyHeroSize(this.value)">
@@ -1460,7 +1280,6 @@
                     </select>
                 </div>
 
-                <!-- Option 11 -->
                 <div class="settings-group">
                     <h4>11. Position des Toasts</h4>
                     <select class="settings-select" id="setting-toast-pos" onchange="applyToastPos(this.value)">
@@ -1471,7 +1290,6 @@
                     </select>
                 </div>
 
-                <!-- Option 12 -->
                 <div class="settings-group">
                     <h4>12. Éléments par page</h4>
                     <select class="settings-select" id="setting-per-page" onchange="applyPerPage(this.value)">
@@ -1481,7 +1299,6 @@
                     </select>
                 </div>
 
-                <!-- Option 13 -->
                 <div class="settings-group">
                     <h4>13. Audio Préféré par défaut</h4>
                     <select class="settings-select" id="setting-default-lang" onchange="applyDefaultLang(this.value)">
@@ -1490,7 +1307,6 @@
                     </select>
                 </div>
 
-                <!-- Option 14 -->
                 <div class="settings-group">
                     <h4>14. Lecteur vidéo par défaut</h4>
                     <select class="settings-select" id="setting-default-server" onchange="applyDefaultServer(this.value)">
@@ -1499,7 +1315,6 @@
                     </select>
                 </div>
 
-                <!-- Option 15 -->
                 <div class="settings-group">
                     <label class="settings-checkbox">
                         <input type="checkbox" id="setting-hide-resumes" onchange="applyHideResumes(this.checked)">
@@ -1507,7 +1322,6 @@
                     </label>
                 </div>
 
-                <!-- Option 16 -->
                 <div class="settings-group">
                     <label class="settings-checkbox">
                         <input type="checkbox" id="setting-hide-banner" onchange="applyHideBanner(this.checked)">
@@ -1515,15 +1329,13 @@
                     </label>
                 </div>
 
-                <!-- Option 17 -->
                 <div class="settings-group">
                     <label class="settings-checkbox">
-                        <input type="checkbox" id="setting-reduced-motion" onchange="applyReducedMotion(this.checked)">
+                        <input type="checkbox" id="setting-hide-reduced-motion" onchange="applyReducedMotion(this.checked)">
                         17. Réduire les animations
                     </label>
                 </div>
 
-                <!-- Option 18 -->
                 <div class="settings-group">
                     <label class="settings-checkbox">
                         <input type="checkbox" id="setting-hide-badges" onchange="applyHideBadges(this.checked)">
@@ -1531,7 +1343,6 @@
                     </label>
                 </div>
 
-                <!-- Option 19 -->
                 <div class="settings-group">
                     <label class="settings-checkbox">
                         <input type="checkbox" id="setting-hide-tooltips" onchange="applyHideTooltips(this.checked)">
@@ -1539,7 +1350,6 @@
                     </label>
                 </div>
 
-                <!-- Option 20 -->
                 <div class="settings-group">
                     <label class="settings-checkbox">
                         <input type="checkbox" id="setting-autoplay" onchange="applyAutoplay(this.checked)">
@@ -1554,13 +1364,22 @@
 
     <script src="database.json"></script>
     <script>
-        function setStorage(name, value) {
-            localStorage.setItem(name, value);
+        const GENRE_MAPPING = {
+            "Action": "Action", "Adventure": "Aventure", "Comedy": "Comédie",
+            "Drama": "Drame", "Ecchi": "Ecchi", "Fantasy": "Fantastique",
+            "Horror": "Horreur", "Mahou Shoujo": "Magical Girl", "Mecha": "Mecha",
+            "Music": "Musique", "Mystery": "Mystère", "Psychological": "Psychologique",
+            "Romance": "Romance", "Sci-Fi": "Science-Fiction", "Slice of Life": "Tranche de vie",
+            "Sports": "Sport", "Supernatural": "Surnaturel", "Thriller": "Thriller"
+        };
+
+        function translateGenres(genres) {
+            if (!genres) return [];
+            return genres.map(g => GENRE_MAPPING[g] || g);
         }
 
-        function getStorage(name) {
-            return localStorage.getItem(name);
-        }
+        function setStorage(name, value) { localStorage.setItem(name, value); }
+        function getStorage(name) { return localStorage.getItem(name); }
 
         function getArrayFromStorage(name) {
             const val = getStorage(name);
@@ -1574,7 +1393,6 @@
 
         function loadSettings() {
             applyThemeColor(getStorage('orco_theme') || '#00f2fe');
-
             const bg = getStorage('orco_bg_color') || '#050508';
             if (document.getElementById('setting-bg-color')) document.getElementById('setting-bg-color').value = bg;
             applyBgColor(bg);
@@ -1636,7 +1454,7 @@
             applyHideBanner(hideBanner);
 
             const reducedMotion = getStorage('orco_reduced_motion') === 'true';
-            if (document.getElementById('setting-reduced-motion')) document.getElementById('setting-reduced-motion').checked = reducedMotion;
+            if (document.getElementById('setting-hide-reduced-motion')) document.getElementById('setting-hide-reduced-motion').checked = reducedMotion;
             applyReducedMotion(reducedMotion);
 
             const hideBadges = getStorage('orco_hide_badges') === 'true';
@@ -1652,113 +1470,34 @@
             setStorage('orco_autoplay', autoplay.toString());
         }
 
-        function applyThemeColor(color) {
-            document.documentElement.style.setProperty('--accent', color);
-            setStorage('orco_theme', color);
-        }
-
-        function applyBgColor(color) {
-            document.documentElement.style.setProperty('--bg-body', color);
-            setStorage('orco_bg_color', color);
-        }
-
-        function applyTypography(font) {
-            document.body.style.fontFamily = font + ', sans-serif';
-            setStorage('orco_typo', font);
-        }
-
-        function applyFontSize(size) {
-            document.documentElement.style.fontSize = size;
-            setStorage('orco_font_size', size);
-        }
-
-        function applyBorderRadius(radius) {
-            document.documentElement.style.setProperty('--custom-radius', radius);
-            setStorage('orco_radius', radius);
-        }
-
-        function applyBlur(val) {
-            document.documentElement.style.setProperty('--glass-blur', 'blur(' + val + ') saturate(180%)');
-            setStorage('orco_blur', val);
-        }
-
-        function applyGlow(val) {
-            document.body.setAttribute('data-glow', val);
-            setStorage('orco_glow', val);
-        }
-
-        function applyDensity(density) {
-            document.body.setAttribute('data-density', density);
-            setStorage('orco_density', density);
-        }
-
-        function applyCardZoom(val) {
-            document.body.setAttribute('data-card-zoom', val);
-            setStorage('orco_card_zoom', val);
-        }
-
-        function applyHeroSize(val) {
-            document.body.setAttribute('data-hero-size', val);
-            setStorage('orco_hero_size', val);
-        }
-
-        function applyToastPos(pos) {
-            const container = document.getElementById('toast-container');
-            if (container) container.className = pos;
-            setStorage('orco_toast_pos', pos);
-        }
-
+        function applyThemeColor(color) { document.documentElement.style.setProperty('--accent', color); setStorage('orco_theme', color); }
+        function applyBgColor(color) { document.documentElement.style.setProperty('--bg-body', color); setStorage('orco_bg_color', color); }
+        function applyTypography(font) { document.body.style.fontFamily = font + ', sans-serif'; setStorage('orco_typo', font); }
+        function applyFontSize(size) { document.documentElement.style.fontSize = size; setStorage('orco_font_size', size); }
+        function applyBorderRadius(radius) { document.documentElement.style.setProperty('--custom-radius', radius); setStorage('orco_radius', radius); }
+        function applyBlur(val) { document.documentElement.style.setProperty('--glass-blur', 'blur(' + val + ') saturate(180%)'); setStorage('orco_blur', val); }
+        function applyGlow(val) { document.body.setAttribute('data-glow', val); setStorage('orco_glow', val); }
+        function applyDensity(density) { document.body.setAttribute('data-density', density); setStorage('orco_density', density); }
+        function applyCardZoom(val) { document.body.setAttribute('data-card-zoom', val); setStorage('orco_card_zoom', val); }
+        function applyHeroSize(val) { document.body.setAttribute('data-hero-size', val); setStorage('orco_hero_size', val); }
+        function applyToastPos(pos) { const container = document.getElementById('toast-container'); if (container) container.className = pos; setStorage('orco_toast_pos', pos); }
+        
         function applyPerPage(val) {
             catalogItemsPerPage = parseInt(val) || 50;
             setStorage('orco_per_page', val);
-            if (document.getElementById('view-catalog').classList.contains('active-view')) {
-                applyCatalogFilters();
-            }
+            if (document.getElementById('view-catalog').classList.contains('active-view')) applyCatalogFilters();
         }
 
-        function applyHideResumes(checked) {
-            document.body.classList.toggle('hide-resumes', checked);
-            setStorage('orco_hide_resume', checked.toString());
-        }
+        function applyHideResumes(checked) { document.body.classList.toggle('hide-resumes', checked); setStorage('orco_hide_resume', checked.toString()); }
+        function applyHideBanner(checked) { document.body.classList.toggle('hide-resume-banner', checked); setStorage('orco_hide_banner', checked.toString()); }
+        function applyReducedMotion(checked) { document.body.classList.toggle('reduced-motion', checked); setStorage('orco_reduced_motion', checked.toString()); }
+        function applyHideBadges(checked) { document.body.classList.toggle('hide-badges', checked); setStorage('orco_hide_badges', checked.toString()); }
+        function applyHideTooltips(checked) { document.body.classList.toggle('hide-tooltips', checked); setStorage('orco_hide_tooltips', checked.toString()); }
+        function applyDefaultLang(val) { playerLang = val; setStorage('orco_default_lang', val); }
+        function applyDefaultServer(val) { playerServer = val; setStorage('orco_default_server', val); }
+        function applyAutoplay(checked) { setStorage('orco_autoplay', checked.toString()); }
 
-        function applyHideBanner(checked) {
-            document.body.classList.toggle('hide-resume-banner', checked);
-            setStorage('orco_hide_banner', checked.toString());
-        }
-
-        function applyReducedMotion(checked) {
-            document.body.classList.toggle('reduced-motion', checked);
-            setStorage('orco_reduced_motion', checked.toString());
-        }
-
-        function applyHideBadges(checked) {
-            document.body.classList.toggle('hide-badges', checked);
-            setStorage('orco_hide_badges', checked.toString());
-        }
-
-        function applyHideTooltips(checked) {
-            document.body.classList.toggle('hide-tooltips', checked);
-            setStorage('orco_hide_tooltips', checked.toString());
-        }
-
-        function applyDefaultLang(val) {
-            playerLang = val;
-            setStorage('orco_default_lang', val);
-        }
-
-        function applyDefaultServer(val) {
-            playerServer = val;
-            setStorage('orco_default_server', val);
-        }
-
-        function applyAutoplay(checked) {
-            setStorage('orco_autoplay', checked.toString());
-        }
-
-        function openSettingsModal() {
-            document.getElementById('settings-modal').style.display = 'flex';
-        }
-
+        function openSettingsModal() { document.getElementById('settings-modal').style.display = 'flex'; }
         function closeSettingsModal(e) {
             if (e) {
                 if (e.target.id === 'settings-modal' || e.target.classList.contains('btn-primary')) {
@@ -1770,12 +1509,9 @@
         }
 
         function getAnime(id) { return database.find(a => a.id === id) || null; }
-
         function getItem(anime, context) {
             if (!anime) return null;
-            if (context.type === 'film') {
-                return (anime.films && anime.films[context.itemIndex]) ? anime.films[context.itemIndex] : null;
-            }
+            if (context.type === 'film') return (anime.films && anime.films[context.itemIndex]) ? anime.films[context.itemIndex] : null;
             const season = (anime.seasons && anime.seasons[context.index]) ? anime.seasons[context.index] : null;
             return (season && season.episodes && season.episodes[context.itemIndex]) ? season.episodes[context.itemIndex] : null;
         }
@@ -1794,28 +1530,16 @@
             return Boolean(l[server] && l[server].trim() !== '');
         }
 
-        function checkAnimeLangGlobal(anime, lang) {
-            let hasIt = false;
-            if (anime.seasons) {
-                anime.seasons.forEach(s => {
-                    if (s.episodes) s.episodes.forEach(e => { if(hasLang(e, lang)) hasIt = true; });
-                });
-            }
-            if (anime.films) {
-                anime.films.forEach(f => { if(hasLang(f, lang)) hasIt = true; });
-            }
-            return hasIt;
-        }
-
         let currentAnimeId = null;
         let activeTabId = 's-0';
         let playerContext = { type: 'season', index: 0, itemIndex: 0 };
         let playerLang = 'vf';
         let playerServer = 'sibnet';
-        let catalogFilters = { sort: 'default', status: 'all', vf: false, vostfr: false };
+        let catalogFilters = { sort: 'default', status: 'all', genre: 'all', vf: false, vostfr: false };
         let catalogPage = 1;
         let catalogItemsPerPage = 50;
         let isListView = false;
+        let navHistoryStack = [];
 
         function showToast(message) {
             const container = document.getElementById('toast-container');
@@ -1823,22 +1547,15 @@
             toast.className = 'toast';
             toast.innerText = message;
             container.appendChild(toast);
-            setTimeout(() => {
-                if (container.contains(toast)) container.removeChild(toast);
-            }, 3000);
+            setTimeout(() => { if (container.contains(toast)) container.removeChild(toast); }, 3000);
         }
 
         function toggleFavoriteEvent(e, id) {
             e.stopPropagation();
             let favs = getArrayFromStorage('orco_favorites');
             const index = favs.indexOf(id);
-            if (index > -1) {
-                favs.splice(index, 1);
-                showToast("Retiré des favoris");
-            } else {
-                favs.push(id);
-                showToast("Ajouté aux favoris");
-            }
+            if (index > -1) { favs.splice(index, 1); showToast("Retiré des favoris"); } 
+            else { favs.push(id); showToast("Ajouté aux favoris"); }
             saveArrayToStorage('orco_favorites', favs);
             refreshActiveGrid();
         }
@@ -1847,27 +1564,17 @@
             e.stopPropagation();
             let list = getArrayFromStorage('orco_watchlater');
             const index = list.indexOf(id);
-            if (index > -1) {
-                list.splice(index, 1);
-                showToast("Retiré de la liste à regarder");
-            } else {
-                list.push(id);
-                showToast("Ajouté pour plus tard");
-            }
+            if (index > -1) { list.splice(index, 1); showToast("Retiré de la liste"); } 
+            else { list.push(id); showToast("Ajouté pour plus tard"); }
             saveArrayToStorage('orco_watchlater', list);
             refreshActiveGrid();
         }
 
-        function isFavorite(id) {
-            return getArrayFromStorage('orco_favorites').includes(id);
-        }
-
-        function isWatchLater(id) {
-            return getArrayFromStorage('orco_watchlater').includes(id);
-        }
+        function isFavorite(id) { return getArrayFromStorage('orco_favorites').includes(id); }
+        function isWatchLater(id) { return getArrayFromStorage('orco_watchlater').includes(id); }
 
         function refreshActiveGrid() {
-            if (document.getElementById('view-home').classList.contains('active-view')) renderHomeGrid();
+            if (document.getElementById('view-home').classList.contains('active-view')) renderHomeGrids();
             if (document.getElementById('view-catalog').classList.contains('active-view')) applyCatalogFilters();
             if (document.getElementById('view-favorites').classList.contains('active-view')) renderFavoritesGrid();
             if (document.getElementById('view-watchlater').classList.contains('active-view')) renderWatchLaterGrid();
@@ -1895,23 +1602,13 @@
             if (input !== "") return;
             let history = getArrayFromStorage('orco_search_history');
             const dropdown = document.getElementById('search-dropdown');
-            if (history.length === 0) {
-                dropdown.classList.remove('active');
-                return;
-            }
-            let historyHtml = '<div class="search-history-header">';
-            historyHtml += '<span>Recherches récentes</span>';
-            historyHtml += '<span class="search-history-clear" onclick="clearSearchHistory(event)">Effacer</span>';
-            historyHtml += '</div>';
-            
+            if (history.length === 0) { dropdown.classList.remove('active'); return; }
+            let historyHtml = '<div class="search-history-header"><span>Recherches récentes</span><span class="search-history-clear" onclick="clearSearchHistory(event)">Effacer</span></div>';
             historyHtml += history.map(q => {
                 let itemHtml = '<div class="search-result-item" onclick="document.getElementById(\'search-input\').value=\'' + q + '\'; handleSearchDropdown(\'' + q + '\')">';
-                itemHtml += '<span style="font-size:16px; margin-right:10px;">🕒</span>';
-                itemHtml += '<div class="search-result-title">' + q + '</div>';
-                itemHtml += '</div>';
+                itemHtml += '<span style="font-size:16px; margin-right:10px;">🕒</span><div class="search-result-title">' + q + '</div></div>';
                 return itemHtml;
             }).join('');
-            
             dropdown.innerHTML = historyHtml;
             dropdown.classList.add('active');
         }
@@ -1920,13 +1617,8 @@
             document.body.classList.toggle('cinema-mode');
             const btn = document.getElementById('btn-cinema');
             if(btn) {
-                if(document.body.classList.contains('cinema-mode')) {
-                    btn.classList.add('active');
-                    showToast("Mode Cinéma activé");
-                } else {
-                    btn.classList.remove('active');
-                    showToast("Mode Cinéma désactivé");
-                }
+                if(document.body.classList.contains('cinema-mode')) { btn.classList.add('active'); showToast("Mode Cinéma activé"); } 
+                else { btn.classList.remove('active'); showToast("Mode Cinéma désactivé"); }
             }
             document.getElementById('custom-context-menu').style.display = 'none';
         }
@@ -1937,14 +1629,10 @@
                 if (player.requestFullscreen) player.requestFullscreen();
                 else if (player.webkitRequestFullscreen) player.webkitRequestFullscreen();
                 else if (player.msRequestFullscreen) player.msRequestFullscreen();
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen();
-            }
+            } else { if (document.exitFullscreen) document.exitFullscreen(); }
         }
 
-        function togglePIP() {
-            showToast("Mode Picture-in-Picture simulé");
-        }
+        function togglePIP() { showToast("Mode Picture-in-Picture simulé"); }
 
         function saveProgress() {
             if(!currentAnimeId) return;
@@ -1992,19 +1680,17 @@
         function handleSearchDropdown(query) {
             const q = query.toLowerCase().trim();
             const dropdown = document.getElementById('search-dropdown');
-            if (!q) {
-                showSearchHistory();
-                return;
-            }
+            if (!q) { showSearchHistory(); return; }
             const filtered = database.filter(a => a.title.toLowerCase().includes(q) || (a.resume && a.resume.toLowerCase().includes(q)));
             if(filtered.length === 0) {
                 dropdown.innerHTML = '<div style="padding: 15px; text-align: center; color: var(--text-sub);">Aucun résultat</div>';
             } else {
                 dropdown.innerHTML = filtered.map(anime => {
+                    let translated = translateGenres(anime.genres);
                     let cardHtml = '<div class="search-result-item" onclick="selectSearchResult(\'' + anime.id + '\', \'' + q + '\')">';
                     cardHtml += '<img src="' + (anime.image || '') + '" alt="" loading="lazy">';
                     cardHtml += '<div class="search-result-title">' + anime.title + '</div>';
-                    cardHtml += '<div class="search-result-genre">' + ((anime.genres && anime.genres[0]) ? anime.genres[0] : 'Anime') + '</div>';
+                    cardHtml += '<div class="search-result-genre">' + (translated.length > 0 ? translated[0] : 'Anime') + '</div>';
                     cardHtml += '</div>';
                     return cardHtml;
                 }).join('');
@@ -2027,9 +1713,11 @@
         function renderHeroBanner() {
             const container = document.getElementById('hero-container');
             if (!database || database.length === 0) { container.innerHTML = ''; return; }
-            const anime = database[0];
-            const detectedGenres = anime.genres || [];
-            const genreTagsHtml = detectedGenres.map(g => '<span class="meta-badge">' + g + '</span>').join('');
+            
+            const anime = database[Math.floor(Math.random() * database.length)];
+            const translatedGenres = translateGenres(anime.genres);
+            const genreTagsHtml = translatedGenres.map(g => '<span class="meta-badge">' + g + '</span>').join('');
+            
             let heroHtml = '<div class="hero-banner">';
             heroHtml += '<img src="' + (anime.image || '') + '" class="hero-bg" alt="' + anime.title + '" loading="lazy">';
             heroHtml += '<div class="hero-overlay"></div>';
@@ -2049,32 +1737,6 @@
             container.innerHTML = heroHtml;
         }
 
-        function renderGenresGrid() {
-            const container = document.getElementById('genres-grid');
-            const genreList = [
-                { name: 'Action', img: 'https://www.themoviedb.org/t/p/w600_and_h900_face/cEnxvrGIGwLz7ZfCx3g8oULJxrr.jpg' },
-                { name: 'Aventure', img: 'https://www.themoviedb.org/t/p/w600_and_h900_face/y4N1MW2LjaO4l5dXCvnJvVWL345.jpg' },
-                { name: 'Comédie', img: 'https://image.tmdb.org/t/p/w500/rt1gmKCONtlcJoBfNvNhcLQziLH.jpg' },
-                { name: 'Fantastique', img: 'https://www.themoviedb.org/t/p/w600_and_h900_face/nGuTtEc5q3pO6Kl2Pmszc9IwEe.jpg' }
-            ];
-            container.innerHTML = genreList.map(g => {
-                let html = '<div class="genre-card" onclick="filterByGenre(\'' + g.name + '\')">';
-                html += '<img src="' + g.img + '" alt="' + g.name + '" loading="lazy">';
-                html += '<span>' + g.name + '</span>';
-                html += '</div>';
-                return html;
-            }).join('');
-        }
-
-        function filterByGenre(genreName) {
-            const filtered = database.filter(a => {
-                const genres = a.genres || [];
-                return genres.includes(genreName);
-            });
-            renderHomeGridRaw(filtered);
-            document.getElementById('hero-container').scrollIntoView({behavior: 'smooth'});
-        }
-
         function renderResumeBanner() {
             const container = document.getElementById('resume-container');
             const savedData = getStorage('orco_progress');
@@ -2086,7 +1748,7 @@
                 if (!anime || !item) { container.innerHTML = ""; return; }
                 let labelStr = data.context.type === 'film' 
                     ? 'Film ' + (item.number || (data.context.itemIndex + 1))
-                    : 'Saison ' + (anime.seasons[data.context.index]?.season_number || 1) + ' • Épisode ' + (item.number || (data.context.itemIndex + 1));
+                    : (anime.seasons[data.context.index]?.season_name || 'Saison ' + (anime.seasons[data.context.index]?.season_number || 1)) + ' • Épisode ' + (item.number || (data.context.itemIndex + 1));
                 let html = '<div class="resume-banner" onclick="openPlayerFromResume(\'' + anime.id + '\')">';
                 html += '<div class="resume-info">';
                 html += '<span class="resume-badge">Continuer la lecture</span>';
@@ -2096,9 +1758,7 @@
                 html += '<div class="resume-play">▶</div>';
                 html += '</div>';
                 container.innerHTML = html;
-            } catch (e) {
-                container.innerHTML = "";
-            }
+            } catch (e) { container.innerHTML = ""; }
         }
 
         function openPlayerFromResume(animeId) {
@@ -2110,25 +1770,31 @@
             router.player();
         }
 
-        function renderHomeGrid() {
-            const items = database.slice(0, 12);
-            renderHomeGridRaw(items);
-        }
-
-        function renderHomeGridRaw(items) {
-            const grid = document.getElementById('home-grid');
-            if (!items || items.length === 0) {
-                grid.innerHTML = "<p style='color: var(--text-sub)'>Aucun résultat trouvé.</p>";
-                return;
-            }
-            grid.innerHTML = items.map(anime => generateAnimeCard(anime)).join('');
+        function renderHomeGrids() {
+            if(!database) return;
+            const trending = [...database].slice(0, 12);
+            document.getElementById('home-trending-grid').innerHTML = trending.map(anime => generateAnimeCard(anime)).join('');
+            
+            const latest = [...database].reverse().slice(0, 12);
+            document.getElementById('home-new-grid').innerHTML = latest.map(anime => generateAnimeCard(anime)).join('');
+            
+            let shuffled = [...database].sort(() => 0.5 - Math.random());
+            document.getElementById('home-discover-grid').innerHTML = shuffled.slice(0, 12).map(anime => generateAnimeCard(anime)).join('');
         }
 
         function generateAnimeCard(anime) {
             let activeClass = isFavorite(anime.id) ? 'active' : '';
+            const translatedGenres = translateGenres(anime.genres);
+            
+            let tagsHtml = "";
+            if (translatedGenres.length > 0) {
+                tagsHtml = '<div class="card-genre-tags">' + translatedGenres.slice(0, 2).map(g => '<span class="card-tag">' + g + '</span>').join('') + '</div>';
+            }
+
             let html = '<div class="card" onclick="router.anime(\'' + anime.id + '\')">';
             html += '<div class="card-img-wrapper">';
             html += '<img src="' + (anime.image || '') + '" alt="' + anime.title + '" loading="lazy">';
+            html += tagsHtml;
             html += '</div>';
             html += '<div class="card-content">';
             html += '<div class="card-title">' + anime.title + '</div>';
@@ -2136,7 +1802,7 @@
             html += '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
             html += '</button>';
             html += '</div>';
-            html += '<div class="card-tooltip">' + (anime.resume || 'Aucun résumé.') + '</div>';
+            html += '<div class="card-tooltip"><strong>' + anime.title + '</strong><br><br>' + (anime.resume || 'Aucun résumé.') + '<br><br><em style="color:var(--accent);">Genres: ' + translatedGenres.join(', ') + '</em></div>';
             html += '</div>';
             return html;
         }
@@ -2165,15 +1831,47 @@
 
         const workerCode = `
             self.onmessage = function(e) {
-                const { db, filters, page, itemsPerPage } = e.data;
+                const { db, filters, page, itemsPerPage, genreMapping } = e.data;
                 let filtered = [...db];
-                if (filters.vf) filtered = filtered.filter(a => JSON.stringify(a).includes('"vf"'));
-                if (filters.vostfr) filtered = filtered.filter(a => JSON.stringify(a).includes('"vostfr"'));
+
+                const checkLangExists = (anime, lang) => {
+                    const hasValidUrl = (l) => {
+                        if (!l) return false;
+                        if (typeof l === 'string') return l.trim() !== '';
+                        return Boolean((l.sibnet && l.sibnet.trim()) || (l.vidmoly && l.vidmoly.trim()));
+                    };
+
+                    if (anime.seasons) {
+                        for (let s of anime.seasons) {
+                            if (s.episodes) {
+                                for (let ep of s.episodes) { if (hasValidUrl(ep[lang])) return true; }
+                            }
+                        }
+                    }
+                    if (anime.films) {
+                        for (let f of anime.films) { if (hasValidUrl(f[lang])) return true; }
+                    }
+                    return false;
+                };
+
+                if (filters.vf) filtered = filtered.filter(a => checkLangExists(a, 'vf'));
+                if (filters.vostfr) filtered = filtered.filter(a => checkLangExists(a, 'vostfr'));
+                
                 if (filters.status && filters.status !== 'all') {
                     filtered = filtered.filter(a => a.status && a.status.toLowerCase() === filters.status);
                 }
+                
+                if (filters.genre && filters.genre !== 'all') {
+                    filtered = filtered.filter(a => {
+                        if(!a.genres) return false;
+                        const translated = a.genres.map(g => genreMapping[g] || g);
+                        return translated.includes(filters.genre) || a.genres.includes(filters.genre);
+                    });
+                }
+
                 if (filters.sort === 'az') filtered.sort((a, b) => a.title.localeCompare(b.title));
                 else if (filters.sort === 'za') filtered.sort((a, b) => b.title.localeCompare(a.title));
+                
                 const totalPages = Math.ceil(filtered.length / itemsPerPage);
                 const start = (page - 1) * itemsPerPage;
                 const paginated = filtered.slice(start, start + itemsPerPage);
@@ -2198,22 +1896,16 @@
         function applyCatalogFilters() {
             catalogFilters.sort = document.getElementById('sort-select').value;
             catalogFilters.status = document.getElementById('status-select').value;
-            catalogWorker.postMessage({ db: database, filters: catalogFilters, page: catalogPage, itemsPerPage: catalogItemsPerPage });
+            catalogFilters.genre = document.getElementById('genre-select').value;
+            catalogWorker.postMessage({ db: database, filters: catalogFilters, page: catalogPage, itemsPerPage: catalogItemsPerPage, genreMapping: GENRE_MAPPING });
         }
 
         function renderPaginationControls(totalPages, currentPage) {
             const container = document.getElementById('pagination-controls');
             let html = '<div class="page-info-text">' + currentPage + ' / ' + totalPages + '</div>';
             html += '<div class="page-arrows">';
-            
-            if (currentPage > 1) {
-                html += '<button class="page-btn" onclick="goToCatalogPage(' + (currentPage - 1) + ')">←</button>';
-            }
-            
-            if (currentPage < totalPages) {
-                html += '<button class="page-btn" onclick="goToCatalogPage(' + (currentPage + 1) + ')">→</button>';
-            }
-            
+            if (currentPage > 1) html += '<button class="page-btn" onclick="goToCatalogPage(' + (currentPage - 1) + ')">←</button>';
+            if (currentPage < totalPages) html += '<button class="page-btn" onclick="goToCatalogPage(' + (currentPage + 1) + ')">→</button>';
             html += '</div>';
             container.innerHTML = html;
         }
@@ -2227,10 +1919,7 @@
         function renderFavoritesGrid() {
             const favIds = getArrayFromStorage('orco_favorites');
             const grid = document.getElementById('favorites-grid');
-            if (favIds.length === 0) {
-                grid.innerHTML = "<p style='color: var(--text-sub)'>Vous n'avez aucun favori pour le moment.</p>";
-                return;
-            }
+            if (favIds.length === 0) { grid.innerHTML = "<p style='color: var(--text-sub)'>Vous n'avez aucun favori pour le moment.</p>"; return; }
             const favItems = favIds.map(id => getAnime(id)).filter(a => a !== null);
             grid.innerHTML = favItems.map(anime => generateAnimeCard(anime)).join('');
         }
@@ -2238,10 +1927,7 @@
         function renderWatchLaterGrid() {
             const listIds = getArrayFromStorage('orco_watchlater');
             const grid = document.getElementById('watchlater-grid');
-            if (listIds.length === 0) {
-                grid.innerHTML = "<p style='color: var(--text-sub)'>Votre liste est vide.</p>";
-                return;
-            }
+            if (listIds.length === 0) { grid.innerHTML = "<p style='color: var(--text-sub)'>Votre liste est vide.</p>"; return; }
             const items = listIds.map(id => getAnime(id)).filter(a => a !== null);
             grid.innerHTML = items.map(anime => generateAnimeCard(anime)).join('');
         }
@@ -2249,132 +1935,195 @@
         function renderHistoryGrid() {
             const listIds = getArrayFromStorage('orco_history');
             const grid = document.getElementById('history-grid');
-            if (listIds.length === 0) {
-                grid.innerHTML = "<p style='color: var(--text-sub)'>Votre historique est vide.</p>";
-                return;
-            }
+            if (listIds.length === 0) { grid.innerHTML = "<p style='color: var(--text-sub)'>Votre historique est vide.</p>"; return; }
             const items = listIds.map(id => getAnime(id)).filter(a => a !== null);
             grid.innerHTML = items.map(anime => generateAnimeCard(anime)).join('');
         }
 
-        function createFolder(target) {
-            showToast("Création de dossier simulée pour " + target);
+        function createFolder(target) { showToast("Création de dossier simulée pour " + target); }
+
+        function switchTab(tabId) {
+            activeTabId = tabId;
+            const anime = getAnime(currentAnimeId);
+            if (!anime) return;
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            const selectedBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+            if (selectedBtn) selectedBtn.classList.add('active');
+
+            const index = parseInt(tabId.replace('s-', ''));
+            renderEpisodesList(anime, index);
+        }
+
+        function renderEpisodesList(anime, seasonIndex) {
+            const container = document.getElementById('episodes-container');
+            if (!container) return;
+            const season = anime.seasons && anime.seasons[seasonIndex];
+            if (!season || !season.episodes) {
+                container.innerHTML = "<p style='color:var(--text-sub)'>Aucun épisode disponible pour cette saison.</p>";
+                return;
+            }
+
+            container.innerHTML = season.episodes.map((ep, epIndex) => {
+                const watchedClass = isEpisodeWatched(anime.id, { type: 'season', index: seasonIndex, itemIndex: epIndex }) ? 'watched' : '';
+                const hasVf = hasLang(ep, 'vf');
+                const hasVost = hasLang(ep, 'vostfr');
+                
+                let badges = '';
+                if(hasVf) badges += '<span class="badge vf">VF</span>';
+                if(hasVost) badges += '<span class="badge vostfr">VOSTFR</span>';
+
+                let html = '<div class="episode-card ' + watchedClass + '" onclick="startPlayer(\'season\', ' + seasonIndex + ', ' + epIndex + ')">';
+                html += '<div class="ep-info">';
+                html += '<div class="ep-num">Épisode ' + (ep.number || (epIndex + 1)) + '</div>';
+                html += '<div class="ep-title">' + (ep.title || ('Épisode ' + (epIndex + 1))) + '</div>';
+                html += '</div>';
+                html += '<div class="badges-container">' + badges + '</div>';
+                html += '</div>';
+                return html;
+            }).join('');
+        }
+
+        function renderFilmsList(anime) {
+            const container = document.getElementById('films-container');
+            if (!container) return;
+            if (!anime.films || anime.films.length === 0) {
+                container.innerHTML = "<p style='color:var(--text-sub)'>Aucun film disponible.</p>";
+                return;
+            }
+
+            container.innerHTML = anime.films.map((film, filmIndex) => {
+                const watchedClass = isEpisodeWatched(anime.id, { type: 'film', index: 0, itemIndex: filmIndex }) ? 'watched' : '';
+                const hasVf = hasLang(film, 'vf');
+                const hasVost = hasLang(film, 'vostfr');
+                
+                let badges = '';
+                if(hasVf) badges += '<span class="badge vf">VF</span>';
+                if(hasVost) badges += '<span class="badge vostfr">VOSTFR</span>';
+
+                let html = '<div class="episode-card ' + watchedClass + '" onclick="startPlayer(\'film\', 0, ' + filmIndex + ')">';
+                html += '<div class="ep-info">';
+                html += '<div class="ep-num">Film ' + (film.number || (filmIndex + 1)) + '</div>';
+                html += '<div class="ep-title">' + (film.title || ('Film ' + (filmIndex + 1))) + '</div>';
+                html += '</div>';
+                html += '<div class="badges-container">' + badges + '</div>';
+                html += '</div>';
+                return html;
+            }).join('');
         }
 
         function renderAnimeDetail() {
             const anime = getAnime(currentAnimeId);
             const container = document.getElementById('anime-detail-content');
             if (!anime) { container.innerHTML = "<p>Erreur d'affichage</p>"; return; }
+            
             let tabsHtml = '';
-            if (anime.seasons) {
+            if (anime.seasons && anime.seasons.length > 0) {
                 anime.seasons.forEach((s, idx) => {
                     const id = 's-' + idx;
                     let activeClass = activeTabId === id ? 'active' : '';
-                    tabsHtml += '<button class="tab-btn ' + activeClass + '" onclick="switchTab(\'' + id + '\')">Saison ' + s.season_number + '</button>';
+                    let seasonDisplay = s.season_name || ('Saison ' + s.season_number);
+                    tabsHtml += '<button class="tab-btn ' + activeClass + '" onclick="switchTab(\'' + id + '\')">' + seasonDisplay + '</button>';
                 });
             }
             if (anime.films && anime.films.length > 0) {
                 let activeClass = activeTabId === 'films' ? 'active' : '';
                 tabsHtml += '<button class="tab-btn ' + activeClass + '" onclick="switchTab(\'films\')">Films</button>';
             }
-            
+
+            let translatedGenres = translateGenres(anime.genres);
+            let activeFavClass = isFavorite(anime.id) ? 'active' : '';
+            let activeWLClass = isWatchLater(anime.id) ? 'active' : '';
+
             let html = '<div class="anime-detail-header">';
-            html += '<img src="' + (anime.image || '') + '" class="anime-detail-bg" alt="" loading="lazy">';
-            html += '<img src="' + (anime.image || '') + '" class="detail-poster" alt="' + anime.title + '" loading="lazy">';
+            html += '<img src="' + (anime.image || '') + '" class="anime-detail-bg" alt="">';
+            html += '<img src="' + (anime.image || '') + '" class="detail-poster" alt="">';
             html += '<div class="anime-info">';
             html += '<h2>' + anime.title + '</h2>';
-            html += '<div class="anime-actions-row">';
-            html += '<button class="btn-secondary" onclick="toggleFavoriteEvent(event, \'' + anime.id + '\')">' + (isFavorite(anime.id) ? '♥ Retirer Favori' : '♡ Favori') + '</button>';
-            html += '<button class="btn-secondary" onclick="toggleWatchLaterEvent(event, \'' + anime.id + '\')">' + (isWatchLater(anime.id) ? '✓ Dans la liste' : '+ À regarder') + '</button>';
-            html += '</div>';
-            html += '<div class="anime-resume">' + (anime.resume || 'Aucune description disponible.') + '</div>';
-            html += '</div>';
-            html += '</div>';
+            html += '<div class="meta-rating" style="margin-bottom:10px;">★ 8.5 <span class="meta-badge" style="margin-left:10px;">' + (anime.status || 'En cours') + '</span></div>';
+            html += '<div style="display:flex; gap:6px; margin-bottom:15px; flex-wrap:wrap;">' + translatedGenres.map(g => '<span class="meta-badge">' + g + '</span>').join('') + '</div>';
+            html += '<p class="anime-resume">' + (anime.resume || 'Aucune description disponible.') + '</p>';
+            html += '<div class="anime-actions-row" style="margin-top:20px;">';
+            html += '<button class="btn-primary" onclick="startFirstEpisode(\'' + anime.id + '\')">▶ Regarder</button>';
+            html += '<button class="btn-secondary ' + activeFavClass + '" onclick="toggleFavoriteEvent(event, \'' + anime.id + '\')">❤️ Favori</button>';
+            html += '<button class="btn-secondary ' + activeWLClass + '" onclick="toggleWatchLaterEvent(event, \'' + anime.id + '\')">📌 À regarder plus tard</button>';
+            html += '</div></div></div>';
+            
             html += '<div class="tabs-container">' + tabsHtml + '</div>';
-            html += '<div class="episodes-grid" id="episodes-container"></div>';
+            html += '<div id="episodes-container" class="episodes-grid"></div>';
+            html += '<div id="films-container" class="episodes-grid" style="display:none;"></div>';
             
             container.innerHTML = html;
-            renderEpisodesList();
+
+            if (activeTabId === 'films') {
+                document.getElementById('episodes-container').style.display = 'none';
+                document.getElementById('films-container').style.display = 'grid';
+                renderFilmsList(anime);
+            } else {
+                document.getElementById('films-container').style.display = 'none';
+                document.getElementById('episodes-container').style.display = 'grid';
+                let sIdx = 0;
+                if(activeTabId.startsWith('s-')) sIdx = parseInt(activeTabId.replace('s-', ''));
+                renderEpisodesList(anime, sIdx);
+            }
         }
 
         function switchTab(tabId) {
             activeTabId = tabId;
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            renderEpisodesList();
-        }
-
-        function renderEpisodesList() {
             const anime = getAnime(currentAnimeId);
-            const container = document.getElementById('episodes-container');
             if (!anime) return;
-            let items = [];
-            let contextType = 'season';
-            let sIndex = 0;
-            if (activeTabId === 'films') {
-                items = anime.films || [];
-                contextType = 'film';
+            
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            const clickedBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+            if(clickedBtn) clickedBtn.classList.add('active');
+
+            if (tabId === 'films') {
+                document.getElementById('episodes-container').style.display = 'none';
+                document.getElementById('films-container').style.display = 'grid';
+                renderFilmsList(anime);
             } else {
-                sIndex = parseInt(activeTabId.split('-')[1]);
-                if (anime.seasons && anime.seasons[sIndex]) items = anime.seasons[sIndex].episodes || [];
+                document.getElementById('films-container').style.display = 'none';
+                document.getElementById('episodes-container').style.display = 'grid';
+                let sIdx = parseInt(tabId.replace('s-', '')) || 0;
+                renderEpisodesList(anime, sIdx);
             }
-            if (items.length === 0) {
-                container.innerHTML = "<p style='color:var(--text-sub)'>Aucun contenu disponible.</p>";
-                return;
-            }
-            container.innerHTML = items.map((item, index) => {
-                const ctx = { type: contextType, index: sIndex, itemIndex: index };
-                const isWatched = isEpisodeWatched(currentAnimeId, ctx);
-                let badges = '';
-                if(hasLang(item, 'vf')) badges += '<span class="badge vf">VF</span>';
-                if(hasLang(item, 'vostfr')) badges += '<span class="badge vostfr">VOSTFR</span>';
-                
-                let watchedClass = isWatched ? 'watched' : '';
-                let epLabel = contextType === 'film' ? 'Film' : 'Épisode';
-                
-                let cardHtml = '<div class="episode-card ' + watchedClass + '" onclick="launchPlayer(\'' + contextType + '\', ' + sIndex + ', ' + index + ')">';
-                cardHtml += '<div class="ep-info">';
-                cardHtml += '<span class="ep-num">' + epLabel + ' ' + (item.number || (index+1)) + '</span>';
-                cardHtml += '<span class="ep-title">' + (item.title || '') + '</span>';
-                cardHtml += '</div>';
-                cardHtml += '<div class="badges-container">' + badges + '</div>';
-                cardHtml += '</div>';
-                return cardHtml;
-            }).join('');
         }
 
-        function launchPlayer(type, sIndex, itemIndex) {
-            playerContext = { type: type, index: sIndex, itemIndex: itemIndex };
-            const anime = getAnime(currentAnimeId);
-            const item = getItem(anime, playerContext);
-            if(hasLang(item, 'vf')) playerLang = 'vf';
-            else if(hasLang(item, 'vostfr')) playerLang = 'vostfr';
-            playerServer = 'sibnet';
-            if(!hasServer(item, playerLang, 'sibnet')) playerServer = 'vidmoly';
+        function startFirstEpisode(animeId) {
+            currentAnimeId = animeId;
+            const anime = getAnime(animeId);
+            if(!anime) return;
+            if(anime.seasons && anime.seasons.length > 0 && anime.seasons[0].episodes && anime.seasons[0].episodes.length > 0) {
+                startPlayer('season', 0, 0);
+            } else if(anime.films && anime.films.length > 0) {
+                startPlayer('film', 0, 0);
+            } else {
+                showToast("Aucun média disponible.");
+            }
+        }
+
+        function startPlayer(type, index, itemIndex) {
+            playerContext = { type, index, itemIndex };
             router.player();
         }
 
-        function loadPlayerContent() {
+        function renderPlayer() {
             const anime = getAnime(currentAnimeId);
+            if (!anime) return;
             const item = getItem(anime, playerContext);
-            if (!anime || !item) { router.home(); return; }
-            markEpisodeWatched(currentAnimeId, playerContext);
-            addToHistory(currentAnimeId);
-            saveProgress();
-            
-            let labelStr = playerContext.type === 'film' 
-                ? 'Film ' + (item.number || (playerContext.itemIndex + 1))
-                : 'Saison ' + anime.seasons[playerContext.index].season_number + ' • Épisode ' + (item.number || (playerContext.itemIndex + 1));
-                
-            document.getElementById('player-anime-name').innerText = anime.title;
-            document.getElementById('player-ep-info').innerText = labelStr + ' - ' + (item.title || '');
-            const iframe = document.getElementById('video-iframe');
-            
-            iframe.onerror = function() {
-                showToast("Lien vidéo mort détecté. Passage au serveur alternatif...");
-                switchServer(playerServer === 'sibnet' ? 'vidmoly' : 'sibnet');
-            };
+            if (!item) return;
 
+            addToHistory(anime.id);
+            markEpisodeWatched(anime.id, playerContext);
+            saveProgress();
+
+            document.getElementById('player-anime-name').innerText = anime.title;
+            let infoText = playerContext.type === 'film' 
+                ? 'Film ' + (item.number || (playerContext.itemIndex + 1))
+                : (anime.seasons[playerContext.index]?.season_name || 'Saison ' + (anime.seasons[playerContext.index]?.season_number || 1)) + ' • Épisode ' + (item.number || (playerContext.itemIndex + 1));
+            document.getElementById('player-ep-info').innerText = infoText;
+
+            // --- Logique du lecteur demandée intégrée ici ---
             let src = '';
             if (item[playerLang]) {
                 if (typeof item[playerLang] === 'string') src = item[playerLang];
@@ -2388,195 +2137,173 @@
                 let id = src.includes('vidmoly') ? src.split('-').pop().replace('.html','') : src;
                 src = 'https://vidmoly.biz/embed-' + id + '.html';
             }
-            iframe.src = src || '';
-            updatePlayerControls(anime, item);
-            buildPlayerNav(anime);
-        }
 
-        function updatePlayerControls(anime, item) {
-            document.getElementById('lang-vf').disabled = !hasLang(item, 'vf');
-            document.getElementById('lang-vostfr').disabled = !hasLang(item, 'vostfr');
+            document.getElementById('video-iframe').src = src;
+
             document.getElementById('lang-vf').classList.toggle('active', playerLang === 'vf');
             document.getElementById('lang-vostfr').classList.toggle('active', playerLang === 'vostfr');
-            document.getElementById('server-sibnet').disabled = !hasServer(item, playerLang, 'sibnet');
-            document.getElementById('server-vidmoly').disabled = !hasServer(item, playerLang, 'vidmoly');
             document.getElementById('server-sibnet').classList.toggle('active', playerServer === 'sibnet');
             document.getElementById('server-vidmoly').classList.toggle('active', playerServer === 'vidmoly');
-            let hasPrev = playerContext.itemIndex > 0;
-            let hasNext = false;
-            if (playerContext.type === 'film') {
-                hasNext = playerContext.itemIndex < (anime.films.length - 1);
-            } else {
-                const s = anime.seasons[playerContext.index];
-                hasNext = playerContext.itemIndex < (s.episodes.length - 1);
-            }
-            document.getElementById('btn-prev').disabled = !hasPrev;
-            document.getElementById('btn-next').disabled = !hasNext;
-        }
 
-        function buildPlayerNav(anime) {
-            let catHtml = '';
-            if(anime.seasons) {
-                anime.seasons.forEach((s, i) => {
-                    let activeClass = playerContext.type === 'season' && playerContext.index === i ? 'active' : '';
-                    catHtml += '<button class="pill ' + activeClass + '" onclick="changePlayerCategory(\'season\', ' + i + ')">Saison ' + s.season_number + '</button>';
-                });
-            }
-            if(anime.films && anime.films.length > 0) {
-                let activeClass = playerContext.type === 'film' ? 'active' : '';
-                catHtml += '<button class="pill ' + activeClass + '" onclick="changePlayerCategory(\'film\', 0)">Films</button>';
-            }
-            document.getElementById('player-cat-pills').innerHTML = catHtml;
-            document.getElementById('label-cat').innerText = playerContext.type === 'season' ? 'Saison' : 'Catégorie';
-            let itemsHtml = '';
-            let items = playerContext.type === 'film' ? anime.films : anime.seasons[playerContext.index].episodes;
-            items.forEach((item, i) => {
-                let activeClass = playerContext.itemIndex === i ? 'active' : '';
-                itemsHtml += '<button class="pill ' + activeClass + '" onclick="changePlayerItem(' + i + ')">' + (item.number || (i+1)) + '</button>';
-            });
-            document.getElementById('player-item-pills').innerHTML = itemsHtml;
-        }
-
-        function changePlayerCategory(type, index) {
-            playerContext.type = type;
-            playerContext.index = index;
-            playerContext.itemIndex = 0;
-            const anime = getAnime(currentAnimeId);
-            const item = getItem(anime, playerContext);
-            if(!hasLang(item, playerLang)) playerLang = hasLang(item, 'vf') ? 'vf' : 'vostfr';
-            loadPlayerContent();
-        }
-
-        function changePlayerItem(index) {
-            playerContext.itemIndex = index;
-            const anime = getAnime(currentAnimeId);
-            const item = getItem(anime, playerContext);
-            if(!hasLang(item, playerLang)) playerLang = hasLang(item, 'vf') ? 'vf' : 'vostfr';
-            loadPlayerContent();
-        }
-
-        function navigateEpisode(dir) {
-            const anime = getAnime(currentAnimeId);
-            let items = playerContext.type === 'film' ? anime.films : anime.seasons[playerContext.index].episodes;
-            const newIndex = playerContext.itemIndex + dir;
-            if (newIndex >= 0 && newIndex < items.length) {
-                changePlayerItem(newIndex);
-            }
+            renderPlayerPills(anime);
         }
 
         function switchLang(lang) {
             playerLang = lang;
-            const item = getItem(getAnime(currentAnimeId), playerContext);
-            if (!hasServer(item, playerLang, playerServer)) {
-                playerServer = playerServer === 'sibnet' ? 'vidmoly' : 'sibnet';
-            }
-            loadPlayerContent();
+            renderPlayer();
         }
 
         function switchServer(server) {
             playerServer = server;
-            loadPlayerContent();
+            renderPlayer();
         }
 
-        let touchTimer;
-        document.querySelectorAll('.nav-icon-btn').forEach(btn => {
-            btn.addEventListener('touchstart', e => {
-                touchTimer = setTimeout(() => {
-                    btn.classList.add('show-tooltip');
-                }, 500);
-            });
-            btn.addEventListener('touchend', () => {
-                clearTimeout(touchTimer);
-                setTimeout(() => btn.classList.remove('show-tooltip'), 1000);
-            });
-            btn.addEventListener('touchmove', () => {
-                clearTimeout(touchTimer);
-                btn.classList.remove('show-tooltip');
-            });
-        });
+        function renderPlayerPills(anime) {
+            const catPillsContainer = document.getElementById('player-cat-pills');
+            const itemPillsContainer = document.getElementById('player-item-pills');
+            const labelCat = document.getElementById('label-cat');
 
-        /* Gestionnaire de navigation intelligente (Historique & Défilement) */
-        let navigationStack = [];
-        let currentViewState = null;
+            if (playerContext.type === 'film') {
+                labelCat.innerText = 'Films';
+                catPillsContainer.innerHTML = '<div class="pill active">Films</div>';
+                if (anime.films) {
+                    itemPillsContainer.innerHTML = anime.films.map((f, idx) => {
+                        let active = idx === playerContext.itemIndex ? 'active' : '';
+                        return '<div class="pill ' + active + '" onclick="startPlayer(\'film\', 0, ' + idx + ')">Film ' + (f.number || (idx + 1)) + '</div>';
+                    }).join('');
+                }
+            } else {
+                labelCat.innerText = 'Saison';
+                if (anime.seasons) {
+                    catPillsContainer.innerHTML = anime.seasons.map((s, idx) => {
+                        let active = idx === playerContext.index ? 'active' : '';
+                        let sName = s.season_name || ('Saison ' + (s.season_number || (idx + 1)));
+                        return '<div class="pill ' + active + '" onclick="changeSeason(' + idx + ')">' + sName + '</div>';
+                    }).join('');
+
+                    const currentSeason = anime.seasons[playerContext.index];
+                    if (currentSeason && currentSeason.episodes) {
+                        itemPillsContainer.innerHTML = currentSeason.episodes.map((ep, idx) => {
+                            let active = idx === playerContext.itemIndex ? 'active' : '';
+                            return '<div class="pill ' + active + '" onclick="startPlayer(\'season\', ' + playerContext.index + ', ' + idx + ')">Ép. ' + (ep.number || (idx + 1)) + '</div>';
+                        }).join('');
+                    }
+                }
+            }
+        }
+
+        function changeSeason(seasonIndex) {
+            const anime = getAnime(currentAnimeId);
+            if (!anime || !anime.seasons || !anime.seasons[seasonIndex]) return;
+            playerContext.index = seasonIndex;
+            playerContext.itemIndex = 0;
+            renderPlayer();
+        }
+
+        function navigateEpisode(direction) {
+            const anime = getAnime(currentAnimeId);
+            if (!anime) return;
+
+            if (playerContext.type === 'film') {
+                let newIdx = playerContext.itemIndex + direction;
+                if (anime.films && newIdx >= 0 && newIdx < anime.films.length) {
+                    playerContext.itemIndex = newIdx;
+                    renderPlayer();
+                }
+            } else {
+                const season = anime.seasons && anime.seasons[playerContext.index];
+                if (!season || !season.episodes) return;
+                let newEpIdx = playerContext.itemIndex + direction;
+                if (newEpIdx >= 0 && newEpIdx < season.episodes.length) {
+                    playerContext.itemIndex = newEpIdx;
+                    renderPlayer();
+                } else if (direction > 0 && anime.seasons[playerContext.index + 1]) {
+                    playerContext.index++;
+                    playerContext.itemIndex = 0;
+                    renderPlayer();
+                } else if (direction < 0 && playerContext.index > 0 && anime.seasons[playerContext.index - 1]) {
+                    playerContext.index--;
+                    const prevSeason = anime.seasons[playerContext.index];
+                    playerContext.itemIndex = prevSeason.episodes ? prevSeason.episodes.length - 1 : 0;
+                    renderPlayer();
+                }
+            }
+        }
 
         const router = {
-            hideAll: () => {
-                document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active-view'));
-                document.querySelectorAll('.nav-icon-btn').forEach(btn => btn.classList.remove('active'));
+            home: function() {
+                navHistoryStack.push('home');
+                this.showView('view-home');
+                renderHeroBanner();
+                renderResumeBanner();
+                renderHomeGrids();
             },
-            navigate: (viewName, id = null, isBack = false) => {
-                if (!isBack && currentViewState) {
-                    currentViewState.scrollY = window.scrollY;
-                    navigationStack.push({ ...currentViewState });
-                }
-
-                currentViewState = { viewName, id, scrollY: 0 };
-                router.hideAll();
-
-                if (viewName === 'home') {
-                    document.getElementById('view-home').classList.add('active-view');
-                    document.getElementById('nav-home').classList.add('active');
-                    renderHeroBanner();
-                    renderResumeBanner();
-                    renderHomeGrid();
-                    renderGenresGrid();
-                } else if (viewName === 'catalog') {
-                    document.getElementById('view-catalog').classList.add('active-view');
-                    if (isListView) document.getElementById('catalog-grid').classList.add('list-view');
-                    applyCatalogFilters();
-                } else if (viewName === 'favorites') {
-                    document.getElementById('view-favorites').classList.add('active-view');
-                    document.getElementById('nav-favs').classList.add('active');
-                    if (isListView) document.getElementById('favorites-grid').classList.add('list-view');
-                    renderFavoritesGrid();
-                } else if (viewName === 'watchLater') {
-                    document.getElementById('view-watchlater').classList.add('active-view');
-                    document.getElementById('nav-watchlater').classList.add('active');
-                    if (isListView) document.getElementById('watchlater-grid').classList.add('list-view');
-                    renderWatchLaterGrid();
-                } else if (viewName === 'history') {
-                    document.getElementById('view-history').classList.add('active-view');
-                    document.getElementById('nav-history').classList.add('active');
-                    if (isListView) document.getElementById('history-grid').classList.add('list-view');
-                    renderHistoryGrid();
-                } else if (viewName === 'anime') {
-                    currentAnimeId = id || currentAnimeId;
-                    activeTabId = 's-0';
-                    document.getElementById('view-anime').classList.add('active-view');
-                    renderAnimeDetail();
-                } else if (viewName === 'player') {
-                    document.getElementById('view-player').classList.add('active-view');
-                    loadPlayerContent();
-                }
-
-                if (isBack) {
-                    const targetScroll = id ? id.scrollY : 0;
-                    setTimeout(() => window.scrollTo(0, targetScroll), 10);
+            catalog: function() {
+                navHistoryStack.push('catalog');
+                this.showView('view-catalog');
+                applyCatalogFilters();
+            },
+            favorites: function() {
+                navHistoryStack.push('favorites');
+                this.showView('view-favorites');
+                renderFavoritesGrid();
+            },
+            watchLater: function() {
+                navHistoryStack.push('watchlater');
+                this.showView('view-watchlater');
+                renderWatchLaterGrid();
+            },
+            history: function() {
+                navHistoryStack.push('history');
+                this.showView('view-history');
+                renderHistoryGrid();
+            },
+            anime: function(id) {
+                currentAnimeId = id;
+                navHistoryStack.push('anime-' + id);
+                this.showView('view-anime');
+                renderAnimeDetail();
+            },
+            player: function() {
+                navHistoryStack.push('player');
+                this.showView('view-player');
+                renderPlayer();
+            },
+            back: function() {
+                navHistoryStack.pop();
+                const previous = navHistoryStack.pop() || 'home';
+                if (previous.startsWith('anime-')) {
+                    const id = previous.replace('anime-', '');
+                    this.anime(id);
+                } else if (previous === 'catalog') {
+                    this.catalog();
+                } else if (previous === 'favorites') {
+                    this.favorites();
+                } else if (previous === 'watchlater') {
+                    this.watchLater();
+                } else if (previous === 'history') {
+                    this.history();
                 } else {
-                    window.scrollTo(0, 0);
+                    this.home();
                 }
             },
-            back: () => {
-                if (navigationStack.length > 0) {
-                    const prevState = navigationStack.pop();
-                    router.navigate(prevState.viewName, prevState, true);
-                } else {
-                    router.navigate('home', null, true);
-                }
-            },
-            home: () => router.navigate('home'),
-            catalog: () => router.navigate('catalog'),
-            favorites: () => router.navigate('favorites'),
-            watchLater: () => router.navigate('watchLater'),
-            history: () => router.navigate('history'),
-            anime: (id) => router.navigate('anime', id),
-            player: () => router.navigate('player')
+            showView: function(viewId) {
+                document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active-view'));
+                document.getElementById(viewId).classList.add('active-view');
+                window.scrollTo(0, 0);
+
+                document.querySelectorAll('.nav-icon-btn').forEach(b => b.classList.remove('active'));
+                if (viewId === 'view-home') document.getElementById('nav-home')?.classList.add('active');
+                if (viewId === 'view-favorites') document.getElementById('nav-favs')?.classList.add('active');
+                if (viewId === 'view-watchlater') document.getElementById('nav-watchlater')?.classList.add('active');
+                if (viewId === 'view-history') document.getElementById('nav-history')?.classList.add('active');
+            }
         };
 
-        window.onload = () => {
+        window.addEventListener('DOMContentLoaded', () => {
             loadSettings();
             router.home();
-        };
+        });
     </script>
 </body>
 </html>
