@@ -16,26 +16,24 @@ jobs:
           BODY: ${{ github.event.release.body }}
           URL: ${{ github.event.release.html_url }}
         run: |
+          # 1. Utiliser Python pour générer un fichier JSON propre avec le message formaté
           python3 -c '
-          import os, json, urllib.request
+          import os, json
 
-          webhook = os.environ["DISCORD_WEBHOOK"]
           tag = os.environ["TAG"]
           name = os.environ["NAME"]
           body = os.environ["BODY"]
           url = os.environ["URL"]
 
-          # Personnalise ton message ici
           message = f"🚀 **Nouvelle mise à jour : {name} ({tag})**\n\n**Ajout de :**\n{body}\n\n👉 [Lien de la release]({url})"
 
           payload = {"content": message}
-          data = json.dumps(payload).encode("utf-8")
-
-          req = urllib.request.Request(webhook, data=data, headers={"Content-Type": "application/json"})
-          try:
-              with urllib.request.urlopen(req) as response:
-                  print("Message envoye avec succes sur Discord !")
-          except Exception as e:
-              print(f"Erreur lors de l envoi : {e}")
-              exit(1)
+          with open("payload.json", "w", encoding="utf-8") as f:
+              json.dump(payload, f)
           '
+
+          # 2. Envoyer le fichier via curl
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d @payload.json \
+            "$DISCORD_WEBHOOK"
