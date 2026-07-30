@@ -1,0 +1,41 @@
+name: Discord Release Notification
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send custom Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          TAG: ${{ github.event.release.tag_name }}
+          NAME: ${{ github.event.release.name }}
+          BODY: ${{ github.event.release.body }}
+          URL: ${{ github.event.release.html_url }}
+        run: |
+          python3 -c '
+          import os, json, urllib.request
+
+          webhook = os.environ["DISCORD_WEBHOOK"]
+          tag = os.environ["TAG"]
+          name = os.environ["NAME"]
+          body = os.environ["BODY"]
+          url = os.environ["URL"]
+
+          # Personnalise ton message ici
+          message = f"🚀 **Nouvelle mise à jour : {name} ({tag})**\n\n**Ajout de :**\n{body}\n\n👉 [Lien de la release]({url})"
+
+          payload = {"content": message}
+          data = json.dumps(payload).encode("utf-8")
+
+          req = urllib.request.Request(webhook, data=data, headers={"Content-Type": "application/json"})
+          try:
+              with urllib.request.urlopen(req) as response:
+                  print("Message envoye avec succes sur Discord !")
+          except Exception as e:
+              print(f"Erreur lors de l envoi : {e}")
+              exit(1)
+          '
