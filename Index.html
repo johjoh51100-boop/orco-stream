@@ -2954,8 +2954,8 @@
         }
 
         // ============================================================
-        //  RECHERCHE : recherche sur "title" ET "sim_title" avec affichage
-        //  du titre similaire en gris sous le titre principal.
+        //  RECHERCHE AVEC AFFICHAGE DES TITRES SIMILAIRES EN GRIS
+        //  CORRIGÉE : recherche sur title ET sim_title, affiche le sim_title matché
         // ============================================================
         function handleSearchDropdown(query) {
             const dropdown = document.getElementById('search-dropdown');
@@ -2966,42 +2966,38 @@
 
             const lowerQuery = query.toLowerCase().trim();
 
-            // Filtrer les animes : match sur title ou sim_title (insensible à la casse)
-            const results = animes.filter(a => {
-                const titleMatch = a.title.toLowerCase().includes(lowerQuery);
+            // Filtrer les animes : match sur title ou sur un sim_title
+            const results = animes.filter(anime => {
+                const titleMatch = anime.title.toLowerCase().includes(lowerQuery);
                 let simMatch = false;
-                if (a.sim_title && Array.isArray(a.sim_title)) {
-                    simMatch = a.sim_title.some(s => s.toLowerCase().includes(lowerQuery));
+                if (anime.sim_title && Array.isArray(anime.sim_title)) {
+                    simMatch = anime.sim_title.some(s => s.toLowerCase().includes(lowerQuery));
                 }
                 return titleMatch || simMatch;
-            }).slice(0, 8); // on affiche jusqu'à 8 résultats
+            }).slice(0, 8);
 
             if (results.length === 0) {
                 dropdown.innerHTML = `
                     <div style="padding:18px;text-align:center;color:var(--text-sub);font-size:13px;font-weight:500;">
-                        Aucun résultat trouvé pour « ${query} »
+                        Aucun résultat pour « ${query} »
                     </div>
                 `;
             } else {
-                // Construction des résultats avec affichage du sim_title en gris
                 dropdown.innerHTML = results.map(anime => {
-                    // On essaie de trouver le sim_title qui a matché (pour le surligner)
+                    // Trouve le(s) sim_title qui correspondent à la recherche
                     let matchedSim = null;
                     if (anime.sim_title && Array.isArray(anime.sim_title)) {
                         const found = anime.sim_title.find(s => s.toLowerCase().includes(lowerQuery));
                         if (found) matchedSim = found;
                     }
 
-                    // On construit l'affichage : si on a un sim_title matché, on le montre en gris
-                    // Sinon, on montre le premier sim_title s'il existe, sinon rien.
+                    // Si un sim_title match, on l'affiche en gris ; sinon on affiche les premiers sim_title
                     let simDisplay = '';
                     if (matchedSim) {
-                        // On met en évidence la partie qui match (ex: "onigiri" dans "Demon Slayer (Onigiri)")
-                        simDisplay = `Similaire : ${matchedSim}`;
+                        simDisplay = matchedSim;
                     } else if (anime.sim_title && anime.sim_title.length > 0) {
-                        // On montre les 2 premiers sim_title pour l'exemple
-                        const sims = anime.sim_title.slice(0, 3).join(' · ');
-                        simDisplay = `Similaire : ${sims}`;
+                        // Si le match est sur le titre principal, on affiche les 3 premiers sim_title
+                        simDisplay = anime.sim_title.slice(0, 3).join(' · ');
                     }
 
                     return `
