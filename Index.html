@@ -317,7 +317,7 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(8, 10, 16, 0.95);
+            background: rgba(8, 10, 16, 0.96);
             backdrop-filter: var(--glass-blur);
             border: 1px solid var(--glass-border);
             border-radius: 14px;
@@ -326,6 +326,19 @@
             overflow-y: auto;
             z-index: 1000;
             display: none;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) transparent;
+        }
+
+        .search-results-dropdown::-webkit-scrollbar {
+            width: 4px;
+        }
+        .search-results-dropdown::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .search-results-dropdown::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 20px;
         }
 
         .search-results-dropdown.active {
@@ -336,14 +349,18 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px;
+            padding: 12px 16px;
             cursor: pointer;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
             transition: var(--transition);
         }
 
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
         .search-result-item:hover {
-            background: rgba(0, 242, 254, 0.1);
+            background: rgba(0, 242, 254, 0.08);
         }
 
         .search-result-item img {
@@ -351,24 +368,52 @@
             height: 60px;
             object-fit: cover;
             border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .search-result-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
         }
 
         .search-result-title {
             font-size: 14px;
             font-weight: 700;
-            flex-grow: 1;
+            color: #fff;
+            line-height: 1.3;
         }
-        
+
+        .search-result-sim {
+            font-size: 12px;
+            color: #888;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 400;
+            letter-spacing: 0.1px;
+        }
+
+        .search-result-sim strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
         .search-result-genre {
             font-size: 10px;
-            background: rgba(255,255,255,0.1);
-            padding: 2px 6px;
+            background: rgba(255,255,255,0.08);
+            padding: 2px 8px;
             border-radius: 4px;
             color: var(--accent);
+            flex-shrink: 0;
+            font-weight: 700;
+            letter-spacing: 0.3px;
         }
 
         .search-history-header {
-            padding: 10px 12px;
+            padding: 10px 16px;
             font-size: 11px;
             color: var(--accent);
             text-transform: uppercase;
@@ -2908,38 +2953,72 @@
             showToast(isCinema ? 'Mode cinéma activé' : 'Mode cinéma désactivé');
         }
 
-        // ============ RECHERCHE AVEC sim_title ============
+        // ============================================================
+        //  RECHERCHE : recherche sur "title" ET "sim_title" avec affichage
+        //  du titre similaire en gris sous le titre principal.
+        // ============================================================
         function handleSearchDropdown(query) {
             const dropdown = document.getElementById('search-dropdown');
             if (!query.trim()) {
                 dropdown.classList.remove('active');
                 return;
             }
-            const lowerQuery = query.toLowerCase();
+
+            const lowerQuery = query.toLowerCase().trim();
+
+            // Filtrer les animes : match sur title ou sim_title (insensible à la casse)
             const results = animes.filter(a => {
-                // Vérification sur le titre principal
-                let match = a.title.toLowerCase().includes(lowerQuery);
-                // Si pas match et que sim_title existe (tableau)
-                if (!match && a.sim_title && Array.isArray(a.sim_title)) {
-                    match = a.sim_title.some(s => s.toLowerCase().includes(lowerQuery));
+                const titleMatch = a.title.toLowerCase().includes(lowerQuery);
+                let simMatch = false;
+                if (a.sim_title && Array.isArray(a.sim_title)) {
+                    simMatch = a.sim_title.some(s => s.toLowerCase().includes(lowerQuery));
                 }
-                return match;
-            }).slice(0, 6);
+                return titleMatch || simMatch;
+            }).slice(0, 8); // on affiche jusqu'à 8 résultats
 
             if (results.length === 0) {
-                dropdown.innerHTML = '<div style="padding:15px;text-align:center;color:var(--text-sub);font-size:13px;">Aucun résultat trouvé</div>';
-            } else {
-                dropdown.innerHTML = results.map(anime => `
-                    <div class="search-result-item" onclick="router.anime('${anime.id}'); hideSearchDropdown();">
-                        <img src="${anime.image}" alt="${anime.title}">
-                        <div class="search-result-title">${anime.title}</div>
-                        ${anime.genres && anime.genres[0] ? `<span class="search-result-genre">${anime.genres[0]}</span>` : ''}
+                dropdown.innerHTML = `
+                    <div style="padding:18px;text-align:center;color:var(--text-sub);font-size:13px;font-weight:500;">
+                        Aucun résultat trouvé pour « ${query} »
                     </div>
-                `).join('');
+                `;
+            } else {
+                // Construction des résultats avec affichage du sim_title en gris
+                dropdown.innerHTML = results.map(anime => {
+                    // On essaie de trouver le sim_title qui a matché (pour le surligner)
+                    let matchedSim = null;
+                    if (anime.sim_title && Array.isArray(anime.sim_title)) {
+                        const found = anime.sim_title.find(s => s.toLowerCase().includes(lowerQuery));
+                        if (found) matchedSim = found;
+                    }
+
+                    // On construit l'affichage : si on a un sim_title matché, on le montre en gris
+                    // Sinon, on montre le premier sim_title s'il existe, sinon rien.
+                    let simDisplay = '';
+                    if (matchedSim) {
+                        // On met en évidence la partie qui match (ex: "onigiri" dans "Demon Slayer (Onigiri)")
+                        simDisplay = `Similaire : ${matchedSim}`;
+                    } else if (anime.sim_title && anime.sim_title.length > 0) {
+                        // On montre les 2 premiers sim_title pour l'exemple
+                        const sims = anime.sim_title.slice(0, 3).join(' · ');
+                        simDisplay = `Similaire : ${sims}`;
+                    }
+
+                    return `
+                        <div class="search-result-item" onclick="router.anime('${anime.id}'); hideSearchDropdown();">
+                            <img src="${anime.image}" alt="${anime.title}" loading="lazy">
+                            <div class="search-result-text">
+                                <div class="search-result-title">${anime.title}</div>
+                                ${simDisplay ? `<div class="search-result-sim">${simDisplay}</div>` : ''}
+                            </div>
+                            ${anime.genres && anime.genres[0] ? `<span class="search-result-genre">${anime.genres[0]}</span>` : ''}
+                        </div>
+                    `;
+                }).join('');
             }
             dropdown.classList.add('active');
         }
-        // ============ FIN MODIFICATION ============
+        // ============================================================
 
         function showSearchHistory() {
             const query = document.getElementById('search-input').value;
