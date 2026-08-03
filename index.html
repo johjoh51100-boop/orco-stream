@@ -8,8 +8,10 @@
     <meta name="description" content="Orco Stream est une plateforme moderne pour découvrir des animes avec une interface rapide, fluide et intuitive.">
     <title>Orco Stream - Regardez vos films et séries animes en streaming</title>
     <style>
+     
        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:wght@400;600;800;900&display=swap');
         
+   
         :root {
             --bg-body: #050508;
             --sidebar-width: 80px;
@@ -363,31 +365,6 @@
             padding: 2px 6px;
             border-radius: 4px;
             color: var(--accent);
-        }
-
-        .sim-title-container {
-            margin-top: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .sim-title-label {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-sub);
-        }
-
-        .sim-title-tag {
-            background: rgba(0, 242, 254, 0.08);
-            border: 1px solid var(--accent);
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
         }
 
         .search-history-header {
@@ -870,7 +847,7 @@
             width: 16px;
             height: 16px;
             fill: currentColor;
-          }
+        }
 
         .btn-back {
             background: rgba(255,255,255,0.03); color: var(--text-sub); border: 1px solid var(--glass-border);
@@ -1028,13 +1005,7 @@
             <button class="nav-icon-btn" id="nav-watchlater" data-title="À regarder plus tard" onclick="resetSearch(); router.watchLater()">
                 <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
             </button>
-            <button class="nav-icon-btn" id="nav-history" data-title="Historique" onclick="resetSearch(); router.history()">
-                <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
-            </button>
-            <button class="nav-icon-btn" data-title="Rechercher" onclick="document.getElementById('search-input').focus()">
-                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-            </button>
-            <button class="nav-icon-btn" data-title="Paramètres" onclick="openSettingsModal()">
+                 <button class="nav-icon-btn" data-title="Paramètres" onclick="openSettingsModal()">
                 <svg viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
             </button>
         </nav>
@@ -1103,11 +1074,6 @@
                         <select id="sort-select" class="filter-select" onchange="resetPaginationAndApply()">
                             <option value="default">Trier par : Défaut</option>
                             <option value="az">De A à Z</option>
-                            <option value="za">De Z à A</option>
-                        </select>
-                        <select id="status-select" class="filter-select" onchange="resetPaginationAndApply()">
-                            <option value="all">Tous statuts</option>
-            <option value="az">De A à Z</option>
                             <option value="za">De Z à A</option>
                         </select>
                         <select id="status-select" class="filter-select" onchange="resetPaginationAndApply()">
@@ -1199,7 +1165,8 @@
             </div>
         </main>
     </div>
-  <div id="toast-container" class="pos-bottom-right"></div>
+
+    <div id="toast-container" class="pos-bottom-right"></div>
 
     <div id="custom-context-menu" class="context-menu">
         <div class="context-menu-item" onclick="openSettingsModal()">Personnaliser l'interface</div>
@@ -1215,200 +1182,953 @@
                 <div class="settings-group">
                     <h4>1. Couleur d'accentuation (180+ Options)</h4>
                     <div class="color-picker-container" style="max-height: 250px; overflow-y: auto; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px solid var(--glass-border);">
-                        <div class="color-dot" style="background:#ffebee;" onclick="applyThemeColor('#ffebee')"></div>
-                        <div class="color-dot" style="background:#ffcdd2;" onclick="applyThemeColor('#ffcdd2')"></div>
-                        <div class="color-dot" style="background:#ef9a9a;" onclick="applyThemeColor('#ef9a9a')"></div>
-                        <div class="color-dot" style="background:#e57373;" onclick="applyThemeColor('#e57373')"></div>
-                        <div class="color-dot" style="background:#ef5350;" onclick="applyThemeColor('#ef5350')"></div>
-                        <div class="color-dot" style="background:#f44336;" onclick="applyThemeColor('#f44336')"></div>
-                        <div class="color-dot" style="background:#e53935;" onclick="applyThemeColor('#e53935')"></div>
-                        <div class="color-dot" style="background:#d32f2f;" onclick="applyThemeColor('#d32f2f')"></div>
-                        <div class="color-dot" style="background:#c62828;" onclick="applyThemeColor('#c62828')"></div>
-                        <div class="color-dot" style="background:#b71c1c;" onclick="applyThemeColor('#b71c1c')"></div>
-                        <div class="color-dot" style="background:#ff8a80;" onclick="applyThemeColor('#ff8a80')"></div>
-                        <div class="color-dot" style="background:#ff5252;" onclick="applyThemeColor('#ff5252')"></div>
-                        <div class="color-dot" style="background:#ff1744;" onclick="applyThemeColor('#ff1744')"></div>
-                        <div class="color-dot" style="background:#d50000;" onclick="applyThemeColor('#d50000')"></div>
-                        <div class="color-dot" style="background:#ff0000;" onclick="applyThemeColor('#ff0000')"></div>
-                        <div class="color-dot" style="background:#cc0000;" onclick="applyThemeColor('#cc0000')"></div>
-                        <div class="color-dot" style="background:#990000;" onclick="applyThemeColor('#990000')"></div>
-                        <div class="color-dot" style="background:#660000;" onclick="applyThemeColor('#660000')"></div>
-                        <div class="color-dot" style="background:#330000;" onclick="applyThemeColor('#330000')"></div>
-                        <div class="color-dot" style="background:#aa0000;" onclick="applyThemeColor('#aa0000')"></div>
+                        
+                        <!-- 
+                        =====================================
+                        Reds / Rouges 
+                        ===================================== 
+                        -->
+                        <div
+                            class="color-dot"
+                            style="background:#ffebee;"
+                            onclick="applyThemeColor('#ffebee')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffcdd2;"
+                            onclick="applyThemeColor('#ffcdd2')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ef9a9a;"
+                            onclick="applyThemeColor('#ef9a9a')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#e57373;"
+                            onclick="applyThemeColor('#e57373')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ef5350;"
+                            onclick="applyThemeColor('#ef5350')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#f44336;"
+                            onclick="applyThemeColor('#f44336')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#e53935;"
+                            onclick="applyThemeColor('#e53935')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#d32f2f;"
+                            onclick="applyThemeColor('#d32f2f')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#c62828;"
+                            onclick="applyThemeColor('#c62828')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#b71c1c;"
+                            onclick="applyThemeColor('#b71c1c')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff8a80;"
+                            onclick="applyThemeColor('#ff8a80')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff5252;"
+                            onclick="applyThemeColor('#ff5252')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff1744;"
+                            onclick="applyThemeColor('#ff1744')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#d50000;"
+                            onclick="applyThemeColor('#d50000')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff0000;"
+                            onclick="applyThemeColor('#ff0000')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#cc0000;"
+                            onclick="applyThemeColor('#cc0000')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#990000;"
+                            onclick="applyThemeColor('#990000')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#660000;"
+                            onclick="applyThemeColor('#660000')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#330000;"
+                            onclick="applyThemeColor('#330000')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#aa0000;"
+                            onclick="applyThemeColor('#aa0000')"
+                        ></div>
 
-                        <div class="color-dot" style="background:#fff3e0;" onclick="applyThemeColor('#fff3e0')"></div>
-                        <div class="color-dot" style="background:#ffe0b2;" onclick="applyThemeColor('#ffe0b2')"></div>
-                        <div class="color-dot" style="background:#ffcc80;" onclick="applyThemeColor('#ffcc80')"></div>
-                        <div class="color-dot" style="background:#ffb74d;" onclick="applyThemeColor('#ffb74d')"></div>
-                        <div class="color-dot" style="background:#ffa726;" onclick="applyThemeColor('#ffa726')"></div>
-                        <div class="color-dot" style="background:#ff9800;" onclick="applyThemeColor('#ff9800')"></div>
-                        <div class="color-dot" style="background:#fb8c00;" onclick="applyThemeColor('#fb8c00')"></div>
-                        <div class="color-dot" style="background:#f57c00;" onclick="applyThemeColor('#f57c00')"></div>
-                        <div class="color-dot" style="background:#ef6c00;" onclick="applyThemeColor('#ef6c00')"></div>
-                        <div class="color-dot" style="background:#e65100;" onclick="applyThemeColor('#e65100')"></div>
-                        <div class="color-dot" style="background:#ffd180;" onclick="applyThemeColor('#ffd180')"></div>
-                        <div class="color-dot" style="background:#ffab40;" onclick="applyThemeColor('#ffab40')"></div>
-                        <div class="color-dot" style="background:#ff9100;" onclick="applyThemeColor('#ff9100')"></div>
-                        <div class="color-dot" style="background:#ff6d00;" onclick="applyThemeColor('#ff6d00')"></div>
-                        <div class="color-dot" style="background:#ff7f50;" onclick="applyThemeColor('#ff7f50')"></div>
-                        <div class="color-dot" style="background:#ff6347;" onclick="applyThemeColor('#ff6347')"></div>
-                        <div class="color-dot" style="background:#ff4500;" onclick="applyThemeColor('#ff4500')"></div>
-                        <div class="color-dot" style="background:#d2691e;" onclick="applyThemeColor('#d2691e')"></div>
-                        <div class="color-dot" style="background:#8b4513;" onclick="applyThemeColor('#8b4513')"></div>
-                        <div class="color-dot" style="background:#a0522d;" onclick="applyThemeColor('#a0522d')"></div>
+                        <!-- 
+                        =====================================
+                        Oranges / Oranges 
+                        ===================================== 
+                        -->
+                        <div
+                            class="color-dot"
+                            style="background:#fff3e0;"
+                            onclick="applyThemeColor('#fff3e0')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffe0b2;"
+                            onclick="applyThemeColor('#ffe0b2')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffcc80;"
+                            onclick="applyThemeColor('#ffcc80')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffb74d;"
+                            onclick="applyThemeColor('#ffb74d')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffa726;"
+                            onclick="applyThemeColor('#ffa726')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff9800;"
+                            onclick="applyThemeColor('#ff9800')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#fb8c00;"
+                            onclick="applyThemeColor('#fb8c00')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#f57c00;"
+                            onclick="applyThemeColor('#f57c00')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ef6c00;"
+                            onclick="applyThemeColor('#ef6c00')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#e65100;"
+                            onclick="applyThemeColor('#e65100')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffd180;"
+                            onclick="applyThemeColor('#ffd180')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffab40;"
+                            onclick="applyThemeColor('#ffab40')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff9100;"
+                            onclick="applyThemeColor('#ff9100')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff6d00;"
+                            onclick="applyThemeColor('#ff6d00')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff7f50;"
+                            onclick="applyThemeColor('#ff7f50')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff6347;"
+                            onclick="applyThemeColor('#ff6347')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff4500;"
+                            onclick="applyThemeColor('#ff4500')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#d2691e;"
+                            onclick="applyThemeColor('#d2691e')"
+                                  ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#8b4513;"
+                            onclick="applyThemeColor('#8b4513')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#a0522d;"
+                            onclick="applyThemeColor('#a0522d')"
+                        ></div>
 
-                        <div class="color-dot" style="background:#fffde7;" onclick="applyThemeColor('#fffde7')"></div>
-                        <div class="color-dot" style="background:#fff9c4;" onclick="applyThemeColor('#fff9c4')"></div>
-                        <div class="color-dot" style="background:#fff59d;" onclick="applyThemeColor('#fff59d')"></div>
-                        <div class="color-dot" style="background:#fff176;" onclick="applyThemeColor('#fff176')"></div>
-                        <div class="color-dot" style="background:#ffee58;" onclick="applyThemeColor('#ffee58')"></div>
-                        <div class="color-dot" style="background:#ffeb3b;" onclick="applyThemeColor('#ffeb3b')"></div>
-                        <div class="color-dot" style="background:#fdd835;" onclick="applyThemeColor('#fdd835')"></div>
-                        <div class="color-dot" style="background:#fbc02d;" onclick="applyThemeColor('#fbc02d')"></div>
-                        <div class="color-dot" style="background:#f9a825;" onclick="applyThemeColor('#f9a825')"></div>
-                        <div class="color-dot" style="background:#f57f17;" onclick="applyThemeColor('#f57f17')"></div>
-                        <div class="color-dot" style="background:#ffff8d;" onclick="applyThemeColor('#ffff8d')"></div>
-                        <div class="color-dot" style="background:#ffff00;" onclick="applyThemeColor('#ffff00')"></div>
-                        <div class="color-dot" style="background:#ffea00;" onclick="applyThemeColor('#ffea00')"></div>
-                        <div class="color-dot" style="background:#ffd600;" onclick="applyThemeColor('#ffd600')"></div>
-                        <div class="color-dot" style="background:#f0e68c;" onclick="applyThemeColor('#f0e68c')"></div>
-                        <div class="color-dot" style="background:#bdb76b;" onclick="applyThemeColor('#bdb76b')"></div>
-                        <div class="color-dot" style="background:#eee8aa;" onclick="applyThemeColor('#eee8aa')"></div>
-                        <div class="color-dot" style="background:#fffacd;" onclick="applyThemeColor('#fffacd')"></div>
-                        <div class="color-dot" style="background:#ffffe0;" onclick="applyThemeColor('#ffffe0')"></div>
-                        <div class="color-dot" style="background:#fafad2;" onclick="applyThemeColor('#fafad2')"></div>
+                        <!-- 
+                        =====================================
+                        Yellows / Jaunes 
+                        ===================================== 
+                        -->
+                        <div
+                            class="color-dot"
+                            style="background:#fffde7;"
+                            onclick="applyThemeColor('#fffde7')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#fff9c4;"
+                            onclick="applyThemeColor('#fff9c4')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#fff59d;"
+                            onclick="applyThemeColor('#fff59d')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#fff176;"
+                            onclick="applyThemeColor('#fff176')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffee58;"
+                            onclick="applyThemeColor('#ffee58')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffeb3b;"
+                            onclick="applyThemeColor('#ffeb3b')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#fdd835;"
+                            onclick="applyThemeColor('#fdd835')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#fbc02d;"
+                            onclick="applyThemeColor('#fbc02d')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#f9a825;"
+                            onclick="applyThemeColor('#f9a825')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#f57f17;"
+                            onclick="applyThemeColor('#f57f17')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffff8d;"
+                            onclick="applyThemeColor('#ffff8d')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffff00;"
+                            onclick="applyThemeColor('#ffff00')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffea00;"
+                            onclick="applyThemeColor('#ffea00')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffd600;"
+                            onclick="applyThemeColor('#ffd600')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#f0e68c;"
+                            onclick="applyThemeColor('#f0e68c')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#bdb76b;"
+                            onclick="applyThemeColor('#bdb76b')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#eee8aa;"
+                            onclick="applyThemeColor('#eee8aa')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#fffacd;"
+                            onclick="applyThemeColor('#fffacd')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffffe0;"
+                            onclick="applyThemeColor('#ffffe0')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#fafad2;"
+                            onclick="applyThemeColor('#fafad2')"
+                        ></div>
 
-                        <div class="color-dot" style="background:#e8f5e9;" onclick="applyThemeColor('#e8f5e9')"></div>
-                        <div class="color-dot" style="background:#c8e6c9;" onclick="applyThemeColor('#c8e6c9')"></div>
-                        <div class="color-dot" style="background:#a5d6a7;" onclick="applyThemeColor('#a5d6a7')"></div>
-                        <div class="color-dot" style="background:#81c784;" onclick="applyThemeColor('#81c784')"></div>
-                        <div class="color-dot" style="background:#66bb6a;" onclick="applyThemeColor('#66bb6a')"></div>
-                        <div class="color-dot" style="background:#4caf50;" onclick="applyThemeColor('#4caf50')"></div>
-                        <div class="color-dot" style="background:#43a047;" onclick="applyThemeColor('#43a047')"></div>
-                        <div class="color-dot" style="background:#388e3c;" onclick="applyThemeColor('#388e3c')"></div>
-                        <div class="color-dot" style="background:#2e7d32;" onclick="applyThemeColor('#2e7d32')"></div>
-                        <div class="color-dot" style="background:#1b5e20;" onclick="applyThemeColor('#1b5e20')"></div>
-                        <div class="color-dot" style="background:#b9f6ca;" onclick="applyThemeColor('#b9f6ca')"></div>
-                        <div class="color-dot" style="background:#69f0ae;" onclick="applyThemeColor('#69f0ae')"></div>
-                        <div class="color-dot" style="background:#00e676;" onclick="applyThemeColor('#00e676')"></div>
-                        <div class="color-dot" style="background:#00c853;" onclick="applyThemeColor('#00c853')"></div>
-                        <div class="color-dot" style="background:#7cfc00;" onclick="applyThemeColor('#7cfc00')"></div>
-                        <div class="color-dot" style="background:#7fff00;" onclick="applyThemeColor('#7fff00')"></div>
-                        <div class="color-dot" style="background:#32cd32;" onclick="applyThemeColor('#32cd32')"></div>
-                        <div class="color-dot" style="background:#00ff00;" onclick="applyThemeColor('#00ff00')"></div>
-                        <div class="color-dot" style="background:#228b22;" onclick="applyThemeColor('#228b22')"></div>
-                        <div class="color-dot" style="background:#008000;" onclick="applyThemeColor('#008000')"></div>
+                        <!-- 
+                        =====================================
+                        Greens / Verts 
+                        ===================================== 
+                        -->
+                        <div
+                            class="color-dot"
+                            style="background:#e8f5e9;"
+                            onclick="applyThemeColor('#e8f5e9')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#c8e6c9;"
+                            onclick="applyThemeColor('#c8e6c9')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#a5d6a7;"
+                            onclick="applyThemeColor('#a5d6a7')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#81c784;"
+                            onclick="applyThemeColor('#81c784')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#66bb6a;"
+                            onclick="applyThemeColor('#66bb6a')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#4caf50;"
+                            onclick="applyThemeColor('#4caf50')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#43a047;"
+                            onclick="applyThemeColor('#43a047')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#388e3c;"
+                            onclick="applyThemeColor('#388e3c')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#2e7d32;"
+                            onclick="applyThemeColor('#2e7d32')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#1b5e20;"
+                            onclick="applyThemeColor('#1b5e20')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#b9f6ca;"
+                            onclick="applyThemeColor('#b9f6ca')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#69f0ae;"
+                            onclick="applyThemeColor('#69f0ae')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#00e676;"
+                            onclick="applyThemeColor('#00e676')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#00c853;"
+                            onclick="applyThemeColor('#00c853')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#7cfc00;"
+                            onclick="applyThemeColor('#7cfc00')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#7fff00;"
+                            onclick="applyThemeColor('#7fff00')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#32cd32;"
+                            onclick="applyThemeColor('#32cd32')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#00ff00;"
+                            onclick="applyThemeColor('#00ff00')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#228b22;"
+                            onclick="applyThemeColor('#228b22')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#008000;"
+                            onclick="applyThemeColor('#008000')"
+                        ></div>
 
-                        <div class="color-dot" style="background:#e0f2f1;" onclick="applyThemeColor('#e0f2f1')"></div>
-                        <div class="color-dot" style="background:#b2dfdb;" onclick="applyThemeColor('#b2dfdb')"></div>
-                        <div class="color-dot" style="background:#80cbc4;" onclick="applyThemeColor('#80cbc4')"></div>
-                        <div class="color-dot" style="background:#4db6ac;" onclick="applyThemeColor('#4db6ac')"></div>
-                        <div class="color-dot" style="background:#26a69a;" onclick="applyThemeColor('#26a69a')"></div>
-                        <div class="color-dot" style="background:#009688;" onclick="applyThemeColor('#009688')"></div>
-                        <div class="color-dot" style="background:#00897b;" onclick="applyThemeColor('#00897b')"></div>
-                        <div class="color-dot" style="background:#00796b;" onclick="applyThemeColor('#00796b')"></div>
-                        <div class="color-dot" style="background:#00695c;" onclick="applyThemeColor('#00695c')"></div>
-                        <div class="color-dot" style="background:#004d40;" onclick="applyThemeColor('#004d40')"></div>
-                        <div class="color-dot" style="background:#a7ffeb;" onclick="applyThemeColor('#a7ffeb')"></div>
-                        <div class="color-dot" style="background:#64ffda;" onclick="applyThemeColor('#64ffda')"></div>
-                        <div class="color-dot" style="background:#1de9b6;" onclick="applyThemeColor('#1de9b6')"></div>
-                        <div class="color-dot" style="background:#00bfa5;" onclick="applyThemeColor('#00bfa5')"></div>
-                        <div class="color-dot" style="background:#00ffff;" onclick="applyThemeColor('#00ffff')"></div>
-                        <div class="color-dot" style="background:#00ced1;" onclick="applyThemeColor('#00ced1')"></div>
-                        <div class="color-dot" style="background:#48d1cc;" onclick="applyThemeColor('#48d1cc')"></div>
-                        <div class="color-dot" style="background:#20b2aa;" onclick="applyThemeColor('#20b2aa')"></div>
-                        <div class="color-dot" style="background:#008b8b;" onclick="applyThemeColor('#008b8b')"></div>
-                        <div class="color-dot" style="background:#008080;" onclick="applyThemeColor('#008080')"></div>
+                        <div
+                            class="color-dot"
+                            style="background:#e0f2f1;"
+                            onclick="applyThemeColor('#e0f2f1')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#b2dfdb;"
+                            onclick="applyThemeColor('#b2dfdb')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#80cbc4;"
+                            onclick="applyThemeColor('#80cbc4')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#4db6ac;"
+                            onclick="applyThemeColor('#4db6ac')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#26a69a;"
+                            onclick="applyThemeColor('#26a69a')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#009688;"
+                            onclick="applyThemeColor('#009688')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#00897b;"
+                            onclick="applyThemeColor('#00897b')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#00796b;"
+                            onclick="applyThemeColor('#00796b')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#00695c;"
+                            onclick="applyThemeColor('#00695c')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#004d40;"
+                            onclick="applyThemeColor('#004d40')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#a7ffeb;"
+                            onclick="applyThemeColor('#a7ffeb')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#64ffda;"
+                            onclick="applyThemeColor('#64ffda')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#1de9b6;"
+                            onclick="applyThemeColor('#1de9b6')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#00bfa5;"
+                            onclick="applyThemeColor('#00bfa5')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#00ffff;"
+                            onclick="applyThemeColor('#00ffff')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#00ced1;"
+                            onclick="applyThemeColor('#00ced1')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#48d1cc;"
+                            onclick="applyThemeColor('#48d1cc')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#20b2aa;"
+                            onclick="applyThemeColor('#20b2aa')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#008b8b;"
+                            onclick="applyThemeColor('#008b8b')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#008080;"
+                            onclick="applyThemeColor('#008080')"
+                        ></div>
 
-                        <div class="color-dot" style="background:#e3f2fd;" onclick="applyThemeColor('#e3f2fd')"></div>
-                        <div class="color-dot" style="background:#bbdefb;" onclick="applyThemeColor('#bbdefb')"></div>
-                        <div class="color-dot" style="background:#90caf9;" onclick="applyThemeColor('#90caf9')"></div>
-                        <div class="color-dot" style="background:#64b5f6;" onclick="applyThemeColor('#64b5f6')"></div>
-                        <div class="color-dot" style="background:#42a5f5;" onclick="applyThemeColor('#42a5f5')"></div>
-                        <div class="color-dot" style="background:#2196f3;" onclick="applyThemeColor('#2196f3')"></div>
-                        <div class="color-dot" style="background:#1e88e5;" onclick="applyThemeColor('#1e88e5')"></div>
-                        <div class="color-dot" style="background:#1976d2;" onclick="applyThemeColor('#1976d2')"></div>
-                        <div class="color-dot" style="background:#1565c0;" onclick="applyThemeColor('#1565c0')"></div>
-                        <div class="color-dot" style="background:#0d47a1;" onclick="applyThemeColor('#0d47a1')"></div>
-                        <div class="color-dot" style="background:#82b1ff;" onclick="applyThemeColor('#82b1ff')"></div>
-                        <div class="color-dot" style="background:#448aff;" onclick="applyThemeColor('#448aff')"></div>
-                        <div class="color-dot" style="background:#2979ff;" onclick="applyThemeColor('#2979ff')"></div>
-                        <div class="color-dot" style="background:#2962ff;" onclick="applyThemeColor('#2962ff')"></div>
-                        <div class="color-dot" style="background:#0000ff;" onclick="applyThemeColor('#0000ff')"></div>
-                        <div class="color-dot" style="background:#0000cd;" onclick="applyThemeColor('#0000cd')"></div>
-                        <div class="color-dot" style="background:#00008b;" onclick="applyThemeColor('#00008b')"></div>
-                        <div class="color-dot" style="background:#000080;" onclick="applyThemeColor('#000080')"></div>
-                        <div class="color-dot" style="background:#191970;" onclick="applyThemeColor('#191970')"></div>
-                        <div class="color-dot" style="background:#4169e1;" onclick="applyThemeColor('#4169e1')"></div>
+                        <!-- 
+                        =====================================
+                        Blues / Bleus 
+                        ===================================== 
+                        -->
+                        <div
+                            class="color-dot"
+                            style="background:#e3f2fd;"
+                            onclick="applyThemeColor('#e3f2fd')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#bbdefb;"
+                            onclick="applyThemeColor('#bbdefb')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#90caf9;"
+                            onclick="applyThemeColor('#90caf9')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#64b5f6;"
+                            onclick="applyThemeColor('#64b5f6')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#42a5f5;"
+                            onclick="applyThemeColor('#42a5f5')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#2196f3;"
+                            onclick="applyThemeColor('#2196f3')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#1e88e5;"
+                            onclick="applyThemeColor('#1e88e5')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#1976d2;"
+                            onclick="applyThemeColor('#1976d2')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#1565c0;"
+                            onclick="applyThemeColor('#1565c0')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#0d47a1;"
+                            onclick="applyThemeColor('#0d47a1')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#82b1ff;"
+                            onclick="applyThemeColor('#82b1ff')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#448aff;"
+                            onclick="applyThemeColor('#448aff')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#2979ff;"
+                            onclick="applyThemeColor('#2979ff')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#2962ff;"
+                            onclick="applyThemeColor('#2962ff')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#0000ff;"
+                                                   onclick="applyThemeColor('#0000ff')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#0000cd;"
+                            onclick="applyThemeColor('#0000cd')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#00008b;"
+                            onclick="applyThemeColor('#00008b')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#000080;"
+                            onclick="applyThemeColor('#000080')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#191970;"
+                            onclick="applyThemeColor('#191970')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#4169e1;"
+                            onclick="applyThemeColor('#4169e1')"
+                        ></div>
 
-                        <div class="color-dot" style="background:#f3e5f5;" onclick="applyThemeColor('#f3e5f5')"></div>
-                        <div class="color-dot" style="background:#e1bee7;" onclick="applyThemeColor('#e1bee7')"></div>
-                        <div class="color-dot" style="background:#ce93d8;" onclick="applyThemeColor('#ce93d8')"></div>
-                        <div class="color-dot" style="background:#ba68c8;" onclick="applyThemeColor('#ba68c8')"></div>
-                        <div class="color-dot" style="background:#ab47bc;" onclick="applyThemeColor('#ab47bc')"></div>
-                        <div class="color-dot" style="background:#9c27b0;" onclick="applyThemeColor('#9c27b0')"></div>
-                        <div class="color-dot" style="background:#8e24aa;" onclick="applyThemeColor('#8e24aa')"></div>
-                        <div class="color-dot" style="background:#7b1fa2;" onclick="applyThemeColor('#7b1fa2')"></div>
-                        <div class="color-dot" style="background:#6a1b9a;" onclick="applyThemeColor('#6a1b9a')"></div>
-                        <div class="color-dot" style="background:#4a148c;" onclick="applyThemeColor('#4a148c')"></div>
-                        <div class="color-dot" style="background:#ea80fc;" onclick="applyThemeColor('#ea80fc')"></div>
-                        <div class="color-dot" style="background:#e040fb;" onclick="applyThemeColor('#e040fb')"></div>
-                        <div class="color-dot" style="background:#d500f9;" onclick="applyThemeColor('#d500f9')"></div>
-                        <div class="color-dot" style="background:#aa00ff;" onclick="applyThemeColor('#aa00ff')"></div>
-                        <div class="color-dot" style="background:#800080;" onclick="applyThemeColor('#800080')"></div>
-                        <div class="color-dot" style="background:#8b008b;" onclick="applyThemeColor('#8b008b')"></div>
-                        <div class="color-dot" style="background:#9400d3;" onclick="applyThemeColor('#9400d3')"></div>
-                        <div class="color-dot" style="background:#9932cc;" onclick="applyThemeColor('#9932cc')"></div>
-                        <div class="color-dot" style="background:#8a2be2;" onclick="applyThemeColor('#8a2be2')"></div>
-                        <div class="color-dot" style="background:#4b0082;" onclick="applyThemeColor('#4b0082')"></div>
+                        <!-- 
+                        =====================================
+                        Purples / Violets 
+                        ===================================== 
+                        -->
+                        <div
+                            class="color-dot"
+                            style="background:#f3e5f5;"
+                            onclick="applyThemeColor('#f3e5f5')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#e1bee7;"
+                            onclick="applyThemeColor('#e1bee7')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ce93d8;"
+                            onclick="applyThemeColor('#ce93d8')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ba68c8;"
+                            onclick="applyThemeColor('#ba68c8')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ab47bc;"
+                            onclick="applyThemeColor('#ab47bc')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#9c27b0;"
+                            onclick="applyThemeColor('#9c27b0')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#8e24aa;"
+                            onclick="applyThemeColor('#8e24aa')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#7b1fa2;"
+                            onclick="applyThemeColor('#7b1fa2')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#6a1b9a;"
+                            onclick="applyThemeColor('#6a1b9a')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#4a148c;"
+                            onclick="applyThemeColor('#4a148c')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ea80fc;"
+                            onclick="applyThemeColor('#ea80fc')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#e040fb;"
+                            onclick="applyThemeColor('#e040fb')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#d500f9;"
+                            onclick="applyThemeColor('#d500f9')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#aa00ff;"
+                            onclick="applyThemeColor('#aa00ff')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#800080;"
+                            onclick="applyThemeColor('#800080')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#8b008b;"
+                            onclick="applyThemeColor('#8b008b')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#9400d3;"
+                            onclick="applyThemeColor('#9400d3')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#9932cc;"
+                            onclick="applyThemeColor('#9932cc')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#8a2be2;"
+                            onclick="applyThemeColor('#8a2be2')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#4b0082;"
+                            onclick="applyThemeColor('#4b0082')"
+                        ></div>
 
-                        <div class="color-dot" style="background:#fce4ec;" onclick="applyThemeColor('#fce4ec')"></div>
-                        <div class="color-dot" style="background:#f8bbd0;" onclick="applyThemeColor('#f8bbd0')"></div>
-                        <div class="color-dot" style="background:#f48fb1;" onclick="applyThemeColor('#f48fb1')"></div>
-                        <div class="color-dot" style="background:#f06292;" onclick="applyThemeColor('#f06292')"></div>
-                        <div class="color-dot" style="background:#ec407a;" onclick="applyThemeColor('#ec407a')"></div>
-                        <div class="color-dot" style="background:#e91e63;" onclick="applyThemeColor('#e91e63')"></div>
-                        <div class="color-dot" style="background:#d81b60;" onclick="applyThemeColor('#d81b60')"></div>
-                        <div class="color-dot" style="background:#c2185b;" onclick="applyThemeColor('#c2185b')"></div>
-                        <div class="color-dot" style="background:#ad1457;" onclick="applyThemeColor('#ad1457')"></div>
-                        <div class="color-dot" style="background:#880b4f;" onclick="applyThemeColor('#880b4f')"></div>
-                        <div class="color-dot" style="background:#ff80ab;" onclick="applyThemeColor('#ff80ab')"></div>
-                        <div class="color-dot" style="background:#ff4081;" onclick="applyThemeColor('#ff4081')"></div>
-                        <div class="color-dot" style="background:#f50057;" onclick="applyThemeColor('#f50057')"></div>
-                        <div class="color-dot" style="background:#c51162;" onclick="applyThemeColor('#c51162')"></div>
-                        <div class="color-dot" style="background:#ffc0cb;" onclick="applyThemeColor('#ffc0cb')"></div>
-                        <div class="color-dot" style="background:#ffb6c1;" onclick="applyThemeColor('#ffb6c1')"></div>
-                        <div class="color-dot" style="background:#ff69b4;" onclick="applyThemeColor('#ff69b4')"></div>
-                        <div class="color-dot" style="background:#ff1493;" onclick="applyThemeColor('#ff1493')"></div>
-                            
-                      
-                      
-                        <div class="color-dot" style="background:#db7093;" onclick="applyThemeColor('#db7093')"></div>
-                        <div class="color-dot" style="background:#c71585;" onclick="applyThemeColor('#c71585')"></div>
-
-                        <div class="color-dot" style="background:#fafafa;" onclick="applyThemeColor('#fafafa')"></div>
-                        <div class="color-dot" style="background:#f5f5f5;" onclick="applyThemeColor('#f5f5f5')"></div>
-                        <div class="color-dot" style="background:#eeeeee;" onclick="applyThemeColor('#eeeeee')"></div>
-                        <div class="color-dot" style="background:#e0e0e0;" onclick="applyThemeColor('#e0e0e0')"></div>
-                        <div class="color-dot" style="background:#bdbdbd;" onclick="applyThemeColor('#bdbdbd')"></div>
-                        <div class="color-dot" style="background:#9e9e9e;" onclick="applyThemeColor('#9e9e9e')"></div>
-                        <div class="color-dot" style="background:#757575;" onclick="applyThemeColor('#757575')"></div>
-                        <div class="color-dot" style="background:#616161;" onclick="applyThemeColor('#616161')"></div>
-                        <div class="color-dot" style="background:#424242;" onclick="applyThemeColor('#424242')"></div>
-                        <div class="color-dot" style="background:#212121;" onclick="applyThemeColor('#212121')"></div>
-                        <div class="color-dot" style="background:#eceff1;" onclick="applyThemeColor('#eceff1')"></div>
-                        <div class="color-dot" style="background:#cfd8dc;" onclick="applyThemeColor('#cfd8dc')"></div>
-                        <div class="color-dot" style="background:#b0bec5;" onclick="applyThemeColor('#b0bec5')"></div>
-                        <div class="color-dot" style="background:#90a4ae;" onclick="applyThemeColor('#90a4ae')"></div>
-                        <div class="color-dot" style="background:#78909c;" onclick="applyThemeColor('#78909c')"></div>
-                        <div class="color-dot" style="background:#607d8b;" onclick="applyThemeColor('#607d8b')"></div>
-                        <div class="color-dot" style="background:#546e7a;" onclick="applyThemeColor('#546e7a')"></div>
-                        <div class="color-dot" style="background:#455a64;" onclick="applyThemeColor('#455a64')"></div>
-                        <div class="color-dot" style="background:#37474f;" onclick="applyThemeColor('#37474f')"></div>
-                        <div class="color-dot" style="background:#263238;" onclick="applyThemeColor('#263238')"></div>
+                        <!-- 
+                        =====================================
+                        Pinks / Roses 
+                        ===================================== 
+                        -->
+                        <div
+                            class="color-dot"
+                            style="background:#fce4ec;"
+                            onclick="applyThemeColor('#fce4ec')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#f8bbd0;"
+                            onclick="applyThemeColor('#f8bbd0')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#f48fb1;"
+                            onclick="applyThemeColor('#f48fb1')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#f06292;"
+                            onclick="applyThemeColor('#f06292')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ec407a;"
+                            onclick="applyThemeColor('#ec407a')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#e91e63;"
+                            onclick="applyThemeColor('#e91e63')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#d81b60;"
+                            onclick="applyThemeColor('#d81b60')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#c2185b;"
+                            onclick="applyThemeColor('#c2185b')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ad1457;"
+                            onclick="applyThemeColor('#ad1457')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#880b4f;"
+                            onclick="applyThemeColor('#880b4f')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff80ab;"
+                            onclick="applyThemeColor('#ff80ab')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff4081;"
+                            onclick="applyThemeColor('#ff4081')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#f50057;"
+                            onclick="applyThemeColor('#f50057')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#c51162;"
+                            onclick="applyThemeColor('#c51162')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffc0cb;"
+                            onclick="applyThemeColor('#ffc0cb')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ffb6c1;"
+                            onclick="applyThemeColor('#ffb6c1')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff69b4;"
+                            onclick="applyThemeColor('#ff69b4')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#ff1493;"
+                            onclick="applyThemeColor('#ff1493')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#db7093;"
+                            onclick="applyThemeColor('#db7093')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#c71585;"
+                            onclick="applyThemeColor('#c71585')"
+                        ></div>
+ <div
+                            class="color-dot"
+                            style="background:#fafafa;"
+                            onclick="applyThemeColor('#fafafa')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#f5f5f5;"
+                            onclick="applyThemeColor('#f5f5f5')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#eeeeee;"
+                            onclick="applyThemeColor('#eeeeee')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#e0e0e0;"
+                            onclick="applyThemeColor('#e0e0e0')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#bdbdbd;"
+                            onclick="applyThemeColor('#bdbdbd')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#9e9e9e;"
+                            onclick="applyThemeColor('#9e9e9e')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#757575;"
+                            onclick="applyThemeColor('#757575')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#616161;"
+                            onclick="applyThemeColor('#616161')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#424242;"
+                            onclick="applyThemeColor('#424242')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#212121;"
+                            onclick="applyThemeColor('#212121')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#eceff1;"
+                            onclick="applyThemeColor('#eceff1')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#cfd8dc;"
+                            onclick="applyThemeColor('#cfd8dc')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#b0bec5;"
+                            onclick="applyThemeColor('#b0bec5')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#90a4ae;"
+                            onclick="applyThemeColor('#90a4ae')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#78909c;"
+                            onclick="applyThemeColor('#78909c')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#607d8b;"
+                            onclick="applyThemeColor('#607d8b')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#546e7a;"
+                            onclick="applyThemeColor('#546e7a')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#455a64;"
+                            onclick="applyThemeColor('#455a64')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#37474f;"
+                            onclick="applyThemeColor('#37474f')"
+                        ></div>
+                        <div
+                            class="color-dot"
+                            style="background:#263238;"
+                            onclick="applyThemeColor('#263238')"
+                        ></div>
+                        
                     </div>
                 </div>
-             
+
                 <div class="settings-group">
                     <h4>2. Densité de la grille</h4>
                     <select id="setting-density" class="settings-select" onchange="updateSetting('density', this.value)">
@@ -1536,88 +2256,7 @@
                     router.home();
                 }
             }
-        };   
-              function searchAnimes(query) {
-            if (!query || query.trim() === '') return [];
-            const q = query.toLowerCase().trim();
-            return animes.filter(anime => {
-                const matchTitle = anime.title && anime.title.toLowerCase().includes(q);
-                const matchSim = anime.sim_title && Array.isArray(anime.sim_title) && anime.sim_title.some(st => st.toLowerCase().includes(q));
-                return matchTitle || matchSim;
-            });
-        }
-
-        function handleSearchDropdown(query) {
-            const dropdown = document.getElementById('search-dropdown');
-            if (!query || query.trim() === '') {
-                dropdown.classList.remove('active');
-                dropdown.innerHTML = '';
-                return;
-            }
-
-            const results = searchAnimes(query);
-
-            if (results.length === 0) {
-                dropdown.innerHTML = '<div class="search-result-item" style="color:var(--text-sub);">Aucun résultat trouvé</div>';
-                dropdown.classList.add('active');
-                return;
-            }
-
-            dropdown.innerHTML = results.slice(0, 10).map(a => {
-                const simTitlesStr = (a.sim_title && Array.isArray(a.sim_title) && a.sim_title.length > 0) 
-                    ? `<div style="font-size:11px; color:var(--text-sub);">Titres similaires : ${a.sim_title.join(', ')}</div>` 
-                    : '';
-                
-                return `
-                    <div class="search-result-item" onclick="selectSearchResult(${a.id})">
-                        <img src="${a.poster || ''}" alt="${a.title}">
-                        <div style="display:flex; flex-direction:column; gap:2px; flex-grow:1;">
-                            <div class="search-result-title">${a.title}</div>
-                            ${simTitlesStr}
-                        </div>
-                        ${a.genre ? `<span class="search-result-genre">${Array.isArray(a.genre) ? a.genre[0] : a.genre}</span>` : ''}
-                    </div>
-                `;
-            }).join('');
-            
-            dropdown.classList.add('active');
-        }
-
-        function selectSearchResult(id) {
-            document.getElementById('search-dropdown').classList.remove('active');
-            document.getElementById('search-input').value = '';
-            router.anime(id);
-        }
-
-        function renderAnimeDetail(id) {
-            const anime = animes.find(a => a.id === id);
-            if (!anime) return;
-            activeAnimeId = id;
-            const container = document.getElementById('anime-detail-content');
-
-            let simTitlesMarkup = '';
-            if (anime.sim_title && Array.isArray(anime.sim_title) && anime.sim_title.length > 0) {
-                const tags = anime.sim_title.map(t => `<span class="sim-title-tag">${t}</span>`).join('');
-                simTitlesMarkup = `
-                    <div class="sim-title-container">
-                        <span class="sim-title-label">Noms similaires :</span>
-                        ${tags}
-                    </div>
-                `;
-            }
-
-            container.innerHTML = `
-                <div class="anime-detail-header">
-                    <img class="anime-detail-bg" src="${anime.banner || anime.poster || ''}">
-                    <img class="detail-poster" src="${anime.poster || ''}" alt="${anime.title}">
-                    <div class="anime-info">
-                        <h2>${anime.title}</h2>
-                        ${simTitlesMarkup}
-                        <div class="anime-resume">${anime.description || ''}</div>
-                    </div>
-                </div>
-            `;
-        }
+        };
 
         function navigateTo(viewName, id = null, params = null, isBack = false, savedScrollY = 0) {
             if (!isBack && currentView) {
@@ -1666,7 +2305,7 @@
                 }
                 renderPlayer();
             }
-            
+         
             if (isBack && savedScrollY !== undefined) {
                 setTimeout(() => {
                     window.scrollTo({ top: savedScrollY, behavior: 'instant' });
@@ -1687,12 +2326,737 @@
             toast.className = 'toast';
             toast.innerText = message;
             container.appendChild(toast);
-            setTimeout(() => {
-                if (toast.parentNode) toast.parentNode.removeChild(toast);
-            }, 3000);
+            setTimeout(() => toast.remove(), 3000);
         }
 
-        window.onload = loadDatabase;
+        function renderHome() {
+            renderHero();
+            renderResumeBanner();
+            renderGrid('home-trending-grid', animes.slice(0, 6));
+            renderGrid('home-new-grid', animes.slice().reverse().slice(0, 6));
+            renderGrid('home-discover-grid', getRandomAnimes(6));
+        }
+
+        function renderHero() {
+            const container = document.getElementById('hero-container');
+            if (!animes.length) return;
+            const anime = animes[0];
+            container.innerHTML = `
+                <div class="hero-banner">
+                    <img src="${anime.image}" class="hero-bg" alt="${anime.title}">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <div class="hero-tag">Tendance #1</div>
+                        <h2 class="hero-title">${anime.title}</h2>
+                        <div class="hero-meta">
+                            <span class="meta-rating">★ 4.9</span>
+                            <span class="meta-badge">${anime.seasons.length} Saisons</span>
+                            <span class="meta-badge">HD</span>
+                        </div>
+                        <div class="hero-desc">${anime.resume}</div>
+                        <div class="hero-actions">
+                            <button class="btn-primary" onclick="router.anime('${anime.id}')">▶ Regarder</button>
+                            <button class="btn-secondary" onclick="toggleFavorite('${anime.id}')">${favorites.includes(anime.id) ? '♥ Retirer des favoris' : '+ Favoris'}</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderResumeBanner() {
+            const container = document.getElementById('resume-container');
+            if (userSettings.hideResumeBanner || watchHistory.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+            const last = watchHistory[0];
+            const anime = animes.find(a => a.id === last.animeId);
+            if (!anime) {
+                container.innerHTML = '';
+                return;
+            }
+            container.innerHTML = `
+                <div class="resume-banner" onclick="router.player('${anime.id}', ${last.seasonNum}, ${last.epNum}, '${last.lang}', '${last.server}')">
+                    <div class="resume-info">
+                        <span class="resume-badge">Reprendre la lecture</span>
+                        <div class="resume-title">${anime.title}</div>
+                        <div class="resume-ep">Saison ${last.seasonNum} - Épisode ${last.epNum} (${last.lang.toUpperCase()})</div>
+                    </div>
+                    <div class="resume-play">▶</div>
+                </div>
+            `;
+        }
+
+        function renderGrid(containerId, list) {
+            const container = document.getElementById('containerId' === containerId ? containerId : containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            list.forEach(anime => {
+                const isFav = favorites.includes(anime.id);
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = () => router.anime(anime.id);
+                card.innerHTML = `
+                    <div class="card-img-wrapper">
+                        <img src="${anime.image}" alt="${anime.title}" loading="lazy">
+                        <div class="card-genre-tags">
+                            ${(anime.genres || []).map(g => `<span class="card-tag">${g}</span>`).join('')}
+                        </div>
+                        <div class="card-tooltip">${anime.resume}</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">${anime.title}</div>
+                        <button class="fav-btn ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite('${anime.id}')">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderCatalog() {
+            const grid = document.getElementById('catalog-grid');
+            grid.className = isListView ? 'grid list-view' : 'grid';
+            
+            let filtered = animes.filter(anime => {
+                const genre = document.getElementById('genre-select').value;
+                const status = document.getElementById('status-select').value;
+                if (genre !== 'all' && (!anime.genres || !anime.genres.includes(genre))) return false;
+                if (status !== 'all' && anime.status !== status) return false;
+                if (activeFilters.vf && !hasLang(anime, 'vf')) return false;
+                if (activeFilters.vostfr && !hasLang(anime, 'vostfr')) return false;
+                return true;
+            });
+
+            const sort = document.getElementById('sort-select').value;
+            if (sort === 'az') filtered.sort((a, b) => a.title.localeCompare(b.title));
+            if (sort === 'za') filtered.sort((a, b) => b.title.localeCompare(a.title));
+
+            const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
+            if (currentCatalogPage > totalPages) currentCatalogPage = totalPages;
+
+            const paginated = filtered.slice((currentCatalogPage - 1) * itemsPerPage, currentCatalogPage * itemsPerPage);
+            renderGrid('catalog-grid', paginated);
+            renderPagination(totalPages);
+        }
+
+        function renderPagination(totalPages) {
+            const container = document.getElementById('pagination-controls');
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+            container.innerHTML = `
+                <div class="page-info-text">Page ${currentCatalogPage} sur ${totalPages}</div>
+                <div class="page-arrows">
+                    <button class="page-btn" onclick="changeCatalogPage(-1)" ${currentCatalogPage === 1 ? 'disabled style="opacity:0.3"' : ''}>◀</button>
+                    <button class="page-btn" onclick="changeCatalogPage(1)" ${currentCatalogPage === totalPages ? 'disabled style="opacity:0.3"' : ''}>▶</button>
+                </div>
+            `;
+        }
+
+        function changeCatalogPage(direction) {
+            currentCatalogPage += direction;
+            renderCatalog();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetPaginationAndApply() {
+            currentCatalogPage = 1;
+            renderCatalog();
+        }
+
+        function toggleGridView() {
+            isListView = !isListView;
+            document.getElementById('toggle-view-btn').innerText = isListView ? 'Vue Grille' : 'Vue Liste';
+            document.getElementById('toggle-view-btn').classList.toggle('active', isListView);
+            renderCatalog();
+        }
+
+        function toggleFilter(lang) {
+            activeFilters[lang] = !activeFilters[lang];
+            document.getElementById(`filter-${lang}`).classList.toggle('active', activeFilters[lang]);
+            resetPaginationAndApply();
+        }
+
+        function hasLang(anime, lang) {
+            if (anime.films && anime.films.some(f => f[lang] && Object.values(f[lang]).some(val => val))) return true;
+            if (anime.seasons && anime.seasons.some(s => s.episodes && s.episodes.some(e => e[lang] && Object.values(e[lang]).some(val => val)))) return true;
+            return false;
+        }
+
+        function renderFavorites() {
+            const list = animes.filter(a => favorites.includes(a.id));
+            renderGrid('favorites-grid', list);
+        }
+
+        function renderWatchLater() {
+            const list = animes.filter(a => watchLater.includes(a.id));
+            renderGrid('watchlater-grid', list);
+        }
+
+        function renderHistory() {
+            const list = [];
+            watchHistory.forEach(h => {
+                const anime = animes.find(a => a.id === h.animeId);
+                if (anime && !list.includes(anime)) list.push(anime);
+            });
+            renderGrid('history-grid', list);
+        }
+
+        function clearWatchHistory() {
+            watchHistory = [];
+            localStorage.setItem('orco_history', JSON.stringify(watchHistory));
+            renderHistory();
+            renderResumeBanner();
+            showToast('Historique effacé');
+        }
+
+        function toggleFavorite(id) {
+            const idx = favorites.indexOf(id);
+            if (idx > -1) {
+                favorites.splice(idx, 1);
+                showToast('Retiré des favoris');
+            } else {
+                favorites.push(id);
+                showToast('Ajouté aux favoris');
+            }
+            localStorage.setItem('orco_favorites', JSON.stringify(favorites));
+            if (currentView === 'favorites') renderFavorites();
+            else if (currentView === 'home') renderHome();
+            else if (currentView === 'anime') renderAnimeDetail(id);
+            else if (currentView === 'catalog') renderCatalog();
+        }
+
+        function toggleWatchLater(id) {
+            const idx = watchLater.indexOf(id);
+            if (idx > -1) {
+                watchLater.splice(idx, 1);
+                showToast('Retiré de la liste');
+            } else {
+                watchLater.push(id);
+                showToast('Ajouté à la liste');
+            }
+            localStorage.setItem('orco_watchlater', JSON.stringify(watchLater));
+            if (currentView === 'watchlater') renderWatchLater();
+            else if (currentView === 'anime') renderAnimeDetail(id);
+        }
+
+        function renderAnimeDetail(id) {
+            const anime = animes.find(a => a.id === id);
+            if (!anime) return;
+            const isFav = favorites.includes(id);
+            const isWL = watchLater.includes(id);
+
+            const container = document.getElementById('anime-detail-content');
+            container.innerHTML = `
+                <div class="anime-detail-header">
+                    <img src="${anime.image}" class="anime-detail-bg" alt="${anime.title}">
+                    <img src="${anime.image}" class="detail-poster" alt="${anime.title}">
+                    <div class="anime-info">
+                        <h2>${anime.title}</h2>
+                        <div class="hero-meta" style="margin-bottom: 15px;">
+                            <span class="meta-rating">★ 4.9</span>
+                            <span class="meta-badge">${anime.seasons.length} Saisons</span>
+                            ${(anime.genres || []).map(g => `<span class="meta-badge" style="background: rgba(0, 242, 254, 0.1); color: var(--accent); border-color: var(--accent);">${g}</span>`).join('')}           
+
+                        </div>
+                        <div class="anime-actions-row">
+                            <button class="btn-primary" onclick="playFirstEpisode('${anime.id}')">▶ Regarder</button>
+                            <button class="btn-secondary" onclick="toggleFavorite('${anime.id}')">${isFav ? '♥ Favori' : '+ Favori'}</button>
+                            <button class="btn-secondary" onclick="toggleWatchLater('${anime.id}')">${isWL ? '✓ À regarder' : '+ À regarder plus tard'}</button>
+                        </div>
+                        <div class="anime-resume">${anime.resume}</div>
+                    </div>
+                </div>
+
+                <div class="tabs-container" id="anime-tabs">
+                    ${anime.seasons.map((s, idx) => `<button class="tab-btn ${idx === 0 ? 'active' : ''}" onclick="switchDetailTab(${idx})">${s.season_name}</button>`).join('')}
+                    ${anime.films && anime.films.length ? `<button class="tab-btn" onclick="switchDetailTab('films')">Films / OAV</button>` : ''}
+                </div>
+
+                <div id="anime-tab-content"></div>
+            `;
+            renderDetailTabContent(anime, 0);
+        }
+
+        function switchDetailTab(tabIndex) {
+            const anime = animes.find(a => a.id === activeAnimeId);
+            if (!anime) return;
+            document.querySelectorAll('#anime-tabs .tab-btn').forEach((btn, idx) => {
+                btn.classList.toggle('active', (tabIndex === 'films' && btn.innerText.includes('Films')) || btn.innerText === (tabIndex === 'films' ? '' : anime.seasons[tabIndex].season_name));
+            });
+            renderDetailTabContent(anime, tabIndex);
+        }
+
+        function renderDetailTabContent(anime, tabIndex) {
+            const container = document.getElementById('anime-tab-content');
+            container.innerHTML = '';
+
+            if (tabIndex === 'films') {
+                const grid = document.createElement('div');
+                grid.className = 'episodes-grid';
+                anime.films.forEach((film, idx) => {
+                    const isWatched = watchedEpisodes[`${anime.id}_film_${idx}`];
+                    const card = document.createElement('div');
+                    card.className = `episode-card ${isWatched ? 'watched' : ''}`;
+                    card.onclick = () => router.player(anime.id, 0, idx, 'vf', getFirstAvailableServer(film, 'vf'));
+                    card.innerHTML = `
+                        <div class="ep-info">
+                            <span class="ep-num">Film</span>
+                            <div class="ep-title">${film.title}</div>
+                        </div>
+                        <div class="badges-container">
+                            ${hasSource(film, 'vf') ? '<span class="badge vf">VF</span>' : ''}
+                            ${hasSource(film, 'vostfr') ? '<span class="badge vostfr">VOSTFR</span>' : ''}
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+                container.appendChild(grid);
+            } else {
+                const season = anime.seasons[tabIndex];
+                if (!season) return;
+                const grid = document.createElement('div');
+                grid.className = 'episodes-grid';
+                season.episodes.forEach(ep => {
+                    const isWatched = watchedEpisodes[`${anime.id}_s${season.season_number}_e${ep.number}`];
+                    const card = document.createElement('div');
+                    card.className = `episode-card ${isWatched ? 'watched' : ''}`;
+                    card.onclick = () => router.player(anime.id, season.season_number, ep.number, 'vf', getFirstAvailableServer(ep, 'vf'));
+                    card.innerHTML = `
+                        <div class="ep-info">
+                            <span class="ep-num">Épisode ${ep.number}</span>
+                            <div class="ep-title">${ep.title}</div>
+                        </div>
+                        <div class="badges-container">
+                            ${hasSource(ep, 'vf') ? '<span class="badge vf">VF</span>' : ''}
+                            ${hasSource(ep, 'vostfr') ? '<span class="badge vostfr">VOSTFR</span>' : ''}
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+                container.appendChild(grid);
+            }
+        }
+
+        function hasSource(item, lang) {
+            return item[lang] && Object.values(item[lang]).some(val => val);
+        }
+
+        function getFirstAvailableServer(item, lang) {
+            if (item[lang]) {
+                for (let [srv, code] of Object.entries(item[lang])) {
+                    if (code) return srv;
+                }
+            }
+            const otherLang = lang === 'vf' ? 'vostfr' : 'vf';
+            if (item[otherLang]) {
+                for (let [srv, code] of Object.entries(item[otherLang])) {
+                    if (code) return srv;
+                }
+            }
+            return 'sibnet';
+        }
+
+        function playFirstEpisode(id) {
+            const anime = animes.find(a => a.id === id);
+            if (!anime) return;
+            if (anime.seasons && anime.seasons.length > 0 && anime.seasons[0].episodes.length > 0) {
+                const s = anime.seasons[0];
+                const ep = s.episodes[0];
+                router.player(anime.id, s.season_number, ep.number, 'vf', getFirstAvailableServer(ep, 'vf'));
+            } else if (anime.films && anime.films.length > 0) {
+                router.player(anime.id, 0, 0, 'vf', getFirstAvailableServer(anime.films[0], 'vf'));
+            }
+        }
+
+        function renderPlayer() {
+            const anime = animes.find(a => a.id === activeAnimeId);
+            if (!anime) return;
+
+            document.getElementById('player-anime-name').innerText = anime.title;
+            document.getElementById('player-to-anime-btn').onclick = () => router.anime(anime.id);
+
+            const isFilm = activeSeasonNum === 0;
+            let currentItem;
+            if (isFilm) {
+                currentItem = anime.films[activeEpNum];
+                document.getElementById('player-ep-info').innerText = `Film : ${currentItem ? currentItem.title : ''}`;
+            } else {
+                const season = anime.seasons.find(s => s.season_number === activeSeasonNum);
+                currentItem = season ? season.episodes.find(e => e.number === activeEpNum) : null;
+                document.getElementById('player-ep-info').innerText = `Saison ${activeSeasonNum} - Épisode ${activeEpNum}`;
+            }
+
+            // Lang buttons
+            const hasVF = currentItem && hasSource(currentItem, 'vf');
+            const hasVOSTFR = currentItem && hasSource(currentItem, 'vostfr');
+            document.getElementById('lang-vf').disabled = !hasVF;
+            document.getElementById('lang-vostfr').disabled = !hasVOSTFR;
+            document.getElementById('lang-vf').classList.toggle('active', activeLang === 'vf');
+            document.getElementById('lang-vostfr').classList.toggle('active', activeLang === 'vostfr');
+
+            // Server selector
+            const serverContainer = document.getElementById('server-selector');
+            serverContainer.innerHTML = '';
+            if (currentItem && currentItem[activeLang]) {
+                Object.entries(currentItem[activeLang]).forEach(([srv, code]) => {
+                    if (code) {
+                        const btn = document.createElement('button');
+                        btn.className = `control-btn ${activeServer === srv ? 'active' : ''}`;
+                        btn.innerText = srv.toUpperCase();
+                        btn.onclick = () => switchServer(srv);
+                        serverContainer.appendChild(btn);
+                    }
+                });
+            }
+
+            // Video Iframe
+            let embedCode = '';
+            if (currentItem && currentItem[activeLang] && currentItem[activeLang][activeServer]) {
+                embedCode = currentItem[activeLang][activeServer];
+            } else if (currentItem) {
+                // fallback server
+                for (let [s, c] of Object.entries(currentItem[activeLang] || {})) {
+                    if (c) { activeServer = s; embedCode = c; break; }
+                }
+            }
+
+            const iframe = document.getElementById('video-iframe');
+            iframe.src = getEmbedUrl(activeServer, embedCode);
+
+            // Record watch history & watched status
+            recordHistory(anime.id, activeSeasonNum, activeEpNum, activeLang, activeServer);
+            watchedEpisodes[`${anime.id}_s${activeSeasonNum}_e${activeEpNum}`] = true;
+            localStorage.setItem('orco_watched_episodes', JSON.stringify(watchedEpisodes));
+
+            renderPlayerPills(anime);
+        }
+
+        function getEmbedUrl(server, code) {
+            if (!code) return '';
+            switch(server) {
+                case 'sibnet': return `https://video.sibnet.ru/shell.php?videoid=${code}`;
+                case 'vidmoly': return `https://vidmoly.me/embed-${code}.html`;
+                case 'ansembed': return `https://ansembed.net/embed-${code}.html`;
+                case 'embed4me': return `https://lpayer.embed4me.com/#${code}`;
+                case 'smoothpre': return `https://Smoothpre.com/embed-${code}`;
+                case 'oneupload': return `https://oneupload.to/embed-${code}.html`;
+                case 'sendvid': return `https://sendvid.com/embed/${code}`;
+                default: return '';
+            }
+        }
+
+        function switchLang(lang) {
+            activeLang = lang;
+            const anime = animes.find(a => a.id === activeAnimeId);
+            if (!anime) return;
+            const currentItem = activeSeasonNum === 0 ? anime.films[activeEpNum] : anime.seasons.find(s => s.season_number === activeSeasonNum).episodes.find(e => e.number === activeEpNum);
+            if (currentItem && currentItem[lang]) {
+                for (let [srv, code] of Object.entries(currentItem[lang])) {
+                    if (code) { activeServer = srv; break; }
+                }
+            }
+            renderPlayer();
+        }
+
+        function switchServer(server) {
+            activeServer = server;
+            renderPlayer();
+        }
+
+        function recordHistory(animeId, seasonNum, epNum, lang, server) {
+            watchHistory = watchHistory.filter(h => !(h.animeId === animeId && h.seasonNum === seasonNum && h.epNum === epNum));
+            watchHistory.unshift({ animeId, seasonNum, epNum, lang, server, timestamp: Date.now() });
+            if (watchHistory.length > 50) watchHistory.pop();
+            localStorage.setItem('orco_history', JSON.stringify(watchHistory));
+            renderResumeBanner();
+        }
+
+        function renderPlayerPills(anime) {
+            const catPills = document.getElementById('player-cat-pills');
+            const itemPills = document.getElementById('player-item-pills');
+            catPills.innerHTML = '';
+            itemPills.innerHTML = '';
+
+            anime.seasons.forEach(s => {
+                const pill = document.createElement('div');
+                pill.className = `pill ${activeSeasonNum === s.season_number ? 'active' : ''}`;
+                pill.innerText = s.season_name;
+                pill.onclick = () => {
+                    activeSeasonNum = s.season_number;
+                    activeEpNum = s.episodes[0].number;
+                    renderPlayer();
+                };
+                catPills.appendChild(pill);
+            });
+
+            if (anime.films && anime.films.length > 0) {
+                const pill = document.createElement('div');
+                pill.className = `pill ${activeSeasonNum === 0 ? 'active' : ''}`;
+                pill.innerText = 'Films / OAV';
+                pill.onclick = () => {
+                    activeSeasonNum = 0;
+                    activeEpNum = 0;
+                    renderPlayer();
+                };
+                catPills.appendChild(pill);
+            }
+
+            if (activeSeasonNum === 0) {
+                anime.films.forEach((f, idx) => {
+                    const pill = document.createElement('div');
+                    pill.className = `pill ${activeEpNum === idx ? 'active' : ''}`;
+                    pill.innerText = f.title;
+                    pill.onclick = () => {
+                        activeEpNum = idx;
+                        renderPlayer();
+                    };
+                    itemPills.appendChild(pill);
+                });
+            } else {
+                const season = anime.seasons.find(s => s.season_number === activeSeasonNum);
+                if (season) {
+                    season.episodes.forEach(ep => {
+                        const pill = document.createElement('div');
+                        pill.className = `pill ${activeEpNum === ep.number ? 'active' : ''}`;
+                        pill.innerText = `Épisode ${ep.number}`;
+                        pill.onclick = () => {
+                            activeEpNum = ep.number;
+                            renderPlayer();
+                        };
+                        itemPills.appendChild(pill);
+                    });
+                }
+            }
+        }
+
+        function navigateEpisode(direction) {
+            const anime = animes.find(a => a.id === activeAnimeId);
+            if (!anime) return;
+            if (activeSeasonNum === 0) {
+                const newIdx = activeEpNum + direction;
+                if (newIdx >= 0 && newIdx < anime.films.length) {
+                    activeEpNum = newIdx;
+                    renderPlayer();
+                }
+            } else {
+                const season = anime.seasons.find(s => s.season_number === activeSeasonNum);
+                if (season) {
+                    const epIndex = season.episodes.findIndex(e => e.number === activeEpNum);
+                    const newEpIndex = epIndex + direction;
+                    if (newEpIndex >= 0 && newEpIndex < season.episodes.length) {
+                        activeEpNum = season.episodes[newEpIndex].number;
+                        renderPlayer();
+                    } else {
+                        // Switch season if possible
+                        const seasonIndex = anime.seasons.findIndex(s => s.season_number === activeSeasonNum);
+                        const newSeasonIndex = seasonIndex + direction;
+                        if (newSeasonIndex >= 0 && newSeasonIndex < anime.seasons.length) {
+                            const targetSeason = anime.seasons[newSeasonIndex];
+                            activeSeasonNum = targetSeason.season_number;
+                            activeEpNum = direction > 0 ? targetSeason.episodes[0].number : targetSeason.episodes[targetSeason.episodes.length - 1].number;
+                            renderPlayer();
+                        }
+                    }
+                }
+            }
+        }
+
+        function togglePIP() {
+            const iframe = document.getElementById('video-iframe');
+            if (document.pictureInPictureElement) {
+                document.exitPictureInPicture();
+            } else if (iframe && iframe.requestPictureInPicture) {
+                iframe.requestPictureInPicture().catch(() => showToast('PiP non supporté'));
+            } else {
+                showToast('PiP non supporté sur ce navigateur');
+            }
+        }
+
+        function togglePlayerFullscreen() {
+            const wrapper = document.getElementById('player-wrapper');
+            if (!document.fullscreenElement) {
+                wrapper.requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function toggleCinemaMode() {
+            document.body.classList.toggle('cinema-mode');
+            const isCinema = document.body.classList.contains('cinema-mode');
+            showToast(isCinema ? 'Mode cinéma activé' : 'Mode cinéma désactivé');
+        }
+
+        // ============ RECHERCHE AVEC sim_title ============
+        function handleSearchDropdown(query) {
+            const dropdown = document.getElementById('search-dropdown');
+            if (!query.trim()) {
+                dropdown.classList.remove('active');
+                return;
+            }
+            const lowerQuery = query.toLowerCase();
+            const results = animes.filter(a => {
+                // Vérification sur le titre principal
+                let match = a.title.toLowerCase().includes(lowerQuery);
+                // Si pas match et que sim_title existe
+                if (!match && a.sim_title) {
+                    if (Array.isArray(a.sim_title)) {
+                        match = a.sim_title.some(s => s.toLowerCase().includes(lowerQuery));
+                    } else if (typeof a.sim_title === 'string') {
+                        // Découpage par virgule ou retour à la ligne
+                        const sims = a.sim_title.split(/[,;]\s*|\n/);
+                        match = sims.some(s => s.toLowerCase().includes(lowerQuery));
+                    }
+                }
+                return match;
+            }).slice(0, 6);
+
+            if (results.length === 0) {
+                dropdown.innerHTML = '<div style="padding:15px;text-align:center;color:var(--text-sub);font-size:13px;">Aucun résultat trouvé</div>';
+            } else {
+                dropdown.innerHTML = results.map(anime => `
+                    <div class="search-result-item" onclick="router.anime('${anime.id}'); hideSearchDropdown();">
+                        <img src="${anime.image}" alt="${anime.title}">
+                        <div class="search-result-title">${anime.title}</div>
+                        ${anime.genres && anime.genres[0] ? `<span class="search-result-genre">${anime.genres[0]}</span>` : ''}
+                    </div>
+                `).join('');
+            }
+            dropdown.classList.add('active');
+        }
+        // ============ FIN MODIFICATION ============
+
+        function showSearchHistory() {
+            const query = document.getElementById('search-input').value;
+            if (!query.trim()) {
+                const dropdown = document.getElementById('search-dropdown');
+                dropdown.innerHTML = `
+                    <div class="search-history-header">
+                        <span>Historique de recherche</span>
+                        <span class="search-history-clear" onclick="clearSearchHistory()">Effacer</span>
+                    </div>
+                `;
+                dropdown.classList.add('active');
+            }
+        }
+
+        function hideSearchDropdown() {
+            document.getElementById('search-dropdown').classList.remove('active');
+        }
+
+        function clearSearchHistory() {
+            hideSearchDropdown();
+        }
+
+        function startVoiceSearch() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                showToast('Recherche vocale non supportée');
+                return;
+            }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'fr-FR';
+            recognition.onstart = () => showToast('Écoute en cours...');
+            recognition.onresult = (event) => {
+                const speechToText = event.results[0][0].transcript;
+                document.getElementById('search-input').value = speechToText;
+                handleSearchDropdown(speechToText);
+            };
+            recognition.start();
+        }
+
+        function getRandomAnimes(count) {
+            const shuffled = [...animes].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function playRandomAnime() {
+            if (!animes.length) return;
+            const randomAnime = animes[Math.floor(Math.random() * animes.length)];
+            playFirstEpisode(randomAnime.id);
+        }
+
+        function resetSearch() {
+            document.getElementById('search-input').value = '';
+            hideSearchDropdown();
+        }
+
+        function openSettingsModal() {
+            document.getElementById('settings-modal').style.display = 'flex';
+        }
+
+        function closeSettingsModal(e) {
+            if (!e || e.target === document.getElementById('settings-modal') || e.target.classList.contains('btn-primary')) {
+                document.getElementById('settings-modal').style.display = 'none';
+            }
+        }
+
+        function applyThemeColor(color) {
+            userSettings.themeColor = color;
+            document.documentElement.style.setProperty('--accent', color);
+            localStorage.setItem('orco_settings', JSON.stringify(userSettings));
+            showToast('Couleur d\'accentuation mise à jour');
+        }
+
+        function updateSetting(key, value) {
+            userSettings[key] = value;
+            localStorage.setItem('orco_settings', JSON.stringify(userSettings));
+            applySettingsToDOM();
+            showToast('Paramètre mis à jour');
+        }
+
+        function updateToggleSetting(key, checked) {
+            userSettings[key] = checked;
+            localStorage.setItem('orco_settings', JSON.stringify(userSettings));
+            applySettingsToDOM();
+        }
+
+        function applySettingsToDOM() {
+            document.documentElement.style.setProperty('--accent', userSettings.themeColor);
+            
+            document.body.setAttribute('data-density', userSettings.density);
+            document.body.setAttribute('data-hero-size', userSettings.heroSize);
+            document.body.setAttribute('data-card-zoom', userSettings.cardZoom);
+            document.body.setAttribute('data-glow', userSettings.glow);
+
+            document.getElementById('toast-container').className = userSettings.toastPos;
+
+            document.body.classList.toggle('hide-resume-banner', userSettings.hideResumeBanner);
+            document.body.classList.toggle('hide-badges', userSettings.hideBadges);
+            document.body.classList.toggle('hide-tooltips', userSettings.hideTooltips);
+            document.body.classList.toggle('reduced-motion', userSettings.reducedMotion);
+
+            // Sync settings UI form
+            if (document.getElementById('setting-density')) document.getElementById('setting-density').value = userSettings.density;
+            if (document.getElementById('setting-hero-size')) document.getElementById('setting-hero-size').value = userSettings.heroSize;
+            if (document.getElementById('setting-card-zoom')) document.getElementById('setting-card-zoom').value = userSettings.cardZoom;
+            if (document.getElementById('setting-glow')) document.getElementById('setting-glow').value = userSettings.glow;
+            if (document.getElementById('setting-toast-pos')) document.getElementById('setting-toast-pos').value = userSettings.toastPos;
+            if (document.getElementById('chk-resume')) document.getElementById('chk-resume').checked = userSettings.hideResumeBanner;
+            if (document.getElementById('chk-badges')) document.getElementById('chk-badges').checked = userSettings.hideBadges;
+            if (document.getElementById('chk-tooltips')) document.getElementById('chk-tooltips').checked = userSettings.hideTooltips;
+            if (document.getElementById('chk-motion')) document.getElementById('chk-motion').checked = userSettings.reducedMotion;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadDatabase();
+        });
+
+        window.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            const menu = document.getElementById('custom-context-menu');
+            menu.style.display = 'flex';
+            menu.style.top = `${e.pageY}px`;
+            menu.style.left = `${e.pageX}px`;
+        });
+
+        window.addEventListener('click', () => {
+            document.getElementById('custom-context-menu').style.display = 'none';
+        });
     </script>
 </body>
 </html>
